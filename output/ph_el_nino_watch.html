@@ -368,6 +368,24 @@ function renderTcBanner(){
 }
 function cellColor(v){return v>=120?'#2E6FD3':v>80?'#3E9B57':v>40?'#E3B505':'#C62828';}
 function fmtNum(v){return v==null?null:Math.round(v).toLocaleString();}
+function fmtShare(pct){return pct<0.1?'<0.1%':pct.toFixed(1)+'%';}
+// Rank/share each province's rice and corn production against every
+// other province with PSA data for that crop, computed once from AG at
+// load time. A bare "1,804,894 MT" means little to a reader with no
+// reference point; "#1 in the Philippines, 10.4% of national
+// production" does, without inventing a drought-impact estimate this
+// project has no agronomic basis for making.
+const AG_RANK = (()=>{
+ function rankField(field){
+  if(!AG||!AG.prov)return {};
+  const entries=Object.entries(AG.prov).filter(([k,v])=>v[field]!=null).sort((a,b)=>b[1][field]-a[1][field]);
+  const total=entries.reduce((s,[,v])=>s+v[field],0);
+  const out={};
+  entries.forEach(([k,v],i)=>{out[k]={rank:i+1,share:total>0?v[field]/total*100:0};});
+  return out;
+ }
+ return {rice:rankField('rice_production_mt'),corn:rankField('corn_production_mt')};
+})();
 function agCardHtml(key){
  const ag=AG&&AG.prov?AG.prov[key]:null;
  const period=AG&&AG.period?AG.period:'';
@@ -375,10 +393,16 @@ function agCardHtml(key){
   const note=(ag&&ag.note)||'No PSA crop-production data for this area.';
   return `<div class="kv"><b>Agricultural exposure.</b> ${note}</div>`;
  }
- const rice=fmtNum(ag.rice_production_mt),riceHa=fmtNum(ag.rice_area_harvested_ha);
- const corn=fmtNum(ag.corn_production_mt),cornHa=fmtNum(ag.corn_area_harvested_ha);
- return `<div class="kv"><b>Agricultural exposure.</b> Rice: ${rice!=null?rice+' MT produced':'no data'}${riceHa!=null?` (${riceHa} ha harvested)`:''}. Corn: ${corn!=null?corn+' MT produced':'no data'}${cornHa!=null?` (${cornHa} ha harvested)`:''}.</div>
- <div class="foot-note">Agricultural exposure source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Shown for context only; it does not affect the drought alert level above.</div>`;
+ const rice=fmtNum(ag.rice_production_mt),riceHa=fmtNum(ag.rice_area_harvested_ha),riceR=AG_RANK.rice[key];
+ const corn=fmtNum(ag.corn_production_mt),cornHa=fmtNum(ag.corn_area_harvested_ha),cornR=AG_RANK.corn[key];
+ const riceLine=riceR
+  ?`Rice: #${riceR.rank} in the Philippines, ${fmtShare(riceR.share)} of national production (${rice} MT${riceHa!=null?`, ${riceHa} ha harvested`:''}).`
+  :'Rice: no PSA data.';
+ const cornLine=cornR
+  ?`Corn: #${cornR.rank} in the Philippines, ${fmtShare(cornR.share)} of national production (${corn} MT${cornHa!=null?`, ${cornHa} ha harvested`:''}).`
+  :'Corn: no PSA data.';
+ return `<div class="kv"><b>Agricultural exposure.</b> ${riceLine} ${cornLine}</div>
+ <div class="foot-note">Agricultural exposure source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Rank and share are computed among Philippine provinces with PSA production data for that crop. Shown for context only; it does not affect the drought alert level above.</div>`;
 }
 function vulnCardHtml(key){
  const v=VULN&&VULN.prov?VULN.prov[key]:null;
