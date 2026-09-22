@@ -178,6 +178,57 @@ a second automated pipeline around.
 On cadence: this project's monthly-update, ~6-month rolling window is
 in line with CPC/IRI/C3S/PAGASA's own practice -- not a gap.
 
+## Community ground-truth reports
+
+Scoped (2026-09-22), not yet built. PAGASA already publishes its own
+official "PH Meteorological Drought Monitor" (observed + forecast maps,
+same Sep 2026-Feb 2027 window this project uses) at
+https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories, so
+this project's forecast layer partly overlaps with an official source.
+What PAGASA's tool does *not* have is any citizen input: a way for
+people to report what they're actually seeing on the ground (water
+shortage, crop stress, other drought symptoms) and have that reach a
+moderator who can pass notable patterns on to PAGASA or a local DRRMO.
+That's a genuinely different, complementary product, not a duplicate.
+
+**Important framing decision, already settled:** this is NOT a public
+"PAGASA said X, but actually Y" claims layer -- that would carry real
+misinformation risk for a solo, unmoderated project, especially during
+an actual emergency. Instead it's a **private report inbox with a
+moderator in the loop**: residents submit what they're experiencing,
+a moderator reviews and can escalate credible patterns to local
+authorities or PAGASA, and nothing is published back to the public map
+as a "fact" unless a moderator has actively chosen to surface it (e.g.
+as an aggregate count, not a raw unverified claim).
+
+**Interaction model:** click a province on the map (reusing the
+existing province-selection UI) to open a short structured report, in
+the spirit of a temperature "feels like" index but for El Nino
+conditions -- a few simple rated dimensions (e.g. water availability,
+crop/agricultural condition, general dryness) plus an optional
+free-text field for their own words, rather than one open text box.
+
+Three ways to build this, ordered by cost/effort:
+
+| | Free | Low-cost | Full |
+|---|---|---|---|
+| Ingestion | GitHub Issue Form, deep-linked from a "Report what you're seeing" button (province + fields pre-filled into a new issue) | Real submission form on the map itself, posting to a small serverless backend (Supabase or Firebase free tier) | Same, plus lightweight anti-abuse (CAPTCHA or phone/email verification) and optional photo evidence |
+| Moderation | GitHub's own issue UI -- label, comment, close (built-in, zero extra tooling) | A small password-gated admin view, or the backend's own built-in table browser | A purpose-built admin dashboard: review queues, verification status, audit trail |
+| Escalation to PAGASA/LGU | Manual: `gh issue list --label needs-followup`, forward by hand | Same manual forward, but from a filtered backend query/export | Automated periodic digest, or API access if a partnership ever formed |
+| Public surfacing | None automatic; any summary shown on the map would be hand-updated, same pattern as the monthly PAGASA transcription | Live per-province report counts pulled at page load (counts only, no raw unverified text, unless a moderator marks one "approved") | A moderated public "community observations" layer with history/trends, only for moderator-approved reports |
+| Cost | $0 | $0 at low volume, realistically $0-10/mo | Roughly $20-100+/mo (managed DB, storage, verification service, likely hosting beyond GitHub Pages) |
+| Effort | Small -- one issue template, one button | Medium -- first real backend this project would have | Large -- a genuine small web app, not a static site anymore |
+| Main limitation | Requires a GitHub account to submit; "click your area" is really a pre-filled dropdown, not an actual map click; no live public counts | Real backend to operate and pay for, even if cheap | Meaningful ongoing cost and maintenance burden for a personal project |
+
+**Recommendation if this gets built:** Free tier is the fastest way to
+find out whether people actually want to submit reports at all, before
+committing to backend work -- but it can't deliver the "click your
+actual area on the map" interaction the low-cost and full tiers can.
+Low-cost (Supabase/Firebase free tier) is the more likely real target:
+it's the first tier that supports both the moderator-inbox model and
+genuine map-click interactivity, without meaningful ongoing cost at
+this project's likely scale.
+
 ## Solar irradiance / vegetation-stress (NDVI) data
 
 Raised but needs scoping -- two different things could be meant here:
