@@ -158,16 +158,18 @@ with a small meter bar per crop (rice and corn): rank among Philippine
 provinces, % share of national production, and the underlying metric
 tons produced and hectares harvested, for the most recent complete year
 available. A bare production total has no reference point for a reader
-("is 1.8 million MT a lot?"), so rank and share of national production
-lead, with the raw figures kept as supporting detail; the bar itself is
-scaled to the top-producing province for that crop, not to 100% of
-national output, so it's actually legible instead of every province's
-bar looking like a sliver. This deliberately does not attempt to
-estimate a drought-impact percentage -- that needs real agronomic
-yield-loss modeling this project has no basis for, and a made-up number
-would be exactly the kind of unfounded claim avoided everywhere else
-here. It's purely informational context and is entirely separate from,
-and never changes, the PAGASA-derived drought alert level, color, or
+("is 1.8 million MT a lot?"), so rank ("#1 of 82 provinces") leads as
+plain text, and the bar's length is that province's exact share of
+national production -- not scaled to the top producer, so it actually
+matches the percentage printed next to it. Most bars are short, which
+is an honest reflection of the real data: production is spread across
+many provinces, not concentrated in a handful. This deliberately does
+not attempt to estimate a drought-impact percentage -- that needs real
+agronomic yield-loss modeling this project has no basis for, and a
+made-up number would be exactly the kind of unfounded claim avoided
+everywhere else here. It's purely informational context and is
+entirely separate from, and never changes, the PAGASA-derived drought
+alert level, color, or
 any of `lvl()`/`style()`'s logic in `map/map_template.html`.
 
 The data comes from the [Philippine Statistics Authority (PSA)

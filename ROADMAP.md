@@ -74,16 +74,19 @@ this:
   it.
 - **Redesigned (2026-09-22)** from a plain-text "X MT produced" line
   (no reference point for a reader -- is that a lot?) to a rank/share
-  presentation per crop, each with a small meter bar: "#1 in the
-  Philippines, 9.2% of national production", with the raw MT/hectares
-  kept as supporting detail underneath, not the headline. The bar is
-  scaled to the top-producing province for that crop rather than to
-  100% of national output, since a literal 0-100% share meter would
-  make almost every province's bar look empty (even the #1 rice
-  province is under 10% of the national total). Deliberately does not
-  attempt to estimate a drought-impact percentage on production --
-  that needs real agronomic yield-loss modeling this project has no
-  basis for.
+  presentation per crop, each with a small meter bar: rank ("#1 of 82
+  provinces") as plain text, and a bar whose length is the literal
+  share of national production, with the raw MT/hectares kept as
+  supporting detail underneath. First attempt scaled the bar to the
+  top-producing province instead of to 100%, so a "full" bar didn't
+  actually mean 100% of national output -- visually contradicting the
+  percentage printed right next to it. Fixed the same day once that
+  mismatch was reported: the bar now equals the stated share exactly,
+  and most bars are short as a result, which is itself accurate --
+  production is spread across many provinces, not concentrated in a
+  handful. Deliberately does not attempt to estimate a drought-impact
+  percentage on production -- that needs real agronomic yield-loss
+  modeling this project has no basis for.
 
 Original scoping notes (kept for context): PSA OpenSTAT
 (`DB/2E/CS` for crops, `DB/2E/FS` for fisheries) — confirmed live, queryable

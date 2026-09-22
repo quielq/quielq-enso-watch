@@ -382,20 +382,25 @@ const AG_RANK = (()=>{
   if(!AG||!AG.prov)return {};
   const entries=Object.entries(AG.prov).filter(([k,v])=>v[field]!=null).sort((a,b)=>b[1][field]-a[1][field]);
   const total=entries.reduce((s,[,v])=>s+v[field],0);
-  const max=entries.length?entries[0][1][field]:0;
   const out={};
-  entries.forEach(([k,v],i)=>{out[k]={rank:i+1,share:total>0?v[field]/total*100:0,relWidth:max>0?v[field]/max*100:0};});
+  entries.forEach(([k,v],i)=>{out[k]={rank:i+1,of:entries.length,share:total>0?v[field]/total*100:0};});
   return out;
  }
  return {rice:rankField('rice_production_mt'),corn:rankField('corn_production_mt')};
 })();
 const CROP_COLOR={rice:'#2F7A5C',corn:'#B4772E'};
+// The bar's width is the literal share of national production (0-100%),
+// matching the percentage printed right next to it -- it previously
+// scaled to the top producer instead, so a "full" bar didn't actually
+// mean 100% of national output, which read as a contradiction. Ranking
+// is stated as plain text ("#1 of 82"), not something the bar also has
+// to imply -- ordinal position doesn't need its own chart to be clear.
 function agMeterHtml(cropLabel,cropKey,value,ha,r){
  if(!r)return `<div class="ag-crop"><div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">No PSA data</span></div></div>`;
  return `<div class="ag-crop">
- <div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">#${r.rank} in the Philippines &middot; ${fmtShare(r.share)} of national production</span></div>
- <div class="ag-meter"><div class="ag-meter-fill" style="width:${Math.max(r.relWidth,2)}%;background:${CROP_COLOR[cropKey]}"></div></div>
- <div class="ag-crop-detail">${fmtNum(value)} MT produced${ha!=null?`, ${fmtNum(ha)} ha harvested`:''}</div>
+ <div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">#${r.rank} of ${r.of} provinces</span></div>
+ <div class="ag-meter"><div class="ag-meter-fill" style="width:${Math.max(r.share,1)}%;background:${CROP_COLOR[cropKey]}"></div></div>
+ <div class="ag-crop-detail">${fmtShare(r.share)} of national production (${fmtNum(value)} MT produced${ha!=null?`, ${fmtNum(ha)} ha harvested`:''})</div>
  </div>`;
 }
 function agCardHtml(key){
@@ -408,7 +413,7 @@ function agCardHtml(key){
  const riceHtml=agMeterHtml('Rice','rice',ag.rice_production_mt,ag.rice_area_harvested_ha,AG_RANK.rice[key]);
  const cornHtml=agMeterHtml('Corn','corn',ag.corn_production_mt,ag.corn_area_harvested_ha,AG_RANK.corn[key]);
  return `<div class="ag-block"><b class="ag-block-title">Agricultural exposure</b>${riceHtml}${cornHtml}
- <div class="foot-note">Source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Bars are scaled to the top-producing province for that crop, not to 100% of national output. Rank and share are computed among provinces with PSA data for that crop. Shown for context only; it does not affect the drought alert level above.</div></div>`;
+ <div class="foot-note">Source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Each bar's length is that province's exact share of national production, so most look short -- production is spread across many provinces, not concentrated in a few. Rank and share are computed among provinces with PSA data for that crop. Shown for context only; it does not affect the drought alert level above.</div></div>`;
 }
 function provinceCardHtml(key){
  const p=DATA.prov[key];const L=lvl(key,cur);const haz=hazardsOf(p,cur);
