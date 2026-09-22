@@ -121,6 +121,18 @@
   .modal .checkgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
   .modal .checkgrid label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:400;margin:0}
   .modal .hint{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+  .filedrop{border:1.5px dashed var(--line);border-radius:10px;padding:18px 12px;text-align:center;cursor:pointer;transition:border-color .12s,background .12s}
+  .filedrop:hover,.filedrop.drag{border-color:var(--accent);background:#FBF1EF}
+  .filedrop-icon{width:32px;height:32px;border-radius:50%;background:var(--tint);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;color:var(--muted);flex:none}
+  .filedrop-icon svg{width:16px;height:16px}
+  .filedrop-text{font-size:12px;color:var(--muted)}
+  .filedrop-text b{color:var(--ink);font-weight:700}
+  .filedrop.has-file{border-style:solid;border-color:var(--accent);background:#FBF1EF;display:flex;align-items:center;gap:10px;padding:10px 12px;text-align:left;cursor:default}
+  .filedrop.has-file .filedrop-icon{margin:0;background:var(--accent);color:#fff}
+  .filedrop-name{flex:1;font-size:12.5px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .filedrop-remove{flex:none;width:24px;height:24px;border-radius:50%;border:none;background:#fff;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;font-family:inherit}
+  .filedrop-remove:hover{background:var(--tint);color:var(--ink)}
+  .filedrop input[type=file]{display:none}
   .modal .modal-actions{display:flex;gap:8px;margin-top:18px}
   .modal .modal-actions button{flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;border:1px solid var(--line)}
   .modal .btn-submit{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -206,7 +218,11 @@
       <label>In your own words <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
       <textarea id="rNotes" maxlength="1900" placeholder="Anything else worth knowing about conditions where you are"></textarea>
       <label>Photo <span style="font-weight:400;color:var(--muted)">(optional, under 5MB)</span></label>
-      <input type="file" id="rPhoto" accept="image/*">
+      <div class="filedrop" id="filedrop" onclick="if(event.target===this||event.target.closest('.filedrop-icon,.filedrop-text'))document.getElementById('rPhoto').click();">
+        <div class="filedrop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+        <div class="filedrop-text"><b>Click to upload</b> or drag a photo here</div>
+        <input type="file" id="rPhoto" accept="image/*" onchange="onPhotoChange()">
+      </div>
       <div class="hint">Only visible to the moderator reviewing reports, same as the rest of this form.</div>
       <label>Contact info <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
       <input type="text" id="rContact" placeholder="Email or phone, only if you're open to a follow-up">
@@ -242,11 +258,48 @@ function openReportModal(key){
  document.getElementById('reportForm').style.display = 'block';
  document.getElementById('reportStatus').innerHTML = '';
  document.getElementById('reportSubmitBtn').disabled = false;
+ renderFiledrop();
  document.getElementById('reportOverlay').classList.add('on');
 }
 function closeReportModal(){
  document.getElementById('reportOverlay').classList.remove('on');
 }
+function renderFiledrop(){
+ const drop=document.getElementById('filedrop');
+ const existing=document.getElementById('rPhoto');
+ const file=existing&&existing.files[0];
+ // The file input stays in the DOM (hidden via CSS) in both branches --
+ // rebuilding innerHTML without it, as an earlier version of this did,
+ // silently deletes #rPhoto and breaks submitReport()'s lookup of it.
+ if(file){
+  drop.classList.add('has-file');
+  drop.innerHTML=`<div class="filedrop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><span class="filedrop-name">${file.name}</span><button type="button" class="filedrop-remove" onclick="event.stopPropagation();clearPhoto()" aria-label="Remove photo">&times;</button><input type="file" id="rPhoto" accept="image/*" onchange="onPhotoChange()">`;
+  const dt=new DataTransfer();
+  dt.items.add(file);
+  document.getElementById('rPhoto').files=dt.files;
+ } else {
+  drop.classList.remove('has-file');
+  drop.innerHTML=`<div class="filedrop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div><div class="filedrop-text"><b>Click to upload</b> or drag a photo here</div><input type="file" id="rPhoto" accept="image/*" onchange="onPhotoChange()">`;
+ }
+}
+function onPhotoChange(){renderFiledrop();}
+function clearPhoto(){
+ document.getElementById('filedrop').classList.remove('has-file');
+ document.getElementById('filedrop').innerHTML=`<div class="filedrop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div><div class="filedrop-text"><b>Click to upload</b> or drag a photo here</div><input type="file" id="rPhoto" accept="image/*" onchange="onPhotoChange()">`;
+}
+(function(){
+ document.addEventListener('dragover',e=>{if(e.target.closest&&e.target.closest('#filedrop')){e.preventDefault();e.target.closest('#filedrop').classList.add('drag');}});
+ document.addEventListener('dragleave',e=>{if(e.target.closest&&e.target.closest('#filedrop'))e.target.closest('#filedrop').classList.remove('drag');});
+ document.addEventListener('drop',e=>{
+  const drop=e.target.closest&&e.target.closest('#filedrop');
+  if(!drop)return;
+  e.preventDefault();
+  drop.classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(f)document.getElementById('rPhoto').files=e.dataTransfer.files;
+  renderFiledrop();
+ });
+})();
 function submitReport(e){
  const dryness = document.getElementById('rDryness').value;
  if(!dryness){return;}
