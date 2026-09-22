@@ -1,0 +1,4515 @@
+{
+ "months": [
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEC",
+  "JAN",
+  "FEB"
+ ],
+ "mlabel": {
+  "SEP": "September 2026",
+  "OCT": "October 2026",
+  "NOV": "November 2026",
+  "DEC": "December 2026",
+  "JAN": "January 2027",
+  "FEB": "February 2027"
+ },
+ "prov": {
+  "ABRA": {
+   "name": "Abra",
+   "region": "CAR",
+   "rf": [
+    49.0,
+    49.7,
+    23.5,
+    144.8,
+    25.5,
+    7.3
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 49.0% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 25.5% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "BENGUET": {
+   "name": "Benguet",
+   "region": "CAR",
+   "rf": [
+    55.7,
+    54.6,
+    39.9,
+    122.3,
+    30.2,
+    9.5
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 55.7% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 30.2% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "IFUGAO": {
+   "name": "Ifugao",
+   "region": "CAR",
+   "rf": [
+    61.4,
+    60.4,
+    42.1,
+    124.3,
+    44.1,
+    20.9
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 44.1% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "KALINGA": {
+   "name": "Kalinga",
+   "region": "CAR",
+   "rf": [
+    54.0,
+    68.5,
+    41.5,
+    137.8,
+    35.0,
+    14.8
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 54.0% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 35.0% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "APAYAO": {
+   "name": "Apayao",
+   "region": "CAR",
+   "rf": [
+    47.4,
+    68.1,
+    40.9,
+    147.0,
+    44.5,
+    20.0
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 47.4% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 44.5% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "MOUNTAIN PROVINCE": {
+   "name": "Mountain Province",
+   "region": "CAR",
+   "rf": [
+    56.3,
+    61.7,
+    40.8,
+    131.1,
+    37.0,
+    16.2
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 56.3% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 37.0% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "ILOCOS NORTE": {
+   "name": "Ilocos Norte",
+   "region": "Region I (Ilocos)",
+   "rf": [
+    43.4,
+    48.1,
+    25.5,
+    157.8,
+    31.1,
+    8.1
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 43.4% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 31.1% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "ILOCOS SUR": {
+   "name": "Ilocos Sur",
+   "region": "Region I (Ilocos)",
+   "rf": [
+    51.0,
+    46.8,
+    31.0,
+    139.1,
+    20.9,
+    6.2
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 51.0% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 20.9% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "LA UNION": {
+   "name": "La Union",
+   "region": "Region I (Ilocos)",
+   "rf": [
+    54.6,
+    55.9,
+    51.2,
+    133.6,
+    24.7,
+    6.6
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 54.6% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 24.7% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "PANGASINAN": {
+   "name": "Pangasinan",
+   "region": "Region I (Ilocos)",
+   "rf": [
+    78.3,
+    56.9,
+    16.6,
+    151.4,
+    17.8,
+    3.2
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 17.8% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "BATANES": {
+   "name": "Batanes",
+   "region": "Region II (Cagayan Valley)",
+   "rf": [
+    59.5,
+    70.4,
+    45.9,
+    100.1,
+    78.2,
+    54.7
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 59.5% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "CAGAYAN": {
+   "name": "Cagayan",
+   "region": "Region II (Cagayan Valley)",
+   "rf": [
+    55.2,
+    79.5,
+    45.9,
+    136.5,
+    55.9,
+    28.7
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 55.2% of normal, below normal"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 55.9% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "ISABELA": {
+   "name": "Isabela",
+   "region": "Region II (Cagayan Valley)",
+   "rf": [
+    71.2,
+    66.0,
+    45.1,
+    124.8,
+    54.4,
+    27.5
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 54.4% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "NUEVA VIZCAYA": {
+   "name": "Nueva Vizcaya",
+   "region": "Region II (Cagayan Valley)",
+   "rf": [
+    77.6,
+    60.4,
+    37.8,
+    120.4,
+    42.4,
+    25.3
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 42.4% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "QUIRINO": {
+   "name": "Quirino",
+   "region": "Region II (Cagayan Valley)",
+   "rf": [
+    86.5,
+    60.2,
+    48.4,
+    118.5,
+    58.3,
+    39.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 58.3% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "BATAAN": {
+   "name": "Bataan",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    77.7,
+    33.8,
+    23.7,
+    149.0,
+    43.4,
+    13.4
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 43.4% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "BULACAN": {
+   "name": "Bulacan",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    97.8,
+    71.6,
+    47.4,
+    132.9,
+    48.5,
+    33.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 48.5% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "NUEVA ECIJA": {
+   "name": "Nueva Ecija",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    99.8,
+    71.6,
+    44.1,
+    129.5,
+    29.7,
+    22.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 29.7% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "PAMPANGA": {
+   "name": "Pampanga",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    90.3,
+    51.9,
+    38.9,
+    147.9,
+    42.8,
+    35.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 51.9% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 42.8% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "TARLAC": {
+   "name": "Tarlac",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    90.0,
+    56.4,
+    36.2,
+    152.3,
+    24.0,
+    18.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 56.4% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 24.0% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "ZAMBALES": {
+   "name": "Zambales",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    78.0,
+    42.6,
+    18.4,
+    153.5,
+    25.6,
+    10.4
+   ],
+   "st": [
+    "-",
+    "C",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 25.6% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "AURORA": {
+   "name": "Aurora",
+   "region": "Region III (Central Luzon)",
+   "rf": [
+    99.2,
+    62.1,
+    72.7,
+    117.9,
+    60.4,
+    51.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "METRO MANILA": {
+   "name": "Metro Manila",
+   "region": "NCR",
+   "rf": [
+    95.2,
+    55.2,
+    27.6,
+    136.6,
+    34.0,
+    14.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 55.2% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 34.0% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "BATANGAS": {
+   "name": "Batangas",
+   "region": "Region IV-A (CALABARZON)",
+   "rf": [
+    91.8,
+    48.4,
+    38.7,
+    122.3,
+    51.5,
+    28.4
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 48.4% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 51.5% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "CAVITE": {
+   "name": "Cavite",
+   "region": "Region IV-A (CALABARZON)",
+   "rf": [
+    86.1,
+    39.3,
+    6.4,
+    134.9,
+    39.6,
+    16.5
+   ],
+   "st": [
+    "-",
+    "-",
+    "S",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 39.3% of normal, well below normal"
+     ]
+    },
+    "NOV": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 39.6% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "LAGUNA": {
+   "name": "Laguna",
+   "region": "Region IV-A (CALABARZON)",
+   "rf": [
+    92.7,
+    46.9,
+    46.2,
+    108.1,
+    51.6,
+    32.3
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 46.9% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 51.6% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "RIZAL": {
+   "name": "Rizal",
+   "region": "Region IV-A (CALABARZON)",
+   "rf": [
+    96.2,
+    53.5,
+    6.5,
+    127.7,
+    45.7,
+    22.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 53.5% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 45.7% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "QUEZON": {
+   "name": "Quezon",
+   "region": "Region IV-A (CALABARZON)",
+   "rf": [
+    99.1,
+    59.8,
+    61.5,
+    97.2,
+    69.2,
+    41.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 59.8% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "MARINDUQUE": {
+   "name": "Marinduque",
+   "region": "Region IV-B (MIMAROPA)",
+   "rf": [
+    99.2,
+    54.7,
+    48.2,
+    92.8,
+    70.7,
+    34.3
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 54.7% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "OCCIDENTAL MINDORO": {
+   "name": "Occidental Mindoro",
+   "region": "Region IV-B (MIMAROPA)",
+   "rf": [
+    101.5,
+    53.8,
+    32.8,
+    101.2,
+    50.7,
+    19.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 53.8% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 50.7% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "ORIENTAL MINDORO": {
+   "name": "Oriental Mindoro",
+   "region": "Region IV-B (MIMAROPA)",
+   "rf": [
+    104.5,
+    57.7,
+    38.3,
+    99.2,
+    55.8,
+    25.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 57.7% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 55.8% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "ROMBLON": {
+   "name": "Romblon",
+   "region": "Region IV-B (MIMAROPA)",
+   "rf": [
+    102.0,
+    54.2,
+    48.4,
+    93.7,
+    70.3,
+    25.5
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 54.2% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "PALAWAN": {
+   "name": "Palawan",
+   "region": "Region IV-B (MIMAROPA)",
+   "rf": [
+    111.2,
+    72.9,
+    50.6,
+    69.3,
+    24.5,
+    12.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "ALBAY": {
+   "name": "Albay",
+   "region": "Region V (Bicol)",
+   "rf": [
+    83.0,
+    58.4,
+    64.1,
+    80.3,
+    67.7,
+    24.4
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 58.4% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "CAMARINES NORTE": {
+   "name": "Camarines Norte",
+   "region": "Region V (Bicol)",
+   "rf": [
+    89.5,
+    63.2,
+    57.8,
+    83.9,
+    67.9,
+    40.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "CAMARINES SUR": {
+   "name": "Camarines Sur",
+   "region": "Region V (Bicol)",
+   "rf": [
+    76.7,
+    52.9,
+    55.8,
+    82.4,
+    65.6,
+    23.9
+   ],
+   "st": [
+    "D",
+    "D",
+    "D",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    },
+    "OCT": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    },
+    "NOV": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "CATANDUANES": {
+   "name": "Catanduanes",
+   "region": "Region V (Bicol)",
+   "rf": [
+    101.5,
+    60.3,
+    55.3,
+    80.7,
+    63.6,
+    40.4
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "MASBATE": {
+   "name": "Masbate",
+   "region": "Region V (Bicol)",
+   "rf": [
+    105.2,
+    57.3,
+    64.9,
+    81.2,
+    76.5,
+    24.5
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 57.3% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "SORSOGON": {
+   "name": "Sorsogon",
+   "region": "Region V (Bicol)",
+   "rf": [
+    98.7,
+    57.9,
+    70.4,
+    78.5,
+    71.5,
+    30.4
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 57.9% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "AKLAN": {
+   "name": "Aklan",
+   "region": "Region VI (Western Visayas)",
+   "rf": [
+    109.2,
+    72.8,
+    73.7,
+    87.7,
+    66.1,
+    35.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "ANTIQUE": {
+   "name": "Antique",
+   "region": "Region VI (Western Visayas)",
+   "rf": [
+    101.3,
+    69.8,
+    54.5,
+    85.7,
+    45.9,
+    29.3
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 45.9% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "CAPIZ": {
+   "name": "Capiz",
+   "region": "Region VI (Western Visayas)",
+   "rf": [
+    113.1,
+    76.8,
+    81.1,
+    85.6,
+    69.5,
+    41.1
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "GUIMARAS": {
+   "name": "Guimaras",
+   "region": "Region VI (Western Visayas)",
+   "rf": [
+    93.2,
+    71.5,
+    42.7,
+    84.3,
+    36.4,
+    24.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 36.4% of normal, well below normal"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "ILOILO": {
+   "name": "Iloilo",
+   "region": "Region VI (Western Visayas)",
+   "rf": [
+    101.9,
+    72.6,
+    59.6,
+    85.0,
+    52.4,
+    33.1
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "-",
+    "-",
+    "C"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 52.4% of normal, below normal"
+     ]
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    }
+   }
+  },
+  "NEGROS OCCIDENTAL": {
+   "name": "Negros Occidental",
+   "region": "Region VI (Western Visayas)",
+   "rf": [
+    103.3,
+    76.9,
+    59.4,
+    74.5,
+    41.1,
+    24.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "NEGROS ORIENTAL": {
+   "name": "Negros Oriental",
+   "region": "Region VII (Central Visayas)",
+   "rf": [
+    107.4,
+    78.8,
+    56.7,
+    62.9,
+    37.5,
+    32.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "SIQUIJOR": {
+   "name": "Siquijor",
+   "region": "Region VII (Central Visayas)",
+   "rf": [
+    112.6,
+    80.0,
+    60.3,
+    52.7,
+    45.1,
+    36.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "BOHOL": {
+   "name": "Bohol",
+   "region": "Region VII (Central Visayas)",
+   "rf": [
+    112.6,
+    77.0,
+    67.5,
+    56.8,
+    56.7,
+    39.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "CEBU": {
+   "name": "Cebu",
+   "region": "Region VII (Central Visayas)",
+   "rf": [
+    107.7,
+    79.8,
+    57.9,
+    66.3,
+    53.1,
+    35.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "BILIRAN": {
+   "name": "Biliran",
+   "region": "Region VIII (Eastern Visayas)",
+   "rf": [
+    110.6,
+    68.8,
+    65.3,
+    70.1,
+    71.8,
+    23.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "EASTERN SAMAR": {
+   "name": "Eastern Samar",
+   "region": "Region VIII (Eastern Visayas)",
+   "rf": [
+    95.8,
+    72.2,
+    72.4,
+    61.7,
+    72.8,
+    33.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "LEYTE": {
+   "name": "Leyte",
+   "region": "Region VIII (Eastern Visayas)",
+   "rf": [
+    106.7,
+    73.3,
+    65.9,
+    67.4,
+    68.2,
+    36.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "NORTHERN SAMAR": {
+   "name": "Northern Samar",
+   "region": "Region VIII (Eastern Visayas)",
+   "rf": [
+    111.2,
+    59.8,
+    71.3,
+    68.9,
+    72.9,
+    30.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 59.8% of normal, below normal"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "SAMAR": {
+   "name": "Samar",
+   "region": "Region VIII (Eastern Visayas)",
+   "rf": [
+    104.5,
+    70.7,
+    71.5,
+    65.6,
+    73.1,
+    29.1
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "SOUTHERN LEYTE": {
+   "name": "Southern Leyte",
+   "region": "Region VIII (Eastern Visayas)",
+   "rf": [
+    103.2,
+    63.9,
+    61.6,
+    61.0,
+    64.7,
+    43.1
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "ZAMBOANGA DEL NORTE": {
+   "name": "Zamboanga Del Norte",
+   "region": "Region IX (Zamboanga)",
+   "rf": [
+    110.3,
+    80.2,
+    67.3,
+    62.3,
+    49.8,
+    35.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "ZAMBOANGA DEL SUR": {
+   "name": "Zamboanga Del Sur",
+   "region": "Region IX (Zamboanga)",
+   "rf": [
+    113.9,
+    81.6,
+    65.4,
+    61.4,
+    54.9,
+    39.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "ZAMBOANGA SIBUGAY": {
+   "name": "Zamboanga Sibugay",
+   "region": "Region IX (Zamboanga)",
+   "rf": [
+    115.4,
+    84.8,
+    63.3,
+    63.9,
+    53.1,
+    39.4
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "BUKIDNON": {
+   "name": "Bukidnon",
+   "region": "Region X (Northern Mindanao)",
+   "rf": [
+    99.7,
+    87.3,
+    70.1,
+    64.2,
+    69.8,
+    59.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "CAMIGUIN": {
+   "name": "Camiguin",
+   "region": "Region X (Northern Mindanao)",
+   "rf": [
+    104.7,
+    77.1,
+    70.6,
+    55.6,
+    63.2,
+    43.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "LANAO DEL NORTE": {
+   "name": "Lanao Del Norte",
+   "region": "Region X (Northern Mindanao)",
+   "rf": [
+    102.3,
+    83.0,
+    65.0,
+    53.6,
+    61.3,
+    42.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "MISAMIS OCCIDENTAL": {
+   "name": "Misamis Occidental",
+   "region": "Region X (Northern Mindanao)",
+   "rf": [
+    101.8,
+    80.6,
+    71.8,
+    55.0,
+    54.6,
+    35.0
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "MISAMIS ORIENTAL": {
+   "name": "Misamis Oriental",
+   "region": "Region X (Northern Mindanao)",
+   "rf": [
+    97.7,
+    80.3,
+    63.0,
+    54.7,
+    65.2,
+    44.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "DAVAO DE ORO": {
+   "name": "Davao De Oro",
+   "region": "Region XI (Davao)",
+   "rf": [
+    88.7,
+    82.3,
+    66.4,
+    67.2,
+    79.4,
+    61.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "DAVAO DEL NORTE": {
+   "name": "Davao Del Norte",
+   "region": "Region XI (Davao)",
+   "rf": [
+    92.0,
+    85.2,
+    88.8,
+    67.9,
+    77.5,
+    65.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "-",
+    "C",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "DEC": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "DAVAO DEL SUR": {
+   "name": "Davao Del Sur",
+   "region": "Region XI (Davao)",
+   "rf": [
+    78.4,
+    89.5,
+    75.1,
+    68.4,
+    83.7,
+    44.2
+   ],
+   "st": [
+    "C",
+    "-",
+    "-",
+    "C",
+    "-",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry spell next month"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "DAVAO OCCIDENTAL": {
+   "name": "Davao Occidental",
+   "region": "Region XI (Davao)",
+   "rf": [
+    73.5,
+    83.9,
+    68.4,
+    70.0,
+    84.4,
+    35.6
+   ],
+   "st": [
+    "C",
+    "-",
+    "-",
+    "C",
+    "-",
+    "-"
+   ],
+   "months": {
+    "SEP": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 35.6% of normal, well below normal"
+     ]
+    }
+   }
+  },
+  "DAVAO ORIENTAL": {
+   "name": "Davao Oriental",
+   "region": "Region XI (Davao)",
+   "rf": [
+    84.2,
+    80.9,
+    68.3,
+    66.8,
+    81.2,
+    54.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "-",
+    "-"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "FEB": {
+     "level": "WATCH",
+     "hazards": [
+      "Rainfall at 54.9% of normal, below normal"
+     ]
+    }
+   }
+  },
+  "SOUTH COTABATO": {
+   "name": "South Cotabato",
+   "region": "Region XII (SOCCSKSARGEN)",
+   "rf": [
+    83.6,
+    84.7,
+    62.8,
+    68.4,
+    83.6,
+    36.9
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "-",
+    "-"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 36.9% of normal, well below normal"
+     ]
+    }
+   }
+  },
+  "COTABATO": {
+   "name": "Cotabato",
+   "region": "Region XII (SOCCSKSARGEN)",
+   "rf": [
+    97.9,
+    86.2,
+    76.0,
+    62.9,
+    78.4,
+    56.5
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "SARANGANI": {
+   "name": "Sarangani",
+   "region": "Region XII (SOCCSKSARGEN)",
+   "rf": [
+    77.1,
+    84.9,
+    62.0,
+    70.0,
+    84.3,
+    33.4
+   ],
+   "st": [
+    "C",
+    "-",
+    "-",
+    "C",
+    "-",
+    "-"
+   ],
+   "months": {
+    "SEP": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "FEB": {
+     "level": "PREPARE",
+     "hazards": [
+      "Rainfall at 33.4% of normal, well below normal"
+     ]
+    }
+   }
+  },
+  "SULTAN KUDARAT": {
+   "name": "Sultan Kudarat",
+   "region": "Region XII (SOCCSKSARGEN)",
+   "rf": [
+    99.1,
+    83.2,
+    70.1,
+    63.9,
+    79.7,
+    47.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "AGUSAN DEL NORTE": {
+   "name": "Agusan Del Norte",
+   "region": "Region XIII (Caraga)",
+   "rf": [
+    109.4,
+    73.9,
+    92.7,
+    62.2,
+    79.4,
+    58.7
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "-",
+    "C",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "DEC": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "AGUSAN DEL SUR": {
+   "name": "Agusan Del Sur",
+   "region": "Region XIII (Caraga)",
+   "rf": [
+    107.8,
+    77.2,
+    82.5,
+    67.5,
+    79.9,
+    68.5
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "-",
+    "C",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "DEC": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "DINAGAT ISLANDS": {
+   "name": "Dinagat Islands",
+   "region": "Region XIII (Caraga)",
+   "rf": [
+    112.0,
+    72.6,
+    77.4,
+    62.3,
+    70.9,
+    50.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "SURIGAO DEL NORTE": {
+   "name": "Surigao Del Norte",
+   "region": "Region XIII (Caraga)",
+   "rf": [
+    117.1,
+    73.6,
+    81.1,
+    63.3,
+    75.5,
+    58.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "-",
+    "C",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "DEC": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "JAN": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "SURIGAO DEL SUR": {
+   "name": "Surigao Del Sur",
+   "region": "Region XIII (Caraga)",
+   "rf": [
+    115.0,
+    72.1,
+    83.9,
+    67.4,
+    83.4,
+    70.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "-",
+    "-",
+    "-"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "DEC": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "JAN": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "FEB": {
+     "level": "WATCH",
+     "hazards": [
+      "Outlook beyond this month not yet loaded. El Nino is forecast to persist"
+     ]
+    }
+   }
+  },
+  "BASILAN": {
+   "name": "Basilan",
+   "region": "BARMM",
+   "rf": [
+    125.4,
+    79.1,
+    58.2,
+    67.8,
+    53.5,
+    41.2
+   ],
+   "st": [
+    "-",
+    "-",
+    "C",
+    "S",
+    "S",
+    "D"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "NOV": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "DEC": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "RESPOND",
+     "hazards": [
+      "Drought"
+     ]
+    }
+   }
+  },
+  "MAGUINDANAO": {
+   "name": "Maguindanao",
+   "region": "BARMM",
+   "rf": [
+    114.3,
+    87.9,
+    72.4,
+    57.2,
+    75.8,
+    57.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "LANAO DEL SUR": {
+   "name": "Lanao Del Sur",
+   "region": "BARMM",
+   "rf": [
+    104.6,
+    84.5,
+    69.6,
+    55.9,
+    67.4,
+    50.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "SULU": {
+   "name": "Sulu",
+   "region": "BARMM",
+   "rf": [
+    118.3,
+    85.4,
+    65.6,
+    62.1,
+    47.7,
+    34.8
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  },
+  "TAWI-TAWI": {
+   "name": "Tawi-Tawi",
+   "region": "BARMM",
+   "rf": [
+    113.2,
+    83.6,
+    63.6,
+    62.0,
+    42.6,
+    29.6
+   ],
+   "st": [
+    "-",
+    "-",
+    "-",
+    "C",
+    "S",
+    "S"
+   ],
+   "months": {
+    "SEP": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "OCT": {
+     "level": "NORMAL",
+     "hazards": []
+    },
+    "NOV": {
+     "level": "WATCH",
+     "hazards": [
+      "Forecast to enter dry condition next month"
+     ]
+    },
+    "DEC": {
+     "level": "PREPARE",
+     "hazards": [
+      "Dry condition"
+     ]
+    },
+    "JAN": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    },
+    "FEB": {
+     "level": "ACT",
+     "hazards": [
+      "Dry spell"
+     ]
+    }
+   }
+  }
+ },
+ "tc_forecast": {
+  "SEP": "2 to 3 tropical cyclones",
+  "OCT": "1 to 2 tropical cyclones",
+  "NOV": "1 to 2 tropical cyclones",
+  "DEC": "1 to 2 tropical cyclones",
+  "JAN": "0 to 1 tropical cyclone",
+  "FEB": "a slim chance of a tropical cyclone"
+ },
+ "tc_forecast_source": "PAGASA Forecast Tropical Cyclone Frequency, issued 26 Aug 2026"
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "used_for": "Provincial rainfall matrix (% of normal) and dry condition/spell/drought status tables, Sep 2026 to Feb 2027; tropical cyclone frequency outlook; temperature outlook.",
+    "issuer": "DOST-PAGASA",
+    "issued": "2026-08-26",
+    "title": "Climate Outlook, September 2026 to February 2027",
+    "public_source": "https://bagong.pagasa.dost.gov.ph/climate (PAGASA Climate Outlook, published monthly)",
+    "ingested_into": "data/provincial_risk_source.py"
+  },
+  {
+    "used_for": "ENSO status/intensity and the Watch · Learn · Prepare · Act framework used in the map's guidance section.",
+    "issuer": "Manila Observatory",
+    "issued": "2026-08-28",
+    "title": "Drought Watch Climate Monitoring Bulletin, Aug 2026",
+    "public_source": "Manila Observatory publishes its Drought Watch bulletins publicly; see https://observatory.ph",
+    "ingested_into": "map guidance copy (map/map_template.html)"
+  },
+  {
+    "used_for": "Philippine province boundary geometry (choropleth shapes).",
+    "issuer": "PSA / faeldon (2023 simplified boundary set)",
+    "issued": "2023",
+    "title": "Philippine administrative province boundaries",
+    "public_source": "See map attribution; a common public-domain simplified boundary set for PH provinces.",
+    "ingested_into": "data/processed/ph_provinces.json"
+  },
+  {
+    "used_for": "Agricultural exposure layer: province-level rice (palay) and corn volume of production (metric tons) and area harvested (hectares), most recent complete year (2025 Annual at time of ingestion).",
+    "issuer": "Philippine Statistics Authority (PSA) OpenSTAT",
+    "issued": "2026-07-29",
+    "title": "Palay and Corn: Volume of Production in Metric Tons, and Area Harvested in Hectares, by Ecosystem/Croptype, Quarter, Semester, Region and Province, 1987-2026",
+    "public_source": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS (PSA OpenSTAT PXWeb API, crop statistics domain)",
+    "ingested_into": "data/processed/agriculture_exposure.json (via scripts/00_fetch_agriculture_exposure.py, retrieved 2026-09-22)"
+  },
+  {
+    "used_for": "Poverty incidence (vulnerability/adaptive-capacity proxy) layer: province-level poverty incidence among population (%), most recent complete year (2023 at time of ingestion). A general vulnerability proxy, not an El Nino-specific index -- see README.md and ROADMAP.md for why this replaced the originally-planned UPLB El Nino vulnerability study (its data table was inaccessible).",
+    "issuer": "Philippine Statistics Authority (PSA) OpenSTAT",
+    "issued": "2026-08-03",
+    "title": "Table 2. Annual Per Capita Poverty Threshold and Poverty Incidence Among Population with Measures of Precision, by Region and Province: 2018, 2021, and 2023",
+    "public_source": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/1F/FY (PSA OpenSTAT PXWeb API, poverty statistics domain)",
+    "ingested_into": "data/processed/vulnerability.json (via scripts/00_fetch_vulnerability_data.py, retrieved 2026-09-22)"
+  }
+]

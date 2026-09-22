@@ -1,0 +1,51 @@
+name: Build and deploy to GitHub Pages
+
+# Rebuilds the map fresh on every push to main and publishes it via
+# GitHub Pages. If you've added a CARTO_API_KEY repo secret (Settings ->
+# Secrets and variables -> Actions -> New repository secret), the
+# deployed page uses CARTO's Voyager basemap; otherwise it falls back to
+# free OpenStreetMap tiles. Either way, the key (if any) is only ever
+# baked into the deployed static page, never committed to the repo --
+# but once deployed, it IS publicly visible in that page's source, the
+# same as any client-side map tile key. See README.md "Deploying to
+# GitHub Pages" before adding a real key here.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build map
+        env:
+          CARTO_API_KEY: ${{ secrets.CARTO_API_KEY }}
+        run: bash build.sh
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site
+          cp output/ph_el_nino_watch.html _site/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

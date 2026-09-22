@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Ni&ntilde;o Watch - Philippines (Sep 2026 to Feb 2027)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root{--respond:#8E1B1B;--act:#E2711D;--prepare:#F2C14E;--watch:#7FB3D5;--normal:#D8E3DC;
+        --ink:#1B2433;--muted:#65707E;--panel:#FFFFFF;--line:#E7EAEE;--tint:#F6F8FA;--accent:#B85042;}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:"Segoe UI",Calibri,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  #app{display:flex;height:100%}
+  #side{width:430px;min-width:430px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+  #side>*{flex:none}
+  #side>.scroll{flex:1;min-height:0}
+  #map{flex:1}
+  .hdr{padding:14px 24px 10px;border-bottom:1px solid var(--line)}
+  .hdr h1{font-size:16px;margin:0 0 4px;letter-spacing:.1px;font-weight:700;line-height:1.25}
+  .hdr .sub{font-size:11.5px;color:var(--muted);line-height:1.4}
+  .months{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:10px 0 6px}
+  .months button{border:1px solid var(--line);background:var(--tint);padding:7px 2px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;color:var(--ink);transition:background .12s}
+  .months button:hover{background:#ECEFF3}
+  .months button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .mtitle{padding:8px 0 2px;font-size:15px;font-weight:700}
+  .mtitle-sub{padding:0 0 6px;font-size:11.5px;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:0 0 8px}
+  .stat{border-radius:9px;padding:8px 5px 7px;text-align:center;color:#fff;cursor:pointer;border:none;font-family:inherit;transition:transform .1s,box-shadow .1s}
+  .stat:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.18)}
+  .stat:disabled{cursor:default;opacity:.45}
+  .stat:disabled:hover{transform:none;box-shadow:none}
+  .stat b{display:block;font-size:19px;line-height:1.15;font-weight:700}
+  .stat span{font-size:9.5px;letter-spacing:.2px;opacity:.95;display:block;line-height:1.35}
+  .scroll{flex:1;min-height:0;overflow-y:auto;padding:0 24px 24px}
+  .scroll::-webkit-scrollbar{width:8px}
+  .scroll::-webkit-scrollbar-thumb{background:#D6DBE1;border-radius:4px}
+  .card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;background:#fff;box-shadow:0 1px 2px rgba(20,30,45,.04)}
+  .card h3{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:700}
+  .card p{margin:0 0 8px;font-size:13px;line-height:1.6;color:#2B3542}
+  .card ul{margin:6px 0 0 18px;padding:0;font-size:12.5px;line-height:1.65;color:#2B3542}
+  .card li{margin-bottom:2px}
+  .guide-card{background:#FAF8FF;border-color:#DED0F5}
+  .guide-card h3{color:#6B4FA0}
+  .guide-note{font-size:11px;color:#6B4FA0;background:#F1EAFB;border:1px solid #DED0F5;border-radius:8px;padding:8px 10px;margin-bottom:10px;line-height:1.5}
+  #tcBanner{margin:8px 0 0;padding:8px 10px;border-radius:8px;font-size:11.5px;line-height:1.5;background:#EAF2FB;border:1px solid #C9DDF2;color:#1B4E7A}
+  #tcBanner b{font-weight:700}
+  .chip{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;color:#fff;margin:0 5px 5px 0;cursor:pointer;border:none;font-family:inherit;transition:filter .12s}
+  .chip:hover{filter:brightness(1.08)}
+  .chip.static{cursor:default}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;padding:9px 24px;border-top:1px solid var(--line);background:var(--tint)}
+  .legend .item{display:flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;flex:none}
+  .legend .credit{width:100%;font-size:9.5px;color:var(--muted);margin-top:2px}
+  .legend .credit a,.foot-note a,.guide-note a{color:inherit;text-decoration:underline}
+  .searchwrap{padding:10px 0 0;display:flex;align-items:center;gap:6px}
+  .searchwrap input{flex:1;min-width:0;padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink)}
+  .clearbtn{flex:none;width:28px;height:28px;border:1px solid var(--line);background:var(--tint);border-radius:8px;cursor:pointer;color:var(--muted);font-size:13px;font-family:inherit;align-items:center;justify-content:center}
+  .clearbtn:hover{background:#ECEFF3}
+  .searchdrop{margin:8px 0 4px;background:#fff;border:1px solid var(--line);border-radius:10px;max-height:280px;overflow-y:auto}
+  .sres{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--line)}
+  .sres:last-child{border-bottom:none}
+  .sres:hover{background:var(--tint)}
+  .sres.active{background:var(--tint)}
+  .sres .stype{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700;width:44px;flex:none}
+  .sres .sname{flex:1;font-size:12.5px;color:var(--ink);min-width:0}
+  .sres .sname b{font-weight:600}
+  .sres .ssub{font-size:11px;color:var(--muted);display:block}
+  .sres .spill{flex:none;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700}
+  .sres.empty{color:var(--muted);cursor:default;font-size:12.5px}
+  .sres.empty:hover{background:none}
+  .tabs{display:flex;gap:4px;padding:4px 24px 0;border-bottom:1px solid var(--line);margin-bottom:6px;flex:none}
+  .tabs button{border:none;background:none;padding:6px 4px 8px;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-right:18px}
+  .tabs button.on{color:var(--ink);border-bottom-color:var(--ink)}
+  .prov-title{font-size:16px;font-weight:700;margin-bottom:3px}
+  .prov-sub{font-size:12px;color:var(--muted);margin-bottom:10px}
+  .kv{font-size:12.5px;margin:2px 0 10px;line-height:1.6;color:#2B3542}
+  .kv b{color:var(--muted);font-weight:600}
+  table.rf{width:100%;border-collapse:collapse;font-size:10.5px;margin-top:4px}
+  table.rf th{padding:4px 2px;text-align:center;color:var(--muted);font-weight:600;font-size:9.5px}
+  table.rf td{padding:4px 2px;text-align:center;border-bottom:1px solid var(--line)}
+  table.rf td.c{color:#fff;font-weight:600;border-radius:4px}
+  .leaflet-tooltip.prov{font-size:12px;font-weight:600}
+  .grp{font-size:12.5px;margin:0 0 12px}
+  .grp:last-child{margin-bottom:0}
+  .grp .lbl{display:inline-block;margin-bottom:5px}
+  .foot-note{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .foot-note a{color:var(--ink)}
+  @media (max-width:800px){#app{flex-direction:column}#side{width:100%;min-width:0;height:48%}#map{height:52%}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="side">
+    <div class="hdr">
+      <h1>El Ni&ntilde;o Watch - Philippines</h1>
+      <div class="sub">An open-source personal project that provides a guide to where El Ni&ntilde;o drought conditions are expected each month. This uses data from PAGASA and Manila Observatory's public outlooks. See sources below.</div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button id="tabOverview" class="on" onclick="setTab('overview')">Overview</button>
+      <button id="tabInsights" onclick="setTab('insights')">Insights</button>
+    </div>
+    <div class="scroll">
+      <div id="panel-overview">
+        <div class="searchwrap">
+          <input id="searchBox" placeholder="Search a province or region…" autocomplete="off"
+            oninput="renderSearch()" onkeydown="if(event.key==='Escape'){resetSearch();this.blur();}">
+          <button id="searchClear" class="clearbtn" onclick="resetSearch()" style="display:none" title="Clear filter">✕</button>
+        </div>
+        <div class="searchdrop" id="searchDrop"></div>
+        <div class="months" id="months"></div>
+        <div id="tcBanner" style="display:none"></div>
+        <div class="mtitle" id="mtitle"></div>
+        <div class="mtitle-sub" id="mtitleSub"></div>
+        <div class="stats" id="stats"></div>
+        <div id="detail"></div>
+      </div>
+      <div id="panel-insights" style="display:none">
+        <div id="focus"></div>
+        <div id="levels"></div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div id="map"></div>
+</div>
+<script>
+const DATA = __DATA__;
+const GEO = __GEO__;
+// Agricultural exposure (rice/corn production and area harvested), from
+// PSA OpenSTAT -- see scripts/00_fetch_agriculture_exposure.py. Purely
+// informational context, additive to the drought alert card below; it is
+// never read by lvl()/style()/COL/ORDER and never changes an alert level.
+// AG.prov may be {} (script never run yet) or missing individual province
+// keys -- agCardHtml() below handles both gracefully.
+const AG = __AG__;
+// Poverty incidence (vulnerability/adaptive-capacity proxy), from PSA
+// OpenSTAT -- see scripts/00_fetch_vulnerability_data.py. Purely
+// informational context, additive to the drought alert card below and
+// entirely separate from the agriculture-exposure block above; it is
+// never read by lvl()/style()/COL/ORDER and never changes an alert level.
+// VULN.prov may be {} (script never run yet) or missing individual
+// province keys -- vulnCardHtml() below handles both gracefully.
+const VULN = __VULN__;
+const COL={RESPOND:'#8E1B1B',ACT:'#E2711D',PREPARE:'#F2C14E',WATCH:'#7FB3D5',NORMAL:'#D8E3DC'};
+const TXT={RESPOND:'#fff',ACT:'#fff',PREPARE:'#3B2F00',WATCH:'#0F2A3F',NORMAL:'#3C4A45'};
+const ORDER=['RESPOND','ACT','PREPARE','WATCH','NORMAL'];
+
+/* ============================================================
+   EDITABLE COPY. Everything below, down to the closing brace of
+   FOCUS, is plain text and can be hand-edited directly in this
+   file (search "EDITABLE COPY") with no build step needed. It is
+   written from data/processed/provincial_alerts.json's province
+   counts -- if you add a new month of PAGASA data, update this
+   copy by hand using the new counts (there's no script that
+   generates it automatically; see README.md).
+   ============================================================ */
+const GUIDANCE={
+ RESPOND:["This is PAGASA's most severe drought status. Water and food supplies may already be affected here, so conserve water and follow your local government's advisories.","If you're part of a cooperative, business, or community group, this is the point to actively run your response plan, not just have one on paper.","Keep watching PAGASA's updates even after conditions improve. El Nino's effects on water and crops often linger."],
+ ACT:["Drought conditions have set in. At home, start conserving water and setting aside essential supplies.","If you run or belong to a cooperative or local organization, this is the point to start carrying out your El Nino response plan based on the latest PAGASA forecast."],
+ PREPARE:["Dry conditions are building here. It's worth acting on this early rather than waiting for it to worsen.","At home, think through how you'd manage a water shortage or a dip in income, and check on neighbors or relatives who might need help.","If you're organizing at a community or cooperative level, work with your local DRRMO to map out who's likely to be affected and what they'll need before, during, and after a dry spell.","El Nino's effects can linger past the point ENSO itself returns to neutral, so build that into your planning."],
+ WATCH:["Conditions are starting to turn dry here. There's no cause for alarm yet, but it's worth paying attention.","Follow PAGASA's monthly outlook for this province, and think about how a drought here could affect your household, business, or community."],
+ NORMAL:["No drought conditions are flagged for this province this month.","Still worth checking PAGASA's monthly outlook occasionally, in case that changes."]
+};
+const GUIDANCE_SOURCE='Adapted from <a href="https://observatory.ph" target="_blank" rel="noopener">Manila Observatory’s</a> Watch · Learn · Prepare · Act framework (Drought Watch bulletin), applied here to a 5-level scale.';
+const FOCUS={
+ SEP:{Luzon:"Camarines Sur is in drought, the only province nationwide at that status this month.",Visayas:"No province is in drought or dry spell this month.",Mindanao:"No province is in drought or dry spell this month."},
+ OCT:{Luzon:"Camarines Sur remains the only province in drought.",Visayas:"Rainfall is below normal across the region, but no province has reached dry spell or drought yet.",Mindanao:"Rainfall is mostly near normal this month."},
+ NOV:{Luzon:"Camarines Sur remains in drought, and 17 more Luzon provinces (much of the Cordillera, Ilocos, and Cagayan Valley, plus Bataan, Cavite, and Zambales) move into dry spell.",Visayas:"No province has reached dry spell or drought, though dry conditions are building across the region.",Mindanao:"The north coast (Zamboanga del Norte, Misamis Occidental, Misamis Oriental, Camiguin, Davao Oriental, Dinagat, Basilan) is entering dry conditions, short of dry spell."},
+ DEC:{Luzon:"Four provinces (Albay, Sorsogon, Catanduanes, Palawan) are in dry spell.",Visayas:"11 provinces (Cebu, Bohol, Leyte, the Samar provinces, Negros Occidental and Oriental, Biliran, Siquijor, Southern Leyte) enter dry spell.",Mindanao:"7 provinces on the north coast (Zamboanga del Norte, Misamis Occidental, Misamis Oriental, Camiguin, Davao Oriental, Dinagat, Basilan) enter dry spell."},
+ JAN:{Luzon:"The same 4 provinces (Albay, Sorsogon, Catanduanes, Palawan) remain in dry spell.",Visayas:"The same 11 provinces remain in dry spell.",Mindanao:"Dry spell spreads to 17 provinces, including the Zamboanga peninsula, BARMM, Cotabato, and Davao de Oro."},
+ FEB:{Luzon:"4 provinces (Albay, Sorsogon, Catanduanes, Palawan) reach drought, and 13 more (including Metro Manila, Pangasinan, and the Cordillera) are in dry spell.",Visayas:"11 provinces reach drought and Guimaras enters dry spell, covering nearly the entire region.",Mindanao:"6 provinces (including Zamboanga del Norte and the Misamis provinces) reach drought, and 16 more are in dry spell."}
+};
+/* ======================= END EDITABLE COPY ======================= */
+const GROUP={Luzon:['CAR','Region I (Ilocos)','Region II (Cagayan Valley)','Region III (Central Luzon)','NCR','Region IV-A (CALABARZON)','Region IV-B (MIMAROPA)','Region V (Bicol)'],Visayas:['Region VI (Western Visayas)','Region VII (Central Visayas)','Region VIII (Eastern Visayas)'],Mindanao:['Region IX (Zamboanga)','Region X (Northern Mindanao)','Region XI (Davao)','Region XII (SOCCSKSARGEN)','Region XIII (Caraga)','BARMM']};
+const LEVEL_LEGEND={RESPOND:'Drought',ACT:'Dry spell',PREPARE:'Dry condition, or rainfall ≤40% of normal',WATCH:'Turning dry (rainfall 41–60% of normal), or forecast to enter dry status next month',NORMAL:'Nothing flagged'};
+const LEGEND_SHORT={RESPOND:'Drought',ACT:'Dry spell',PREPARE:'Dry condition / ≤40% rain',WATCH:'Turning dry',NORMAL:'Nothing flagged'};
+const months=DATA.months; let cur='OCT'; let selected=null; let tab='overview';
+
+const SEARCH_INDEX=(()=>{
+ const idx=[];
+ Object.entries(DATA.prov).forEach(([k,p])=>idx.push({type:'Province',label:p.name,sub:p.region,hay:(p.name+' '+k+' '+p.region).toLowerCase(),prov:k}));
+ [...new Set(Object.values(DATA.prov).map(p=>p.region))].forEach(r=>idx.push({type:'Region',label:r,sub:`${Object.values(DATA.prov).filter(p=>p.region===r).length} provinces`,hay:r.toLowerCase(),region:r}));
+ return idx;
+})();
+let CURRENT_MATCHES=[];
+
+const map=L.map('map',{zoomControl:true,preferCanvas:true}).setView([12.3,122.5],6);
+// Tile URL/attribution/subdomains are injected at build time by
+// scripts/02_assemble_map.py -- see README.md "Basemap tiles". Never hand-edit
+// a real API key into this file; it's a public repo and this template is
+// what gets committed. Defaults to free, keyless OpenStreetMap tiles if you
+// haven't configured a CARTO key locally.
+L.tileLayer('__TILE_URL__',{attribution:'__TILE_ATTR__',maxZoom:__TILE_MAXZOOM__,subdomains:'__TILE_SUBDOMAINS__'}).addTo(map);
+
+function lvl(key,m){const p=DATA.prov[key];if(!p)return 'NORMAL';return p.months[m].level;}
+function hazardsOf(p,m){return p.months[m].hazards;}
+function style(f){const L=lvl(f.properties.key,cur);return{fillColor:COL[L],fillOpacity:.72,color:'#ffffff',weight:.8};}
+const geo=L.geoJSON(GEO,{style,onEachFeature:(f,l)=>{
+  const p=DATA.prov[f.properties.key]; if(!p)return;
+  l.bindTooltip(()=>`${p.name}. ${lvl(f.properties.key,cur)}`,{className:'prov',sticky:true});
+  l.on('click',()=>{selected=f.properties.key;setTab('overview');renderSearch();renderFocus();renderDetail();});
+  l.on('mouseover',()=>l.setStyle({weight:2,color:'#1B2433'})); l.on('mouseout',()=>geo.resetStyle(l));
+}}).addTo(map);
+
+function recolor(){geo.setStyle(style);}
+
+function renderMonths(){const el=document.getElementById('months');el.innerHTML='';months.forEach(m=>{const b=document.createElement('button');b.textContent=DATA.mlabel[m].slice(0,3)+' '+DATA.mlabel[m].slice(-2);b.className=m===cur?'on':'';b.onclick=()=>{cur=m;selected=null;renderAll();};el.appendChild(b);});}
+function renderStats(){const cnt={};ORDER.forEach(o=>{cnt[o]=0;});
+ Object.keys(DATA.prov).forEach(k=>cnt[lvl(k,cur)]++);
+ document.getElementById('stats').innerHTML=ORDER.map(o=>`<button class="stat" style="background:${COL[o]};color:${TXT[o]}" ${cnt[o]===0?'disabled':''}><b>${cnt[o]}</b><span>${o.charAt(0)+o.slice(1).toLowerCase()}</span></button>`).join('');
+ document.getElementById('mtitle').textContent=DATA.mlabel[cur];
+ const active=cnt.RESPOND+cnt.ACT; const total=Object.keys(DATA.prov).length;
+ document.getElementById('mtitleSub').textContent=`${active} of ${total} provinces are at ACT or RESPOND this month.`;}
+function renderFocus(){
+ const groups=selected && DATA.prov[selected]
+  ? [Object.keys(GROUP).find(g=>GROUP[g].includes(DATA.prov[selected].region))].filter(Boolean)
+  : ['Luzon','Visayas','Mindanao'];
+ let h='';if(selected && DATA.prov[selected])h+=`<div class="foot-note" style="margin-bottom:8px">Showing the region for ${DATA.prov[selected].name}. <a href="#" onclick="resetSearch();return false;">Show all three</a>.</div>`;
+ for(const g of groups){const provs=Object.entries(DATA.prov).filter(([k,p])=>GROUP[g].includes(p.region));const hot=provs.filter(([k,p])=>['RESPOND','ACT'].includes(lvl(k,cur))).sort((a,b)=>ORDER.indexOf(lvl(a[0],cur))-ORDER.indexOf(lvl(b[0],cur))||a[1].name.localeCompare(b[1].name));
+ h+=`<div class="card"><h3>${g}. ${hot.length} of ${provs.length} provinces at ACT or RESPOND</h3><p>${FOCUS[cur][g]}</p>`;
+ if(hot.length)h+=`<div>${hot.slice(0,20).map(([k,p])=>`<button class="chip" style="background:${COL[lvl(k,cur)]};color:${TXT[lvl(k,cur)]}" onclick="pickProvince('${k}')">${p.name}</button>`).join('')}${hot.length>20?`<span class="chip static" style="background:#9099A6">${hot.length-20} more</span>`:''}</div>`;
+ h+='</div>';}
+ document.getElementById('focus').innerHTML=h;}
+function renderLevels(){const el=document.getElementById('levels');
+ const meaning=`<div class="card"><h3>What each level means</h3>`+ORDER.map(o=>`<div class="grp"><span class="chip static lbl" style="background:${COL[o]};color:${TXT[o]}">${o}</span><p style="margin:5px 0 0;color:var(--muted)">${LEVEL_LEGEND[o]}</p></div>`).join('')+`</div>`;
+ const guide=`<div class="card guide-card"><h3>What to consider</h3><div class="guide-note">${GUIDANCE_SOURCE} These are general starting points, not tailored advice for your specific situation. Always confirm against PAGASA's own bulletins.</div>`+ORDER.map(o=>`<div class="grp"><span class="chip static lbl" style="background:${COL[o]};color:${TXT[o]}">${o}</span><ul>${GUIDANCE[o].map(a=>`<li>${a}</li>`).join('')}</ul></div>`).join('')+`</div>`;
+ el.innerHTML=meaning+guide;}
+function renderLegend(){document.getElementById('legend').innerHTML=ORDER.map(o=>`<span class="item"><i style="background:${COL[o]}"></i>${o}. ${LEGEND_SHORT[o]}</span>`).join('')+'<span class="credit">Sources: <a href="https://bagong.pagasa.dost.gov.ph/climate" target="_blank" rel="noopener">DOST-PAGASA</a>, <a href="https://observatory.ph" target="_blank" rel="noopener">Manila Observatory</a>. Boundaries: <a href="https://psa.gov.ph" target="_blank" rel="noopener">PSA</a>, <a href="https://github.com/faeldon/philippines-json-maps" target="_blank" rel="noopener">faeldon</a> (2023). Agriculture &amp; poverty data: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>. Basemap: __TILE_CREDIT__.</span><span class="credit">This is an open-source passion project. If you find it useful, a star on <a href="https://github.com/quielq/quielq-enso-watch" target="_blank" rel="noopener">GitHub</a> would mean a lot, and contributions are always welcome.</span>';}
+function renderTcBanner(){
+ const el=document.getElementById('tcBanner');
+ if(!DATA.tc_forecast||!DATA.tc_forecast[cur]){el.style.display='none';return;}
+ el.innerHTML=`🌀 <b>${DATA.mlabel[cur]}:</b> PAGASA forecasts ${DATA.tc_forecast[cur]} developing or entering the PAR this month, nationally, not tied to any one province. Source: ${DATA.tc_forecast_source}.`;
+ el.style.display='block';
+}
+function cellColor(v){return v>=120?'#2E6FD3':v>80?'#3E9B57':v>40?'#E3B505':'#C62828';}
+function fmtNum(v){return v==null?null:Math.round(v).toLocaleString();}
+function agCardHtml(key){
+ const ag=AG&&AG.prov?AG.prov[key]:null;
+ const period=AG&&AG.period?AG.period:'';
+ if(!ag||(ag.rice_production_mt==null&&ag.corn_production_mt==null&&ag.rice_area_harvested_ha==null&&ag.corn_area_harvested_ha==null)){
+  const note=(ag&&ag.note)||'No PSA crop-production data for this area.';
+  return `<div class="kv"><b>Agricultural exposure.</b> ${note}</div>`;
+ }
+ const rice=fmtNum(ag.rice_production_mt),riceHa=fmtNum(ag.rice_area_harvested_ha);
+ const corn=fmtNum(ag.corn_production_mt),cornHa=fmtNum(ag.corn_area_harvested_ha);
+ return `<div class="kv"><b>Agricultural exposure.</b> Rice: ${rice!=null?rice+' MT produced':'no data'}${riceHa!=null?` (${riceHa} ha harvested)`:''}. Corn: ${corn!=null?corn+' MT produced':'no data'}${cornHa!=null?` (${cornHa} ha harvested)`:''}.</div>
+ <div class="foot-note">Agricultural exposure source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Shown for context only; it does not affect the drought alert level above.</div>`;
+}
+function vulnCardHtml(key){
+ const v=VULN&&VULN.prov?VULN.prov[key]:null;
+ const year=VULN&&VULN.year?VULN.year:'';
+ if(!v||v.poverty_incidence_pct==null){
+  const note=(v&&v.note)||'No PSA poverty data for this area.';
+  return `<div class="kv"><b>Poverty incidence.</b> ${note}</div>`;
+ }
+ return `<div class="kv"><b>Poverty incidence.</b> ${v.poverty_incidence_pct}% of population${year?` (${year}, PSA)`:' (PSA)'}.</div>
+ <div class="foot-note">Poverty incidence source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${year?`, ${year}`:''}. A general vulnerability/adaptive-capacity proxy, not an El Nino-specific index. Shown for context only; it does not affect the drought alert level above.</div>`;
+}
+function provinceCardHtml(key){
+ const p=DATA.prov[key];const L=lvl(key,cur);const haz=hazardsOf(p,cur);
+ const st={D:'Drought',S:'Dry spell',C:'Dry condition','-':'No flag'};
+ return `<div class="card">
+ <div class="prov-title">${p.name}</div>
+ <div class="prov-sub">${p.region} · <span class="chip static" style="background:${COL[L]};color:${TXT[L]}">${L}</span></div>
+ <div class="kv"><b>This month.</b> ${haz.length?haz.join('. '):'No hazard flagged.'}</div>
+ <table class="rf"><tr><th></th>${months.map(x=>`<th>${x}</th>`).join('')}</tr><tr><td style="text-align:left">Rain %N</td>${p.rf.map(v=>`<td class="c" style="background:${cellColor(v)}">${v}</td>`).join('')}</tr><tr><td style="text-align:left">PAGASA</td>${p.st.map(s=>`<td>${st[s]}</td>`).join('')}</tr><tr><td style="text-align:left">Drought level</td>${months.map(x=>{const xl=lvl(key,x);return `<td class="c" style="background:${COL[xl]};color:${TXT[xl]}">${xl.slice(0,3)}</td>`;}).join('')}</tr></table>
+ <ul>${GUIDANCE[L].map(a=>`<li>${a}</li>`).join('')}</ul>
+ <div class="foot-note">Rain %N is forecast rainfall as a share of normal. Source: <a href="https://bagong.pagasa.dost.gov.ph/climate" target="_blank" rel="noopener">PAGASA</a>, 26 Aug 2026.</div>
+ ${agCardHtml(key)}
+ ${vulnCardHtml(key)}
+ </div>`;
+}
+function renderDetail(){
+ const el=document.getElementById('detail');el.style.display='block';
+ if(selected && DATA.prov[selected]){
+  el.innerHTML=`<div class="foot-note" style="margin-bottom:8px">Showing ${DATA.prov[selected].name} only. <a href="#" onclick="resetSearch();return false;">Show all provinces</a>.</div>${provinceCardHtml(selected)}`;
+  return;
+ }
+ const keys=Object.keys(DATA.prov).sort((a,b)=>ORDER.indexOf(lvl(a,cur))-ORDER.indexOf(lvl(b,cur))||DATA.prov[a].name.localeCompare(DATA.prov[b].name));
+ el.innerHTML=`<div class="foot-note" style="margin-bottom:8px">All ${keys.length} provinces, most severe first. Click a province on the map, or search above, to focus on just one.</div>${keys.map(provinceCardHtml).join('')}`;
+}
+function pickProvince(key){
+ const f=GEO.features.find(x=>x.properties.key===key);
+ if(f)map.fitBounds(L.geoJSON(f).getBounds(),{padding:[20,20]});
+ selected=key;setTab('overview');renderSearch();renderFocus();renderDetail();
+}
+function setTab(t){tab=t;document.getElementById('tabOverview').classList.toggle('on',t==='overview');document.getElementById('tabInsights').classList.toggle('on',t==='insights');document.getElementById('panel-overview').style.display=t==='overview'?'block':'none';document.getElementById('panel-insights').style.display=t==='insights'?'block':'none';}
+function renderAll(){renderMonths();renderStats();renderFocus();renderDetail();renderLegend();renderLevels();renderSearch();renderTcBanner();recolor();}
+renderAll();
+
+/* ---- search / browse list ----
+   Default (no query): every province, most severe first -- always
+   visible and scrollable. Typing narrows the same list to matches
+   across provinces and regions. Picking any row shows its province's
+   full detail card below and highlights the picked row; the clear
+   button (or Escape) resets back to the full unfiltered list. */
+function updateClearBtn(){
+ const has=document.getElementById('searchBox').value.trim()!=='' || !!selected;
+ document.getElementById('searchClear').style.display=has?'flex':'none';
+}
+function renderSearch(){
+ const q=document.getElementById('searchBox').value.trim().toLowerCase();
+ const drop=document.getElementById('searchDrop');
+ updateClearBtn();
+ if(!q){drop.style.display='none';drop.innerHTML='';CURRENT_MATCHES=[];return;}
+ const typeRank={Province:0,Region:1};
+ const matches=SEARCH_INDEX.filter(e=>e.hay.includes(q)).sort((a,b)=>{
+  const an=a.label.toLowerCase().includes(q)?0:1, bn=b.label.toLowerCase().includes(q)?0:1;
+  if(an!==bn)return an-bn;
+  if(typeRank[a.type]!==typeRank[b.type])return typeRank[a.type]-typeRank[b.type];
+  return a.label.localeCompare(b.label);
+ }).slice(0,10);
+ CURRENT_MATCHES=matches;
+ drop.style.display='block';
+ if(!matches.length){drop.innerHTML='<div class="sres empty">No matches.</div>';return;}
+ drop.innerHTML=matches.map((e,i)=>{
+  let lv;
+  if(e.type==='Region'){const ls=Object.entries(DATA.prov).filter(([k,p])=>p.region===e.region).map(([k])=>lvl(k,cur));lv=ORDER.find(o=>ls.includes(o))||'NORMAL';}
+  else lv=lvl(e.prov,cur);
+  const active=selected && e.prov===selected;
+  return `<div class="sres${active?' active':''}" onclick="pickSearch(${i})"><span class="stype">${e.type}</span><span class="sname"><b>${e.label}</b><span class="ssub">${e.sub}</span></span><span class="spill" style="background:${COL[lv]};color:${TXT[lv]}">${lv}</span></div>`;
+ }).join('');
+}
+function pickSearch(i){
+ const e=CURRENT_MATCHES[i];if(!e)return;
+ if(e.type==='Province'){
+  pickProvince(e.prov);
+ } else {
+  const feats=GEO.features.filter(x=>DATA.prov[x.properties.key]&&DATA.prov[x.properties.key].region===e.region);
+  if(feats.length)map.fitBounds(L.geoJSON({type:'FeatureCollection',features:feats}).getBounds(),{padding:[20,20]});
+  renderSearch();renderFocus();renderDetail();
+ }
+}
+function resetSearch(){document.getElementById('searchBox').value='';selected=null;renderSearch();renderFocus();renderDetail();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')resetSearch();});
+</script>
+</body>
+</html>

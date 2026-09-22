@@ -1,0 +1,1123 @@
+{
+ "generated_by": "scripts/00_fetch_agriculture_exposure.py",
+ "retrieved_at": "2026-09-22T01:42:57+00:00",
+ "period": "2025 Annual",
+ "source": {
+  "issuer": "Philippine Statistics Authority (PSA) OpenSTAT",
+  "api": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS",
+  "tables": {
+   "volume_of_production": {
+    "id": "0012E4EVCP0.px",
+    "title": "Palay and Corn: Volume of Production in Metric Tons by Ecosystem/Croptype, Quarter, Semester, Region and Province, 1987-2026",
+    "url": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS/0012E4EVCP0.px"
+   },
+   "area_harvested": {
+    "id": "0022E4EAHC0.px",
+    "title": "Palay and Corn: Area Harvested in Hectares by Ecosystem/Croptype, Quarter, Semester, Region and Province, 1987-2026",
+    "url": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS/0022E4EAHC0.px"
+   }
+  }
+ },
+ "unit": {
+  "production": "metric tons",
+  "area": "hectares"
+ },
+ "missing_provinces": [
+  "METRO MANILA"
+ ],
+ "missing_provinces_note": "Provinces with no PSA crop-production row at all (see 'note' field on each below).",
+ "unmatched_psa_rows": [],
+ "ambiguous_duplicate_rows": [],
+ "prov": {
+  "ABRA": {
+   "rice_production_mt": 73327.6,
+   "corn_production_mt": 16705.0,
+   "rice_area_harvested_ha": 21838.0,
+   "corn_area_harvested_ha": 6328.0,
+   "components": [
+    {
+     "psa_name": "Abra",
+     "geo_code": "2",
+     "region": "..CORDILLERA ADMINISTRATIVE REGION (CAR)"
+    }
+   ]
+  },
+  "AGUSAN DEL NORTE": {
+   "rice_production_mt": 84986.0,
+   "corn_production_mt": 19318.0,
+   "rice_area_harvested_ha": 24407.0,
+   "corn_area_harvested_ha": 5220.0,
+   "components": [
+    {
+     "psa_name": "Agusan del Norte",
+     "geo_code": "96",
+     "region": "..REGION XIII (CARAGA)"
+    },
+    {
+     "psa_name": "Butuan City",
+     "geo_code": "101",
+     "region": "..REGION XIII (CARAGA)"
+    }
+   ]
+  },
+  "AGUSAN DEL SUR": {
+   "rice_production_mt": 310570.96,
+   "corn_production_mt": 102227.84,
+   "rice_area_harvested_ha": 90289.0,
+   "corn_area_harvested_ha": 24494.0,
+   "components": [
+    {
+     "psa_name": "Agusan del Sur",
+     "geo_code": "97",
+     "region": "..REGION XIII (CARAGA)"
+    }
+   ]
+  },
+  "AKLAN": {
+   "rice_production_mt": 73379.4,
+   "corn_production_mt": 1069.94,
+   "rice_area_harvested_ha": 29054.0,
+   "corn_area_harvested_ha": 392.45,
+   "components": [
+    {
+     "psa_name": "Aklan",
+     "geo_code": "48",
+     "region": "..REGION VI (WESTERN VISAYAS)"
+    }
+   ]
+  },
+  "ALBAY": {
+   "rice_production_mt": 210954.81,
+   "corn_production_mt": 30439.34,
+   "rice_area_harvested_ha": 52482.05,
+   "corn_area_harvested_ha": 11535.0,
+   "components": [
+    {
+     "psa_name": "Albay",
+     "geo_code": "41",
+     "region": "..REGION V (BICOL REGION)"
+    }
+   ]
+  },
+  "ANTIQUE": {
+   "rice_production_mt": 200333.59,
+   "corn_production_mt": 9076.94,
+   "rice_area_harvested_ha": 58473.0,
+   "corn_area_harvested_ha": 2279.0,
+   "components": [
+    {
+     "psa_name": "Antique",
+     "geo_code": "49",
+     "region": "..REGION VI (WESTERN VISAYAS)"
+    }
+   ]
+  },
+  "APAYAO": {
+   "rice_production_mt": 63112.41,
+   "corn_production_mt": 12766.62,
+   "rice_area_harvested_ha": 18463.96,
+   "corn_area_harvested_ha": 4303.83,
+   "components": [
+    {
+     "psa_name": "Apayao",
+     "geo_code": "3",
+     "region": "..CORDILLERA ADMINISTRATIVE REGION (CAR)"
+    }
+   ]
+  },
+  "AURORA": {
+   "rice_production_mt": 82407.15,
+   "corn_production_mt": 11817.63,
+   "rice_area_harvested_ha": 19997.0,
+   "corn_area_harvested_ha": 2776.0,
+   "components": [
+    {
+     "psa_name": "Aurora",
+     "geo_code": "20",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "BASILAN": {
+   "rice_production_mt": 1040.6,
+   "corn_production_mt": 500.0,
+   "rice_area_harvested_ha": 365.5,
+   "corn_area_harvested_ha": 245.0,
+   "components": [
+    {
+     "psa_name": "Basilan",
+     "geo_code": "103",
+     "region": "..BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/"
+    }
+   ]
+  },
+  "BATAAN": {
+   "rice_production_mt": 105191.85,
+   "corn_production_mt": 1821.8,
+   "rice_area_harvested_ha": 25672.68,
+   "corn_area_harvested_ha": 285.3,
+   "components": [
+    {
+     "psa_name": "Bataan",
+     "geo_code": "21",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "BATANES": {
+   "rice_production_mt": 110.58,
+   "corn_production_mt": 412.8,
+   "rice_area_harvested_ha": 79.75,
+   "corn_area_harvested_ha": 172.0,
+   "components": [
+    {
+     "psa_name": "Batanes",
+     "geo_code": "14",
+     "region": "..REGION II (CAGAYAN VALLEY)"
+    }
+   ]
+  },
+  "BATANGAS": {
+   "rice_production_mt": 26686.5,
+   "corn_production_mt": 11737.18,
+   "rice_area_harvested_ha": 8377.0,
+   "corn_area_harvested_ha": 3768.3,
+   "components": [
+    {
+     "psa_name": "Batangas",
+     "geo_code": "28",
+     "region": "..REGION IV-A (CALABARZON)"
+    }
+   ]
+  },
+  "BENGUET": {
+   "rice_production_mt": 19160.25,
+   "corn_production_mt": 411.7,
+   "rice_area_harvested_ha": 6740.0,
+   "corn_area_harvested_ha": 172.0,
+   "components": [
+    {
+     "psa_name": "Benguet",
+     "geo_code": "4",
+     "region": "..CORDILLERA ADMINISTRATIVE REGION (CAR)"
+    }
+   ]
+  },
+  "BILIRAN": {
+   "rice_production_mt": 47562.0,
+   "corn_production_mt": 565.5,
+   "rice_area_harvested_ha": 11629.0,
+   "corn_area_harvested_ha": 489.0,
+   "components": [
+    {
+     "psa_name": "Biliran",
+     "geo_code": "65",
+     "region": "..REGION VIII (EASTERN VISAYAS)"
+    }
+   ]
+  },
+  "BOHOL": {
+   "rice_production_mt": 235887.29,
+   "corn_production_mt": 10414.11,
+   "rice_area_harvested_ha": 72026.49,
+   "corn_area_harvested_ha": 7730.0,
+   "components": [
+    {
+     "psa_name": "Bohol",
+     "geo_code": "60",
+     "region": "..REGION VII (CENTRAL VISAYAS)"
+    }
+   ]
+  },
+  "BUKIDNON": {
+   "rice_production_mt": 520907.36,
+   "corn_production_mt": 1069469.38,
+   "rice_area_harvested_ha": 106438.6,
+   "corn_area_harvested_ha": 221839.75,
+   "components": [
+    {
+     "psa_name": "Bukidnon",
+     "geo_code": "78",
+     "region": "..REGION X (NORTHERN MINDANAO)"
+    }
+   ]
+  },
+  "BULACAN": {
+   "rice_production_mt": 356276.0,
+   "corn_production_mt": 1479.0,
+   "rice_area_harvested_ha": 79403.24,
+   "corn_area_harvested_ha": 316.0,
+   "components": [
+    {
+     "psa_name": "Bulacan",
+     "geo_code": "22",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "CAGAYAN": {
+   "rice_production_mt": 1090648.2,
+   "corn_production_mt": 594125.0,
+   "rice_area_harvested_ha": 233925.0,
+   "corn_area_harvested_ha": 136923.25,
+   "components": [
+    {
+     "psa_name": "Cagayan",
+     "geo_code": "15",
+     "region": "..REGION II (CAGAYAN VALLEY)"
+    }
+   ]
+  },
+  "CAMARINES NORTE": {
+   "rice_production_mt": 90320.77,
+   "corn_production_mt": 1584.1,
+   "rice_area_harvested_ha": 20948.51,
+   "corn_area_harvested_ha": 736.76,
+   "components": [
+    {
+     "psa_name": "Camarines Norte",
+     "geo_code": "42",
+     "region": "..REGION V (BICOL REGION)"
+    }
+   ]
+  },
+  "CAMARINES SUR": {
+   "rice_production_mt": 630670.0,
+   "corn_production_mt": 176052.0,
+   "rice_area_harvested_ha": 175249.0,
+   "corn_area_harvested_ha": 46125.0,
+   "components": [
+    {
+     "psa_name": "Camarines Sur",
+     "geo_code": "43",
+     "region": "..REGION V (BICOL REGION)"
+    }
+   ]
+  },
+  "CAMIGUIN": {
+   "rice_production_mt": 2186.14,
+   "corn_production_mt": 223.59,
+   "rice_area_harvested_ha": 547.0,
+   "corn_area_harvested_ha": 113.9,
+   "components": [
+    {
+     "psa_name": "Camiguin",
+     "geo_code": "79",
+     "region": "..REGION X (NORTHERN MINDANAO)"
+    }
+   ]
+  },
+  "CAPIZ": {
+   "rice_production_mt": 321673.93,
+   "corn_production_mt": 81512.14,
+   "rice_area_harvested_ha": 98807.3,
+   "corn_area_harvested_ha": 16920.5,
+   "components": [
+    {
+     "psa_name": "Capiz",
+     "geo_code": "50",
+     "region": "..REGION VI (WESTERN VISAYAS)"
+    }
+   ]
+  },
+  "CATANDUANES": {
+   "rice_production_mt": 25602.19,
+   "corn_production_mt": 17.64,
+   "rice_area_harvested_ha": 7026.6,
+   "corn_area_harvested_ha": 33.05,
+   "components": [
+    {
+     "psa_name": "Catanduanes",
+     "geo_code": "44",
+     "region": "..REGION V (BICOL REGION)"
+    }
+   ]
+  },
+  "CAVITE": {
+   "rice_production_mt": 19166.78,
+   "corn_production_mt": 1291.21,
+   "rice_area_harvested_ha": 5108.82,
+   "corn_area_harvested_ha": 678.67,
+   "components": [
+    {
+     "psa_name": "Cavite",
+     "geo_code": "29",
+     "region": "..REGION IV-A (CALABARZON)"
+    }
+   ]
+  },
+  "CEBU": {
+   "rice_production_mt": 12716.69,
+   "corn_production_mt": 58640.0,
+   "rice_area_harvested_ha": 4091.44,
+   "corn_area_harvested_ha": 58779.42,
+   "components": [
+    {
+     "psa_name": "Cebu",
+     "geo_code": "61",
+     "region": "..REGION VII (CENTRAL VISAYAS)"
+    }
+   ]
+  },
+  "COTABATO": {
+   "rice_production_mt": 474184.0,
+   "corn_production_mt": 262638.0,
+   "rice_area_harvested_ha": 126788.0,
+   "corn_area_harvested_ha": 102518.0,
+   "components": [
+    {
+     "psa_name": "Cotabato (North Cotabato)",
+     "geo_code": "91",
+     "region": "..REGION XII (SOCCSKSARGEN)"
+    }
+   ]
+  },
+  "DAVAO DE ORO": {
+   "rice_production_mt": 136688.44,
+   "corn_production_mt": 53835.6,
+   "rice_area_harvested_ha": 30545.0,
+   "corn_area_harvested_ha": 30790.0,
+   "components": [
+    {
+     "psa_name": "Davao de Oro (Compostela Valley)",
+     "geo_code": "84",
+     "region": "..REGION XI (DAVAO REGION)"
+    }
+   ]
+  },
+  "DAVAO DEL NORTE": {
+   "rice_production_mt": 153135.74,
+   "corn_production_mt": 53814.52,
+   "rice_area_harvested_ha": 34967.32,
+   "corn_area_harvested_ha": 28435.88,
+   "components": [
+    {
+     "psa_name": "Davao del Norte",
+     "geo_code": "85",
+     "region": "..REGION XI (DAVAO REGION)"
+    }
+   ]
+  },
+  "DAVAO DEL SUR": {
+   "rice_production_mt": 158640.78,
+   "corn_production_mt": 68739.45,
+   "rice_area_harvested_ha": 29360.98,
+   "corn_area_harvested_ha": 35927.75,
+   "components": [
+    {
+     "psa_name": "Davao del Sur",
+     "geo_code": "86",
+     "region": "..REGION XI (DAVAO REGION)"
+    },
+    {
+     "psa_name": "City of Davao",
+     "geo_code": "89",
+     "region": "..REGION XI (DAVAO REGION)"
+    }
+   ]
+  },
+  "DAVAO OCCIDENTAL": {
+   "rice_production_mt": 2380.62,
+   "corn_production_mt": 51740.56,
+   "rice_area_harvested_ha": 808.13,
+   "corn_area_harvested_ha": 31524.3,
+   "components": [
+    {
+     "psa_name": "Davao Occidental",
+     "geo_code": "87",
+     "region": "..REGION XI (DAVAO REGION)"
+    }
+   ]
+  },
+  "DAVAO ORIENTAL": {
+   "rice_production_mt": 72610.28,
+   "corn_production_mt": 64065.58,
+   "rice_area_harvested_ha": 15775.0,
+   "corn_area_harvested_ha": 46589.0,
+   "components": [
+    {
+     "psa_name": "Davao Oriental",
+     "geo_code": "88",
+     "region": "..REGION XI (DAVAO REGION)"
+    }
+   ]
+  },
+  "DINAGAT ISLANDS": {
+   "rice_production_mt": 7572.62,
+   "corn_production_mt": 335.86,
+   "rice_area_harvested_ha": 3016.53,
+   "corn_area_harvested_ha": 154.0,
+   "components": [
+    {
+     "psa_name": "Dinagat Islands",
+     "geo_code": "98",
+     "region": "..REGION XIII (CARAGA)"
+    }
+   ]
+  },
+  "EASTERN SAMAR": {
+   "rice_production_mt": 57621.15,
+   "corn_production_mt": 143.57,
+   "rice_area_harvested_ha": 21765.0,
+   "corn_area_harvested_ha": 102.0,
+   "components": [
+    {
+     "psa_name": "Eastern Samar",
+     "geo_code": "66",
+     "region": "..REGION VIII (EASTERN VISAYAS)"
+    }
+   ]
+  },
+  "GUIMARAS": {
+   "rice_production_mt": 52518.9,
+   "corn_production_mt": 1033.45,
+   "rice_area_harvested_ha": 19313.0,
+   "corn_area_harvested_ha": 536.0,
+   "components": [
+    {
+     "psa_name": "Guimaras",
+     "geo_code": "51",
+     "region": "..REGION VI (WESTERN VISAYAS)"
+    }
+   ]
+  },
+  "IFUGAO": {
+   "rice_production_mt": 32109.37,
+   "corn_production_mt": 61972.58,
+   "rice_area_harvested_ha": 9579.5,
+   "corn_area_harvested_ha": 16386.21,
+   "components": [
+    {
+     "psa_name": "Ifugao",
+     "geo_code": "5",
+     "region": "..CORDILLERA ADMINISTRATIVE REGION (CAR)"
+    }
+   ]
+  },
+  "ILOCOS NORTE": {
+   "rice_production_mt": 349254.46,
+   "corn_production_mt": 71662.29,
+   "rice_area_harvested_ha": 65069.0,
+   "corn_area_harvested_ha": 12484.6,
+   "components": [
+    {
+     "psa_name": "Ilocos Norte",
+     "geo_code": "9",
+     "region": "..REGION I (ILOCOS REGION)"
+    }
+   ]
+  },
+  "ILOCOS SUR": {
+   "rice_production_mt": 227598.5,
+   "corn_production_mt": 96298.7,
+   "rice_area_harvested_ha": 50439.0,
+   "corn_area_harvested_ha": 16677.0,
+   "components": [
+    {
+     "psa_name": "Ilocos Sur",
+     "geo_code": "10",
+     "region": "..REGION I (ILOCOS REGION)"
+    }
+   ]
+  },
+  "ILOILO": {
+   "rice_production_mt": 837852.21,
+   "corn_production_mt": 109166.1,
+   "rice_area_harvested_ha": 266109.0,
+   "corn_area_harvested_ha": 24709.71,
+   "components": [
+    {
+     "psa_name": "Iloilo",
+     "geo_code": "52",
+     "region": "..REGION VI (WESTERN VISAYAS)"
+    }
+   ]
+  },
+  "ISABELA": {
+   "rice_production_mt": 1511383.75,
+   "corn_production_mt": 1102162.56,
+   "rice_area_harvested_ha": 297684.67,
+   "corn_area_harvested_ha": 240298.82,
+   "components": [
+    {
+     "psa_name": "Isabela",
+     "geo_code": "16",
+     "region": "..REGION II (CAGAYAN VALLEY)"
+    }
+   ]
+  },
+  "KALINGA": {
+   "rice_production_mt": 138553.96,
+   "corn_production_mt": 69421.0,
+   "rice_area_harvested_ha": 28752.0,
+   "corn_area_harvested_ha": 16000.0,
+   "components": [
+    {
+     "psa_name": "Kalinga",
+     "geo_code": "6",
+     "region": "..CORDILLERA ADMINISTRATIVE REGION (CAR)"
+    }
+   ]
+  },
+  "LA UNION": {
+   "rice_production_mt": 173604.62,
+   "corn_production_mt": 38576.94,
+   "rice_area_harvested_ha": 38440.28,
+   "corn_area_harvested_ha": 6990.04,
+   "components": [
+    {
+     "psa_name": "La Union",
+     "geo_code": "11",
+     "region": "..REGION I (ILOCOS REGION)"
+    }
+   ]
+  },
+  "LAGUNA": {
+   "rice_production_mt": 169591.04,
+   "corn_production_mt": 6902.27,
+   "rice_area_harvested_ha": 39200.65,
+   "corn_area_harvested_ha": 1781.84,
+   "components": [
+    {
+     "psa_name": "Laguna",
+     "geo_code": "30",
+     "region": "..REGION IV-A (CALABARZON)"
+    }
+   ]
+  },
+  "LANAO DEL NORTE": {
+   "rice_production_mt": 213163.75,
+   "corn_production_mt": 329513.58,
+   "rice_area_harvested_ha": 47026.09,
+   "corn_area_harvested_ha": 105592.0,
+   "components": [
+    {
+     "psa_name": "Lanao del Norte",
+     "geo_code": "80",
+     "region": "..REGION X (NORTHERN MINDANAO)"
+    }
+   ]
+  },
+  "LANAO DEL SUR": {
+   "rice_production_mt": 228659.63,
+   "corn_production_mt": 452390.89,
+   "rice_area_harvested_ha": 77003.15,
+   "corn_area_harvested_ha": 174727.7,
+   "components": [
+    {
+     "psa_name": "Lanao del Sur",
+     "geo_code": "104",
+     "region": "..BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/"
+    }
+   ]
+  },
+  "LEYTE": {
+   "rice_production_mt": 442539.16,
+   "corn_production_mt": 31262.25,
+   "rice_area_harvested_ha": 108887.0,
+   "corn_area_harvested_ha": 23069.0,
+   "components": [
+    {
+     "psa_name": "Leyte",
+     "geo_code": "67",
+     "region": "..REGION VIII (EASTERN VISAYAS)"
+    }
+   ]
+  },
+  "MAGUINDANAO": {
+   "rice_production_mt": 651709.19,
+   "corn_production_mt": 745146.0,
+   "rice_area_harvested_ha": 163857.55,
+   "corn_area_harvested_ha": 174923.65,
+   "components": [
+    {
+     "psa_name": "Maguindanao del Norte",
+     "geo_code": "105",
+     "region": "..BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/"
+    },
+    {
+     "psa_name": "Maguindanao del Sur",
+     "geo_code": "106",
+     "region": "..BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/"
+    }
+   ]
+  },
+  "MARINDUQUE": {
+   "rice_production_mt": 20363.15,
+   "corn_production_mt": 1334.51,
+   "rice_area_harvested_ha": 5971.16,
+   "corn_area_harvested_ha": 502.92,
+   "components": [
+    {
+     "psa_name": "Marinduque",
+     "geo_code": "34",
+     "region": "..MIMAROPA REGION"
+    }
+   ]
+  },
+  "MASBATE": {
+   "rice_production_mt": 169352.0,
+   "corn_production_mt": 34352.16,
+   "rice_area_harvested_ha": 55450.0,
+   "corn_area_harvested_ha": 25942.0,
+   "components": [
+    {
+     "psa_name": "Masbate",
+     "geo_code": "45",
+     "region": "..REGION V (BICOL REGION)"
+    }
+   ]
+  },
+  "METRO MANILA": {
+   "rice_production_mt": null,
+   "corn_production_mt": null,
+   "rice_area_harvested_ha": null,
+   "corn_area_harvested_ha": null,
+   "note": "No PSA crop-production data for this area (PSA's tables have no NCR/Metro Manila row)."
+  },
+  "MISAMIS OCCIDENTAL": {
+   "rice_production_mt": 79642.1,
+   "corn_production_mt": 24060.26,
+   "rice_area_harvested_ha": 18585.0,
+   "corn_area_harvested_ha": 16460.0,
+   "components": [
+    {
+     "psa_name": "Misamis Occidental",
+     "geo_code": "81",
+     "region": "..REGION X (NORTHERN MINDANAO)"
+    }
+   ]
+  },
+  "MISAMIS ORIENTAL": {
+   "rice_production_mt": 19546.22,
+   "corn_production_mt": 104300.56,
+   "rice_area_harvested_ha": 4729.86,
+   "corn_area_harvested_ha": 36412.2,
+   "components": [
+    {
+     "psa_name": "Misamis Oriental",
+     "geo_code": "82",
+     "region": "..REGION X (NORTHERN MINDANAO)"
+    }
+   ]
+  },
+  "MOUNTAIN PROVINCE": {
+   "rice_production_mt": 12986.2,
+   "corn_production_mt": 23076.33,
+   "rice_area_harvested_ha": 4429.78,
+   "corn_area_harvested_ha": 6606.27,
+   "components": [
+    {
+     "psa_name": "Mountain Province",
+     "geo_code": "7",
+     "region": "..CORDILLERA ADMINISTRATIVE REGION (CAR)"
+    }
+   ]
+  },
+  "NEGROS OCCIDENTAL": {
+   "rice_production_mt": 425158.37,
+   "corn_production_mt": 51840.0,
+   "rice_area_harvested_ha": 130727.0,
+   "corn_area_harvested_ha": 26977.0,
+   "components": [
+    {
+     "psa_name": "Negros Occidental a/",
+     "geo_code": "55",
+     "region": "..NEGROS ISLAND REGION"
+    },
+    {
+     "psa_name": "Bacolod City",
+     "geo_code": "58",
+     "region": "..NEGROS ISLAND REGION"
+    }
+   ]
+  },
+  "NEGROS ORIENTAL": {
+   "rice_production_mt": 96485.2,
+   "corn_production_mt": 46863.86,
+   "rice_area_harvested_ha": 28961.0,
+   "corn_area_harvested_ha": 53327.0,
+   "components": [
+    {
+     "psa_name": "Negros Oriental b/",
+     "geo_code": "56",
+     "region": "..NEGROS ISLAND REGION"
+    }
+   ]
+  },
+  "NORTHERN SAMAR": {
+   "rice_production_mt": 76040.0,
+   "corn_production_mt": 12338.0,
+   "rice_area_harvested_ha": 29068.0,
+   "corn_area_harvested_ha": 7350.0,
+   "components": [
+    {
+     "psa_name": "Northern Samar",
+     "geo_code": "68",
+     "region": "..REGION VIII (EASTERN VISAYAS)"
+    }
+   ]
+  },
+  "NUEVA ECIJA": {
+   "rice_production_mt": 1804894.08,
+   "corn_production_mt": 32223.18,
+   "rice_area_harvested_ha": 297571.0,
+   "corn_area_harvested_ha": 6859.0,
+   "components": [
+    {
+     "psa_name": "Nueva Ecija",
+     "geo_code": "23",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "NUEVA VIZCAYA": {
+   "rice_production_mt": 299361.26,
+   "corn_production_mt": 81337.99,
+   "rice_area_harvested_ha": 60574.0,
+   "corn_area_harvested_ha": 17740.48,
+   "components": [
+    {
+     "psa_name": "Nueva Vizcaya",
+     "geo_code": "17",
+     "region": "..REGION II (CAGAYAN VALLEY)"
+    }
+   ]
+  },
+  "OCCIDENTAL MINDORO": {
+   "rice_production_mt": 446263.62,
+   "corn_production_mt": 99958.46,
+   "rice_area_harvested_ha": 103059.46,
+   "corn_area_harvested_ha": 17619.81,
+   "components": [
+    {
+     "psa_name": "Occidental Mindoro",
+     "geo_code": "35",
+     "region": "..MIMAROPA REGION"
+    }
+   ]
+  },
+  "ORIENTAL MINDORO": {
+   "rice_production_mt": 358115.76,
+   "corn_production_mt": 4545.92,
+   "rice_area_harvested_ha": 102552.16,
+   "corn_area_harvested_ha": 1466.95,
+   "components": [
+    {
+     "psa_name": "Oriental Mindoro",
+     "geo_code": "36",
+     "region": "..MIMAROPA REGION"
+    }
+   ]
+  },
+  "PALAWAN": {
+   "rice_production_mt": 454527.6,
+   "corn_production_mt": 18675.7,
+   "rice_area_harvested_ha": 114577.58,
+   "corn_area_harvested_ha": 5922.06,
+   "components": [
+    {
+     "psa_name": "Palawan",
+     "geo_code": "37",
+     "region": "..MIMAROPA REGION"
+    },
+    {
+     "psa_name": "Puerto Princesa City",
+     "geo_code": "39",
+     "region": "..MIMAROPA REGION"
+    }
+   ]
+  },
+  "PAMPANGA": {
+   "rice_production_mt": 418908.75,
+   "corn_production_mt": 56292.83,
+   "rice_area_harvested_ha": 89802.0,
+   "corn_area_harvested_ha": 10126.27,
+   "components": [
+    {
+     "psa_name": "Pampanga",
+     "geo_code": "24",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "PANGASINAN": {
+   "rice_production_mt": 1213311.97,
+   "corn_production_mt": 365620.0,
+   "rice_area_harvested_ha": 259071.0,
+   "corn_area_harvested_ha": 59037.0,
+   "components": [
+    {
+     "psa_name": "Pangasinan",
+     "geo_code": "12",
+     "region": "..REGION I (ILOCOS REGION)"
+    }
+   ]
+  },
+  "QUEZON": {
+   "rice_production_mt": 150552.35,
+   "corn_production_mt": 29767.53,
+   "rice_area_harvested_ha": 45934.0,
+   "corn_area_harvested_ha": 11521.0,
+   "components": [
+    {
+     "psa_name": "Quezon",
+     "geo_code": "31",
+     "region": "..REGION IV-A (CALABARZON)"
+    }
+   ]
+  },
+  "QUIRINO": {
+   "rice_production_mt": 113403.47,
+   "corn_production_mt": 174810.73,
+   "rice_area_harvested_ha": 24858.96,
+   "corn_area_harvested_ha": 39989.8,
+   "components": [
+    {
+     "psa_name": "Quirino",
+     "geo_code": "18",
+     "region": "..REGION II (CAGAYAN VALLEY)"
+    }
+   ]
+  },
+  "RIZAL": {
+   "rice_production_mt": 18113.69,
+   "corn_production_mt": 881.02,
+   "rice_area_harvested_ha": 5072.0,
+   "corn_area_harvested_ha": 351.85,
+   "components": [
+    {
+     "psa_name": "Rizal",
+     "geo_code": "32",
+     "region": "..REGION IV-A (CALABARZON)"
+    }
+   ]
+  },
+  "ROMBLON": {
+   "rice_production_mt": 34950.0,
+   "corn_production_mt": 1464.0,
+   "rice_area_harvested_ha": 9467.0,
+   "corn_area_harvested_ha": 517.0,
+   "components": [
+    {
+     "psa_name": "Romblon",
+     "geo_code": "38",
+     "region": "..MIMAROPA REGION"
+    }
+   ]
+  },
+  "SAMAR": {
+   "rice_production_mt": 128622.49,
+   "corn_production_mt": 14119.86,
+   "rice_area_harvested_ha": 40373.84,
+   "corn_area_harvested_ha": 7714.79,
+   "components": [
+    {
+     "psa_name": "Samar",
+     "geo_code": "69",
+     "region": "..REGION VIII (EASTERN VISAYAS)"
+    }
+   ]
+  },
+  "SARANGANI": {
+   "rice_production_mt": 40921.78,
+   "corn_production_mt": 174722.91,
+   "rice_area_harvested_ha": 12193.63,
+   "corn_area_harvested_ha": 60023.23,
+   "components": [
+    {
+     "psa_name": "Sarangani",
+     "geo_code": "92",
+     "region": "..REGION XII (SOCCSKSARGEN)"
+    }
+   ]
+  },
+  "SIQUIJOR": {
+   "rice_production_mt": 1978.88,
+   "corn_production_mt": 1025.21,
+   "rice_area_harvested_ha": 478.0,
+   "corn_area_harvested_ha": 864.0,
+   "components": [
+    {
+     "psa_name": "Siquijor b/",
+     "geo_code": "57",
+     "region": "..NEGROS ISLAND REGION"
+    }
+   ]
+  },
+  "SORSOGON": {
+   "rice_production_mt": 103831.57,
+   "corn_production_mt": 296.37,
+   "rice_area_harvested_ha": 30120.4,
+   "corn_area_harvested_ha": 162.3,
+   "components": [
+    {
+     "psa_name": "Sorsogon",
+     "geo_code": "46",
+     "region": "..REGION V (BICOL REGION)"
+    }
+   ]
+  },
+  "SOUTH COTABATO": {
+   "rice_production_mt": 308117.97,
+   "corn_production_mt": 405966.99,
+   "rice_area_harvested_ha": 89647.0,
+   "corn_area_harvested_ha": 126920.0,
+   "components": [
+    {
+     "psa_name": "South Cotabato",
+     "geo_code": "93",
+     "region": "..REGION XII (SOCCSKSARGEN)"
+    }
+   ]
+  },
+  "SOUTHERN LEYTE": {
+   "rice_production_mt": 50665.4,
+   "corn_production_mt": 687.0,
+   "rice_area_harvested_ha": 13279.0,
+   "corn_area_harvested_ha": 493.0,
+   "components": [
+    {
+     "psa_name": "Southern Leyte",
+     "geo_code": "70",
+     "region": "..REGION VIII (EASTERN VISAYAS)"
+    }
+   ]
+  },
+  "SULTAN KUDARAT": {
+   "rice_production_mt": 381286.0,
+   "corn_production_mt": 242670.0,
+   "rice_area_harvested_ha": 109271.0,
+   "corn_area_harvested_ha": 84832.0,
+   "components": [
+    {
+     "psa_name": "Sultan Kudarat",
+     "geo_code": "94",
+     "region": "..REGION XII (SOCCSKSARGEN)"
+    }
+   ]
+  },
+  "SULU": {
+   "rice_production_mt": 36.0,
+   "corn_production_mt": 671.0,
+   "rice_area_harvested_ha": 21.0,
+   "corn_area_harvested_ha": 364.0,
+   "components": [
+    {
+     "psa_name": "Sulu",
+     "geo_code": "107",
+     "region": "..BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/"
+    }
+   ]
+  },
+  "SURIGAO DEL NORTE": {
+   "rice_production_mt": 67122.0,
+   "corn_production_mt": 2387.0,
+   "rice_area_harvested_ha": 18915.0,
+   "corn_area_harvested_ha": 1040.0,
+   "components": [
+    {
+     "psa_name": "Surigao del Norte",
+     "geo_code": "99",
+     "region": "..REGION XIII (CARAGA)"
+    }
+   ]
+  },
+  "SURIGAO DEL SUR": {
+   "rice_production_mt": 93673.0,
+   "corn_production_mt": 12633.0,
+   "rice_area_harvested_ha": 28869.48,
+   "corn_area_harvested_ha": 5006.0,
+   "components": [
+    {
+     "psa_name": "Surigao del Sur",
+     "geo_code": "100",
+     "region": "..REGION XIII (CARAGA)"
+    }
+   ]
+  },
+  "TARLAC": {
+   "rice_production_mt": 622922.6,
+   "corn_production_mt": 142953.0,
+   "rice_area_harvested_ha": 140336.0,
+   "corn_area_harvested_ha": 20592.0,
+   "components": [
+    {
+     "psa_name": "Tarlac",
+     "geo_code": "25",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "TAWI-TAWI": {
+   "rice_production_mt": 847.01,
+   "corn_production_mt": 644.0,
+   "rice_area_harvested_ha": 409.0,
+   "corn_area_harvested_ha": 606.0,
+   "components": [
+    {
+     "psa_name": "Tawi-tawi",
+     "geo_code": "108",
+     "region": "..BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/"
+    }
+   ]
+  },
+  "ZAMBALES": {
+   "rice_production_mt": 150590.59,
+   "corn_production_mt": 2880.15,
+   "rice_area_harvested_ha": 34295.36,
+   "corn_area_harvested_ha": 530.0,
+   "components": [
+    {
+     "psa_name": "Zambales",
+     "geo_code": "26",
+     "region": "..REGION III (CENTRAL LUZON)"
+    }
+   ]
+  },
+  "ZAMBOANGA DEL NORTE": {
+   "rice_production_mt": 129297.58,
+   "corn_production_mt": 56755.71,
+   "rice_area_harvested_ha": 35077.13,
+   "corn_area_harvested_ha": 36164.25,
+   "components": [
+    {
+     "psa_name": "Zamboanga del Norte",
+     "geo_code": "73",
+     "region": "..REGION IX (ZAMBOANGA PENINSULA)"
+    }
+   ]
+  },
+  "ZAMBOANGA DEL SUR": {
+   "rice_production_mt": 438355.48,
+   "corn_production_mt": 125233.44,
+   "rice_area_harvested_ha": 93779.63,
+   "corn_area_harvested_ha": 74176.94,
+   "components": [
+    {
+     "psa_name": "Zamboanga del Sur",
+     "geo_code": "74",
+     "region": "..REGION IX (ZAMBOANGA PENINSULA)"
+    },
+    {
+     "psa_name": "Zamboanga City",
+     "geo_code": "76",
+     "region": "..REGION IX (ZAMBOANGA PENINSULA)"
+    }
+   ]
+  },
+  "ZAMBOANGA SIBUGAY": {
+   "rice_production_mt": 185235.61,
+   "corn_production_mt": 18786.88,
+   "rice_area_harvested_ha": 45328.33,
+   "corn_area_harvested_ha": 10262.53,
+   "components": [
+    {
+     "psa_name": "Zamboanga Sibugay",
+     "geo_code": "75",
+     "region": "..REGION IX (ZAMBOANGA PENINSULA)"
+    }
+   ]
+  }
+ }
+}

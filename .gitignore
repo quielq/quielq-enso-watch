@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Your personal CARTO API key, if you use one -- see README.md "Basemap
+# tiles". Never commit this file. config.local.example.json (tracked) is
+# the template to copy from.
+config.local.json

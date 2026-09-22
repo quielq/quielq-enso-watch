@@ -1,0 +1,197 @@
+# Roadmap / candidate future layers
+
+This v1 is deliberately scoped to one thing done well: a province-level
+El Nino drought alert map from PAGASA and Manila Observatory's public
+outlooks, with PAGASA's tropical cyclone frequency outlook noted monthly
+as context. The ideas below were raised while building it and are worth
+pursuing, but need their own research/integration pass before shipping.
+Recorded here so they aren't lost.
+
+## Habagat/flood axis (removed from v1)
+
+v1 originally computed a second, independent alert axis for Habagat
+(Southwest Monsoon) flood risk, including a "flood on dry ground" rule
+reviewed with Manila Observatory. It was removed because the underlying
+Habagat bulletin only covered the first month of this dataset's window,
+which made the axis look stale for the other five months. If this comes
+back, it should be re-scoped as a proper seasonal-forecast layer (e.g.
+tied to Google FloodHub below) rather than a single bulletin's snapshot.
+
+## Upload-your-own-locations matcher
+
+The original motivation for a "no proprietary data" public version: let
+any MFI, cooperative, or NGO upload a CSV of their own branch/office
+locations (city or province name is enough) and see which of their own
+locations fall into a flagged province each month, entirely client-side
+so their location list never leaves their browser. Needs a province/city
+name-matching step tolerant of how different institutions format their
+own location lists.
+
+## Google FloodHub (river flood forecasts)
+
+Verified (2026-09-21): [sites.research.google/gr/floodforecasting](https://sites.research.google/gr/floodforecasting)
+covers 150+ countries, riverine flood forecasts up to 7 days out and
+urban flash-flood forecasts up to 24 hours out, free and public, updated
+daily. There's a published hydrology model, an API (gated, request
+access), the Caravan streamflow dataset, and an open-source model repo.
+This lines up directly with PAGASA's own river-basin warnings (Pampanga,
+Agno, Abra, Cagayan, Bicol) that already drive part of this project's
+flood-on-dry-ground rule. Not yet confirmed: exact river-basin-level
+coverage for the Philippines specifically (floodhub.google.com itself
+wasn't reachable to check at research time) -- verify that before
+committing to integration.
+
+## Philippine agriculture exposure
+
+**Implemented (2026-09-22).** See README.md "Agricultural exposure
+layer" for what it shows and how to refresh it, and
+`scripts/00_fetch_agriculture_exposure.py`'s docstring for the full
+reconciliation rules. Summary of what shipped, for anyone revisiting
+this:
+
+- Built on PSA OpenSTAT's PXWeb API (`DB/2E/CS`), specifically the
+  "Palay and Corn: Volume of Production" and "...: Area Harvested"
+  tables, discovered by title match (not a hardcoded table ID) since
+  PXWeb table IDs can shift. Uses the most recent year with a complete
+  "Annual" figure (2025 at implementation time), fetched via the
+  PX-generic `json` response format -- this server's `json-stat2` format
+  was found to return malformed/truncated data, so don't use it here.
+- All of the province-name reconciliation risks called out below were
+  real and handled: Maguindanao del Norte/Sur summed into `MAGUINDANAO`;
+  Metro Manila/NCR set to an explicit null + note (PSA has no NCR
+  crop-production row at all); the five Highly Urbanized Cities folded
+  into their mother province; and Negros Occidental/Oriental, Siquijor,
+  and Sulu's duplicate-region rows resolved by picking whichever
+  duplicate actually has a non-missing figure (rather than a hardcoded
+  "always prefer region X" rule) -- PSA had in fact already stopped
+  populating the legacy-region rows for these by the time this was
+  built, the opposite of what the original scoping notes below assumed,
+  which is exactly why the resolution rule is data-driven, not static.
+- Fisheries data, PSA's other regions/provinces beyond rice and corn,
+  and the one-time 2022 Census of Agriculture and Fisheries backdrop
+  layer mentioned in the original scoping notes below were not pursued
+  -- still open if this layer proves useful and someone wants to extend
+  it.
+
+Original scoping notes (kept for context): PSA OpenSTAT
+(`DB/2E/CS` for crops, `DB/2E/FS` for fisheries) — confirmed live, queryable
+as JSON-stat/CSV (not PDF), quarterly-updated (latest table stamps
+Jul-Sep 2026), and covers rice, corn, coconut, sugarcane, and fisheries
+volume + peso value at province granularity. Openly licensed with source
+attribution, same pattern as the PAGASA/Manila Observatory citations
+already in `sources.json`. DA has no separate open dataset of its own
+(the old Bureau of Agricultural Statistics was absorbed into PSA in
+2013); FAOSTAT and World Bank only publish PH data at the national
+level, not per-province; DOST's agriculture-relevant public data is all
+hazard-side (SPEI drought maps, Project NOAH flood/landslide layers),
+not exposure. PhilRice's PRiSM/CS Map is the closest existing PH system
+combining rice-area exposure with hazard, but its data is request-gated,
+not an open API -- worth citing as methodology, not usable as a v1 data
+source.
+
+**The real scoping risk is province-name reconciliation, not data
+availability.** PSA's current tables don't line up 1:1 with this
+project's 82-key province list:
+- `Maguindanao del Norte` / `Maguindanao del Sur` are reported
+  separately (2022 PSGC split); the project's single `MAGUINDANAO` key
+  needs a merge step.
+- NCR/Metro Manila has no crop-production row at all -- needs an
+  explicit N/A convention, not a lookup-miss.
+- Highly Urbanized Cities (Puerto Princesa, Bacolod, Zamboanga City,
+  Davao City, Butuan) are reported as their own rows, separate from
+  their "mother" province -- needs a fold-in-or-drop policy.
+- Negros Occidental, Negros Oriental, and Siquijor each appear twice
+  (once under their old region, once under "Negros Island Region") --
+  a naive pull double-counts these three.
+Build a small, tested province-name reconciliation table (cross-checked
+against PSA's own published PSGC) before wiring any PSA table into the
+pipeline. Secondary option once the recurring production numbers are
+working: PSA's 2022 Census of Agriculture and Fisheries for a
+one-time farm-count/farm-area backdrop layer (census, not a series --
+don't try to refresh it monthly).
+
+## Methodology gaps vs. comparable ENSO/drought tools
+
+Researched (2026-09-22), comparing this project's approach (PAGASA's
+monthly Climate Outlook bulletin, manually transcribed, turned into a
+categorical Watch/Prepare/Act/Respond level per province) against IRI,
+NOAA CPC, Copernicus C3S, FEWS NET, and existing Philippines-specific
+studies. Two findings stood out as worth acting on, both cheap:
+
+- **Every comparable tool publishes a probability, never a bare
+  category.** PAGASA's own bulletin already states this (e.g. "70%
+  chance of below-normal rainfall") but the current pipeline discards
+  it in favor of just the rainfall-%-of-normal midpoint. Capturing that
+  number during the same manual transcription and showing it alongside
+  the alert level costs nothing new to gather and brings the map in
+  line with standard practice (see IRI:
+  https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/,
+  NOAA CPC: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/outlook/).
+- **This project has a hazard signal but no exposure/vulnerability
+  signal**, unlike IPCC AR5-style risk frameworks (Risk = Hazard ×
+  Exposure × Vulnerability) used by INFORM
+  (https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk/Methodology)
+  and FEWS NET. The original candidate here was a ready-made, static,
+  Philippines-specific, El Nino-specific index: the UPLB study "Relative
+  Vulnerability of the Different Provinces of the Philippines to El
+  Nino-Induced Droughts" (David et al. 2007,
+  https://www.ukdr.uplb.edu.ph/journal-articles/2741/), which ranks all
+  provinces from historical El Nino rainfall-departure data.
+  **Implemented (2026-09-22), but not with that study** -- on
+  investigation its actual data table turned out to be inaccessible
+  anywhere legitimate (UKDR's own repository entry says "Digital Copy:
+  none"; ResearchGate says "No full-text available, request from
+  authors"). Rather than ship nothing, the user chose to pivot to PSA
+  OpenSTAT's poverty incidence statistics instead: a more general (not
+  El Nino-specific), but fully open and regularly-updated, vulnerability/
+  adaptive-capacity proxy. See README.md "Poverty incidence
+  (vulnerability proxy)" for what shipped and how to refresh it, and
+  `scripts/00_fetch_vulnerability_data.py`'s docstring for the full
+  province-name reconciliation rules (notably: unlike the agriculture
+  layer's crop tonnage, poverty incidence is a rate, so Highly Urbanized
+  City rows are never summed/averaged into a province -- they're
+  reported as unmatched instead -- and Maguindanao uses PSA's own
+  already-combined figure rather than a home-grown average of its del
+  Norte/del Sur split). It is shown as a plain, informational
+  percentage, not blended into the alert level -- no geometric mean or
+  "vulnerability tier nudges the level" rule was implemented, since a
+  general poverty proxy (as opposed to an El Nino-specific vulnerability
+  ranking) diluting or nudging the hazard signal would be an even
+  weaker-founded editorial judgment call than combining two well-scoped
+  axes would have been. If an El Nino-specific vulnerability index ever
+  becomes accessible, revisit combining it with the hazard axis using a
+  geometric mean (or a simple "vulnerability tier nudges the level by
+  +/-1" rule) rather than an averaged score -- INFORM and the Marinduque
+  barangay-level risk study
+  (https://link.springer.com/article/10.1007/s11069-022-05795-w) both
+  found that averaging lets a strong hazard signal get diluted by low
+  vulnerability, which is the wrong direction for an early-warning tool.
+
+Lower priority: PAGASA also publishes a weekly, 4-week-lead
+Sub-Seasonal-to-Seasonal rainfall-exceedance forecast
+(https://bagong.pagasa.dost.gov.ph/climate/climate-prediction/sub-seasonal2),
+faster-cadence than the monthly bulletin this project uses. Worth an
+occasional manual cross-check for provinces already at Act/Respond
+(catches a fast-onset dry spell ~3 weeks sooner) but not worth building
+a second automated pipeline around.
+
+On cadence: this project's monthly-update, ~6-month rolling window is
+in line with CPC/IRI/C3S/PAGASA's own practice -- not a gap.
+
+## Solar irradiance / vegetation-stress (NDVI) data
+
+Raised but needs scoping -- two different things could be meant here:
+- **Solar/PV irradiance** (e.g. NASA POWER's free API) for backup-power
+  planning during hydropower cutbacks, which correlate with drought.
+- **Satellite vegetation-stress index (NDVI)**, which is more directly a
+  drought-severity signal than a power-planning one.
+Pick one (or both, separately) before building either.
+
+## Not pursued for this project
+
+- **Google WeatherNext / Weather Lab**: aimed at government agencies for
+  precipitation/cyclone forecasting; PAGASA is already the province-level
+  authority this project defers to, so this would mostly duplicate
+  rather than add a layer.
+- **Waze for Cities / Public Alerts**: real-time traffic and official
+  alert broadcasting, not a climate-risk data source.
