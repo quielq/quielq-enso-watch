@@ -195,10 +195,10 @@ in line with CPC/IRI/C3S/PAGASA's own practice -- not a gap.
 
 ## Community ground-truth reports
 
-**Implemented (2026-09-22), low-cost tier, text/ratings only.** Click
-"Report what you're seeing" on any province's detail card to open the
-"feels like"-style form described below; it writes to a Firebase
-(Firestore) project on the free Spark plan. See README.md "Community
+**Implemented (2026-09-22), low-cost tier, including photo upload.**
+Click "Report what you're seeing" on any province's detail card to
+open the "feels like"-style form described below; it writes to a
+Firebase (Firestore + Storage) project. See README.md "Community
 reports" for how to review submissions and why the Firebase web config
 is safe to commit. Firestore security rules (set in the Firebase
 Console, not in this repo) allow anyone to create a report with the
@@ -208,12 +208,30 @@ one is rejected server-side, and an attempted read is rejected
 server-side too, so the "private moderator inbox" framing below is
 actually enforced, not just a client-side convention.
 
-**Photo upload was scoped but deliberately not built.** Firebase
-changed its policy in late 2024: Cloud Storage now requires the paid
-Blaze plan even for usage that falls entirely within the free quota.
-Rather than require a credit card on file to try this feature, photo
-evidence was dropped from this pass. If real demand for it shows up,
-revisit adding Blaze billing (with a budget alert) at that point.
+**Photo upload.** Initially scoped out (2026-09-22 morning) because
+Firebase changed its policy in late 2024: Cloud Storage requires the
+paid Blaze plan even for usage entirely within the free quota, and
+requiring a credit card on file felt like too much to ask just to try
+this feature. Revisited the same day once the user decided to enable
+Blaze themselves. Two things worth recording for anyone else doing
+this:
+- Blaze's no-cost Storage quota (5GB stored, 100GB/month downloaded,
+  5K/month uploads, 50K/month download operations, confirmed on
+  Firebase's live pricing page) only applies in specific regions --
+  us-central1, us-west1, us-east1 at the time this was set up. This
+  project's Storage bucket uses one of those regions rather than
+  something closer to the Philippines, since upload latency for an
+  occasional report photo is a non-issue, but losing the free tier
+  entirely by picking an ineligible region would not have been. Bucket
+  region can't be changed after creation.
+- Photo uploads are verified server-side by the same rigor as the text
+  fields: a valid image under 5MB succeeds, an oversized file is
+  rejected, and a non-image content type is rejected -- all confirmed
+  directly against the live project, not assumed from the rules text.
+  A report's `photoPath` field stores the Storage path only, never a
+  download URL, since Storage read is blocked the same way Firestore
+  read is -- viewing a photo means opening that path in the Console's
+  Storage browser.
 
 Original scoping notes below, kept for context on the free/full tiers
 that weren't chosen and the reasoning behind the framing decision.

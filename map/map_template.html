@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
 <style>
   :root{--respond:#8E1B1B;--act:#E2711D;--prepare:#F2C14E;--watch:#7FB3D5;--normal:#D8E3DC;
         --ink:#1B2433;--muted:#65707E;--panel:#FFFFFF;--line:#E7EAEE;--tint:#F6F8FA;--accent:#B85042;}
@@ -204,6 +205,9 @@
       </div>
       <label>In your own words <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
       <textarea id="rNotes" maxlength="1900" placeholder="Anything else worth knowing about conditions where you are"></textarea>
+      <label>Photo <span style="font-weight:400;color:var(--muted)">(optional, under 5MB)</span></label>
+      <input type="file" id="rPhoto" accept="image/*">
+      <div class="hint">Only visible to the moderator reviewing reports, same as the rest of this form.</div>
       <label>Contact info <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
       <input type="text" id="rContact" placeholder="Email or phone, only if you're open to a follow-up">
       <div class="hint">Only shared with the moderator reviewing reports, and only used if something you reported gets escalated.</div>
@@ -229,6 +233,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const storage = firebase.storage();
 let reportProvinceKey = null;
 function openReportModal(key){
  reportProvinceKey = key;
@@ -246,27 +251,50 @@ function submitReport(e){
  const dryness = document.getElementById('rDryness').value;
  if(!dryness){return;}
  const symptoms = Array.from(document.querySelectorAll('#rSymptoms input:checked')).map(i=>i.value);
- const doc = {
-  province: reportProvinceKey,
-  dryness: dryness,
-  water: document.getElementById('rWater').value || null,
-  agriculture: document.getElementById('rAgriculture').value || null,
-  symptoms: symptoms,
-  notes: document.getElementById('rNotes').value.slice(0,1900) || null,
-  contact: document.getElementById('rContact').value || null,
-  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
- };
  const btn = document.getElementById('reportSubmitBtn');
  const status = document.getElementById('reportStatus');
+ const file = document.getElementById('rPhoto').files[0] || null;
+ if(file && (file.size > 5*1024*1024 || !file.type.startsWith('image/'))){
+  status.innerHTML = '<div class="report-status err">Photo must be an image under 5MB. Remove it or pick a smaller file, then try again.</div>';
+  return;
+ }
  btn.disabled = true;
  status.innerHTML = '';
- db.collection('reports').add(doc).then(()=>{
-  document.getElementById('reportForm').style.display = 'none';
-  status.innerHTML = '<div class="report-status ok">Thanks -- your report was submitted. A moderator will review it.</div>';
- }).catch((err)=>{
-  btn.disabled = false;
-  status.innerHTML = '<div class="report-status err">Something went wrong submitting this ('+err.message+'). Please try again.</div>';
- });
+ // A photo's Storage path is saved to the report (never a download URL --
+ // Storage rules block public read, same private-inbox model as Firestore,
+ // so only the moderator viewing the Firebase Console can see it).
+ const docRef = db.collection('reports').doc();
+ function writeDoc(photoPath,photoNote){
+  const data = {
+   province: reportProvinceKey,
+   dryness: dryness,
+   water: document.getElementById('rWater').value || null,
+   agriculture: document.getElementById('rAgriculture').value || null,
+   symptoms: symptoms,
+   notes: document.getElementById('rNotes').value.slice(0,1900) || null,
+   contact: document.getElementById('rContact').value || null,
+   photoPath: photoPath,
+   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  };
+  docRef.set(data).then(()=>{
+   document.getElementById('reportForm').style.display = 'none';
+   status.innerHTML = '<div class="report-status ok">Thanks -- your report was submitted'+(photoNote||'')+'. A moderator will review it.</div>';
+  }).catch((err)=>{
+   btn.disabled = false;
+   status.innerHTML = '<div class="report-status err">Something went wrong submitting this ('+err.message+'). Please try again.</div>';
+  });
+ }
+ if(file){
+  const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+  const path='report-photos/'+docRef.id+'.'+ext;
+  storage.ref(path).put(file).then(()=>{
+   writeDoc(path,'');
+  }).catch(()=>{
+   writeDoc(null,' (the photo did not upload, but the rest of your report was saved)');
+  });
+ } else {
+  writeDoc(null,'');
+ }
 }
 const DATA = __DATA__;
 const GEO = __GEO__;

@@ -203,9 +203,9 @@ province.
 
 Each province's detail card has a "Report what you're seeing" button.
 It opens a short form (how dry it feels, water availability, crop
-condition, a checklist of other symptoms, optional free text and
-contact info) and writes the submission to a private Firestore
-database (Google Firebase, free Spark tier). This is **not** a public
+condition, a checklist of other symptoms, an optional photo, and
+optional free text and contact info) and writes the submission to a
+private Firestore database (Google Firebase). This is **not** a public
 claims layer -- nothing submitted here is ever displayed back on the
 map automatically. It's a moderator inbox: reports are only visible
 to whoever has access to the Firebase Console for this project, who
@@ -215,17 +215,29 @@ reasoning behind that framing.
 
 The Firebase web config in `map/map_template.html` (`apiKey`,
 `projectId`, etc.) is intentionally public -- Firebase's own security
-model relies entirely on its Firestore rules, not on hiding this
-config, so it's safe to commit. The actual access control lives in
-the Firestore security rules (set in the Firebase Console, not in this
-repo): anyone can *create* a report with the required fields, and
-nobody, including this site's own client code, can read, edit, or
-delete one -- only the project owner via the Console.
+model relies entirely on its Firestore/Storage rules, not on hiding
+this config, so it's safe to commit. The actual access control lives
+in those rules (set in the Firebase Console, not in this repo): anyone
+can *create* a report or *upload* a photo under 5MB, and nobody,
+including this site's own client code, can read, edit, or delete one
+-- only the project owner via the Console. A report's `photoPath`
+field stores the photo's Storage path, never a public download URL
+(Storage read is blocked the same way Firestore read is), so viewing
+an attached photo means opening that path in the Console's Storage
+browser, not clicking a link on the map.
 
-Photo upload was scoped but not built: Firebase now requires its paid
-Blaze plan to use Storage at all, even within the free usage quota, so
-it was deferred rather than asking anyone forking this project to add
-a credit card just to try it.
+Photo upload requires Firebase's paid Blaze plan for Storage (a policy
+change Google made in late 2024, applying even to usage within the
+free quota) -- this project's own Firebase project has Blaze enabled
+with a budget alert, using Storage's no-cost region tier (5GB stored,
+100GB/month downloaded, free) rather than the region nearest the
+Philippines, since that latency difference doesn't matter for an
+occasional report submission and losing the free tier isn't worth it.
+If you fork this and want photo upload too, you'll need to do the
+same: enable Blaze, and make sure your Storage bucket's location is
+one of the free-tier-eligible regions (currently us-central1, us-west1,
+us-east1) -- check before creating the bucket, since the location
+can't be changed afterward.
 
 **To review submitted reports:** open the Firestore Database in the
 [Firebase Console](https://console.firebase.google.com) for this
