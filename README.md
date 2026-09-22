@@ -238,6 +238,38 @@ survey (2018, 2021, 2023 so far), so there's little reason to re-run
 this more than once every few years -- unlike the agriculture layer,
 which is worth refreshing quarterly.
 
+## Community reports ("what are you seeing?")
+
+Each province's detail card has a "Report what you're seeing" button.
+It opens a short form (how dry it feels, water availability, crop
+condition, a checklist of other symptoms, optional free text and
+contact info) and writes the submission to a private Firestore
+database (Google Firebase, free Spark tier). This is **not** a public
+claims layer -- nothing submitted here is ever displayed back on the
+map automatically. It's a moderator inbox: reports are only visible
+to whoever has access to the Firebase Console for this project, who
+can review them and pass credible patterns on to PAGASA or a local
+DRRMO. See `ROADMAP.md` "Community ground-truth reports" for the full
+reasoning behind that framing.
+
+The Firebase web config in `map/map_template.html` (`apiKey`,
+`projectId`, etc.) is intentionally public -- Firebase's own security
+model relies entirely on its Firestore rules, not on hiding this
+config, so it's safe to commit. The actual access control lives in
+the Firestore security rules (set in the Firebase Console, not in this
+repo): anyone can *create* a report with the required fields, and
+nobody, including this site's own client code, can read, edit, or
+delete one -- only the project owner via the Console.
+
+Photo upload was scoped but not built: Firebase now requires its paid
+Blaze plan to use Storage at all, even within the free usage quota, so
+it was deferred rather than asking anyone forking this project to add
+a credit card just to try it.
+
+**To review submitted reports:** open the Firestore Database in the
+[Firebase Console](https://console.firebase.google.com) for this
+project's `reports` collection.
+
 ## Adapting this for your own institution
 
 This project intentionally carries no organization-specific data. If

@@ -180,7 +180,30 @@ in line with CPC/IRI/C3S/PAGASA's own practice -- not a gap.
 
 ## Community ground-truth reports
 
-Scoped (2026-09-22), not yet built. PAGASA already publishes its own
+**Implemented (2026-09-22), low-cost tier, text/ratings only.** Click
+"Report what you're seeing" on any province's detail card to open the
+"feels like"-style form described below; it writes to a Firebase
+(Firestore) project on the free Spark plan. See README.md "Community
+reports" for how to review submissions and why the Firebase web config
+is safe to commit. Firestore security rules (set in the Firebase
+Console, not in this repo) allow anyone to create a report with the
+required fields and block all reads/edits/deletes except via the
+Console -- verified directly: a valid submission succeeds, a malformed
+one is rejected server-side, and an attempted read is rejected
+server-side too, so the "private moderator inbox" framing below is
+actually enforced, not just a client-side convention.
+
+**Photo upload was scoped but deliberately not built.** Firebase
+changed its policy in late 2024: Cloud Storage now requires the paid
+Blaze plan even for usage that falls entirely within the free quota.
+Rather than require a credit card on file to try this feature, photo
+evidence was dropped from this pass. If real demand for it shows up,
+revisit adding Blaze billing (with a budget alert) at that point.
+
+Original scoping notes below, kept for context on the free/full tiers
+that weren't chosen and the reasoning behind the framing decision.
+
+PAGASA already publishes its own
 official "PH Meteorological Drought Monitor" (observed + forecast maps,
 same Sep 2026-Feb 2027 window this project uses) at
 https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories, so
