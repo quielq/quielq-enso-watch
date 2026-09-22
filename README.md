@@ -154,17 +154,22 @@ automatically.
 ## Agricultural exposure layer
 
 Each province's detail card also shows an "Agricultural exposure" panel
-with a small meter bar per crop (rice and corn): rank among Philippine
+with a small ring per crop (rice and corn): rank among Philippine
 provinces, % share of national production, and the underlying metric
 tons produced and hectares harvested, for the most recent complete year
 available. A bare production total has no reference point for a reader
 ("is 1.8 million MT a lot?"), so rank ("#1 of 82 provinces") leads as
-plain text, and the bar's length is that province's exact share of
-national production -- not scaled to the top producer, so it actually
-matches the percentage printed next to it. Most bars are short, which
-is an honest reflection of the real data: production is spread across
-many provinces, not concentrated in a handful. This deliberately does
-not attempt to estimate a drought-impact percentage -- that needs real
+plain text, and the ring's fill arc is that province's exact share of
+national production, out of a full circle -- matching the percentage
+printed beside it exactly (an earlier linear-bar version of this had a
+version that scaled to the top producer instead of to 100%, which made
+a "full" bar look like it meant 100% of national output; fixed, then
+replaced with a ring entirely since a short arc still reads as a
+deliberate design element, unlike a mostly-empty bar that can look
+broken). Most rings are mostly empty, which is an honest reflection of
+the real data: production is spread across many provinces, not
+concentrated in a handful. This deliberately does not attempt to
+estimate a drought-impact percentage -- that needs real
 agronomic yield-loss modeling this project has no basis for, and a
 made-up number would be exactly the kind of unfounded claim avoided
 everywhere else here. It's purely informational context and is

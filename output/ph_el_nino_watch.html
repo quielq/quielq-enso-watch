@@ -93,13 +93,12 @@
   .report-btn:hover{filter:brightness(1.08)}
   .ag-block{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
   .ag-block-title{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:10px}
-  .ag-crop{margin-bottom:10px}
+  .ag-crop{display:flex;align-items:center;gap:12px;margin-bottom:12px}
   .ag-crop:last-of-type{margin-bottom:6px}
-  .ag-crop-label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
-  .ag-crop-name{font-size:12.5px;font-weight:700;color:var(--ink);flex:none}
-  .ag-crop-stat{font-size:10.5px;color:var(--muted);text-align:right}
-  .ag-meter{height:7px;border-radius:4px;background:var(--tint);overflow:hidden}
-  .ag-meter-fill{height:100%;border-radius:4px}
+  .ag-ring{flex:none}
+  .ag-crop-info{flex:1;min-width:0}
+  .ag-crop-name{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .ag-crop-stat{font-size:10.5px;color:var(--muted);margin-top:1px}
   .ag-crop-detail{font-size:10.5px;color:var(--muted);margin-top:3px}
   .prowlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
   .prow{display:flex;align-items:center;gap:9px;padding:9px 12px;cursor:pointer;background:#fff;border-bottom:1px solid var(--line)}
@@ -470,18 +469,31 @@ const AG_RANK = (()=>{
  return {rice:rankField('rice_production_mt'),corn:rankField('corn_production_mt')};
 })();
 const CROP_COLOR={rice:'#2F7A5C',corn:'#B4772E'};
-// The bar's width is the literal share of national production (0-100%),
-// matching the percentage printed right next to it -- it previously
-// scaled to the top producer instead, so a "full" bar didn't actually
-// mean 100% of national output, which read as a contradiction. Ranking
-// is stated as plain text ("#1 of 82"), not something the bar also has
-// to imply -- ordinal position doesn't need its own chart to be clear.
+const RING_R=17,RING_C=2*Math.PI*RING_R;
+// A ring's fill arc is the literal share of national production (0-100%
+// of the full circle), matching the percentage printed beside it -- same
+// honest encoding the bar used, just a shape that still reads as a
+// deliberate design element when the arc is short, instead of looking
+// like a broken or unfinished progress bar. Ranking stays plain text
+// ("#1 of 82"), not something the ring also has to imply.
+function ringSvg(share,color){
+ const fillLen=share>0?Math.max(share/100*RING_C,2):0;
+ const label=share>0&&share<1?'<1':Math.round(share);
+ return `<svg class="ag-ring" viewBox="0 0 42 42" width="42" height="42">
+ <circle cx="21" cy="21" r="${RING_R}" fill="none" stroke="var(--tint)" stroke-width="5"/>
+ <circle cx="21" cy="21" r="${RING_R}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${fillLen} ${RING_C}" transform="rotate(-90 21 21)"/>
+ <text x="21" y="24.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--ink)">${label}%</text>
+ </svg>`;
+}
 function agMeterHtml(cropLabel,cropKey,value,ha,r){
- if(!r)return `<div class="ag-crop"><div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">No PSA data</span></div></div>`;
+ if(!r)return `<div class="ag-crop"><div class="ag-crop-info"><span class="ag-crop-name">${cropLabel}</span><div class="ag-crop-stat">No PSA data</div></div></div>`;
  return `<div class="ag-crop">
- <div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">#${r.rank} of ${r.of} provinces</span></div>
- <div class="ag-meter"><div class="ag-meter-fill" style="width:${Math.max(r.share,1)}%;background:${CROP_COLOR[cropKey]}"></div></div>
- <div class="ag-crop-detail">${fmtShare(r.share)} of national production (${fmtNum(value)} MT produced${ha!=null?`, ${fmtNum(ha)} ha harvested`:''})</div>
+ ${ringSvg(r.share,CROP_COLOR[cropKey])}
+ <div class="ag-crop-info">
+  <span class="ag-crop-name">${cropLabel}</span>
+  <div class="ag-crop-stat">#${r.rank} of ${r.of} provinces &middot; ${fmtShare(r.share)} of national production</div>
+  <div class="ag-crop-detail">${fmtNum(value)} MT produced${ha!=null?`, ${fmtNum(ha)} ha harvested`:''}</div>
+ </div>
  </div>`;
 }
 function agCardHtml(key){
@@ -494,7 +506,7 @@ function agCardHtml(key){
  const riceHtml=agMeterHtml('Rice','rice',ag.rice_production_mt,ag.rice_area_harvested_ha,AG_RANK.rice[key]);
  const cornHtml=agMeterHtml('Corn','corn',ag.corn_production_mt,ag.corn_area_harvested_ha,AG_RANK.corn[key]);
  return `<div class="ag-block"><b class="ag-block-title">Agricultural exposure</b>${riceHtml}${cornHtml}
- <div class="foot-note">Source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Each bar's length is that province's exact share of national production, so most look short -- production is spread across many provinces, not concentrated in a few. Rank and share are computed among provinces with PSA data for that crop. Shown for context only; it does not affect the drought alert level above.</div></div>`;
+ <div class="foot-note">Source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Each ring's fill is that province's exact share of national production, so most are mostly-empty rings -- production is spread across many provinces, not concentrated in a few. Rank and share are computed among provinces with PSA data for that crop. Shown for context only; it does not affect the drought alert level above.</div></div>`;
 }
 function provinceCardHtml(key){
  const p=DATA.prov[key];const L=lvl(key,cur);const haz=hazardsOf(p,cur);

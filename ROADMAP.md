@@ -72,21 +72,28 @@ this:
   layer mentioned in the original scoping notes below were not pursued
   -- still open if this layer proves useful and someone wants to extend
   it.
-- **Redesigned (2026-09-22)** from a plain-text "X MT produced" line
-  (no reference point for a reader -- is that a lot?) to a rank/share
-  presentation per crop, each with a small meter bar: rank ("#1 of 82
-  provinces") as plain text, and a bar whose length is the literal
-  share of national production, with the raw MT/hectares kept as
-  supporting detail underneath. First attempt scaled the bar to the
-  top-producing province instead of to 100%, so a "full" bar didn't
-  actually mean 100% of national output -- visually contradicting the
-  percentage printed right next to it. Fixed the same day once that
-  mismatch was reported: the bar now equals the stated share exactly,
-  and most bars are short as a result, which is itself accurate --
-  production is spread across many provinces, not concentrated in a
-  handful. Deliberately does not attempt to estimate a drought-impact
-  percentage on production -- that needs real agronomic yield-loss
-  modeling this project has no basis for.
+- **Redesigned (2026-09-22)** three times in the same session, in order:
+  1. From a plain-text "X MT produced" line (no reference point for a
+     reader -- is that a lot?) to a rank/share presentation per crop:
+     rank ("#1 of 82 provinces") as plain text, plus a linear meter bar.
+  2. That bar's width scaled to the top-producing province instead of
+     to 100%, so a "full" bar didn't actually mean 100% of national
+     output -- visually contradicting the percentage printed right next
+     to it. Fixed once reported: bar width changed to equal the stated
+     share exactly (0-100%).
+  3. Even accurate, a linear bar still looked unsatisfying: production
+     is spread across many provinces, so nearly every bar was a short,
+     near-empty sliver that read as broken or unfinished rather than
+     intentional. Replaced the bar with a small ring per crop (SVG,
+     stroke-dasharray arc) -- same honest 0-100%-of-national-production
+     encoding as the fixed bar, but a short arc on a ring still reads
+     as a deliberate percentage indicator at any fill level, the way a
+     loading spinner or progress ring does, instead of looking like an
+     incomplete bar. Rank stays plain text either way; ordinal position
+     was never something the shape needed to imply.
+  Deliberately does not attempt to estimate a drought-impact percentage
+  on production at any point in this -- that needs real agronomic
+  yield-loss modeling this project has no basis for.
 
 Original scoping notes (kept for context): PSA OpenSTAT
 (`DB/2E/CS` for crops, `DB/2E/FS` for fisheries) — confirmed live, queryable
