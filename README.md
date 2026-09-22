@@ -153,13 +153,22 @@ automatically.
 
 ## Agricultural exposure layer
 
-Each province's detail card also shows an "Agricultural exposure" line:
-rice (palay) and corn volume of production (metric tons) and area
-harvested (hectares), for the most recent complete year available. This
-is purely informational context -- e.g. "this drought-flagged province
-also has a lot of rice/corn production at stake" -- and is entirely
-separate from, and never changes, the PAGASA-derived drought alert level,
-color, or any of `lvl()`/`style()`'s logic in `map/map_template.html`.
+Each province's detail card also shows an "Agricultural exposure" panel
+with a small meter bar per crop (rice and corn): rank among Philippine
+provinces, % share of national production, and the underlying metric
+tons produced and hectares harvested, for the most recent complete year
+available. A bare production total has no reference point for a reader
+("is 1.8 million MT a lot?"), so rank and share of national production
+lead, with the raw figures kept as supporting detail; the bar itself is
+scaled to the top-producing province for that crop, not to 100% of
+national output, so it's actually legible instead of every province's
+bar looking like a sliver. This deliberately does not attempt to
+estimate a drought-impact percentage -- that needs real agronomic
+yield-loss modeling this project has no basis for, and a made-up number
+would be exactly the kind of unfounded claim avoided everywhere else
+here. It's purely informational context and is entirely separate from,
+and never changes, the PAGASA-derived drought alert level, color, or
+any of `lvl()`/`style()`'s logic in `map/map_template.html`.
 
 The data comes from the [Philippine Statistics Authority (PSA)
 OpenSTAT](https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS) PXWeb API
@@ -187,56 +196,6 @@ transcription needed. This script needs network access and is
 deliberately **not** part of `build.sh`, which stays fully offline; if
 you never run it, the map just shows the "no data" fallback for every
 province.
-
-## Poverty incidence (vulnerability proxy)
-
-Each province's detail card also shows a "Poverty incidence" line: the
-share of the population below the poverty line, for the most recent
-year PSA has published (2023 at time of writing). This is a general
-vulnerability/adaptive-capacity proxy -- provinces with higher poverty
-incidence generally have less capacity to cope with and recover from a
-drought -- not an El Niño-specific index. The original plan (see
-`ROADMAP.md` "Methodology gaps vs. comparable ENSO/drought tools") was
-to overlay the UPLB study "Relative Vulnerability of the Different
-Provinces of the Philippines to El Niño-Induced Droughts" (David et al.
-2007), which ranks provinces by historical El Niño rainfall-departure
-data. That paper's actual data table turned out to be inaccessible
-anywhere legitimate (its UKDR repository entry says "Digital Copy:
-none"; ResearchGate says no full text is available), so this poverty
-statistic shipped instead, as a more general but fully open and
-regularly-updated substitute. No "HIGH/MODERATE/LOW" tier is derived
-from the percentage -- that would be an unreviewed editorial judgment
-call, so only the raw PSA number is shown. Like the agriculture exposure
-layer, this is purely informational context and is entirely separate
-from, and never changes, the PAGASA-derived drought alert level, color,
-or any of `lvl()`/`style()`'s logic in `map/map_template.html` -- and it
-is never blended with the agriculture exposure numbers.
-
-The data comes from [PSA
-OpenSTAT](https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/1F/FY)'s PXWeb
-API (see `sources.json`), cached in `data/processed/vulnerability.json`.
-A couple of Highly-Urbanized-City rows (Isabela City, Cotabato City) have
-no natural home among this project's 82 province keys and are omitted
-rather than folded into a neighboring province -- poverty incidence is a
-rate, so (unlike the agriculture layer's crop-tonnage totals) it cannot
-be meaningfully summed or averaged without population weights. See the
-docstring of `scripts/00_fetch_vulnerability_data.py` for the full,
-documented reconciliation rules, including how Metro Manila and
-Maguindanao (which PSA itself reports as a combined figure alongside its
-del Norte/del Sur split) are handled.
-
-**To refresh it:**
-
-```
-python3 scripts/00_fetch_vulnerability_data.py
-bash build.sh
-```
-
-This script needs network access and is deliberately **not** part of
-`build.sh`. PSA's poverty statistics come from its triennial income
-survey (2018, 2021, 2023 so far), so there's little reason to re-run
-this more than once every few years -- unlike the agriculture layer,
-which is worth refreshing quarterly.
 
 ## Community reports ("what are you seeing?")
 

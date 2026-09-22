@@ -72,6 +72,18 @@ this:
   layer mentioned in the original scoping notes below were not pursued
   -- still open if this layer proves useful and someone wants to extend
   it.
+- **Redesigned (2026-09-22)** from a plain-text "X MT produced" line
+  (no reference point for a reader -- is that a lot?) to a rank/share
+  presentation per crop, each with a small meter bar: "#1 in the
+  Philippines, 9.2% of national production", with the raw MT/hectares
+  kept as supporting detail underneath, not the headline. The bar is
+  scaled to the top-producing province for that crop rather than to
+  100% of national output, since a literal 0-100% share meter would
+  make almost every province's bar look empty (even the #1 rice
+  province is under 10% of the national total). Deliberately does not
+  attempt to estimate a drought-impact percentage on production --
+  that needs real agronomic yield-loss modeling this project has no
+  basis for.
 
 Original scoping notes (kept for context): PSA OpenSTAT
 (`DB/2E/CS` for crops, `DB/2E/FS` for fisheries) — confirmed live, queryable
@@ -137,29 +149,29 @@ studies. Two findings stood out as worth acting on, both cheap:
   Nino-Induced Droughts" (David et al. 2007,
   https://www.ukdr.uplb.edu.ph/journal-articles/2741/), which ranks all
   provinces from historical El Nino rainfall-departure data.
-  **Implemented (2026-09-22), but not with that study** -- on
-  investigation its actual data table turned out to be inaccessible
-  anywhere legitimate (UKDR's own repository entry says "Digital Copy:
-  none"; ResearchGate says "No full-text available, request from
-  authors"). Rather than ship nothing, the user chose to pivot to PSA
-  OpenSTAT's poverty incidence statistics instead: a more general (not
-  El Nino-specific), but fully open and regularly-updated, vulnerability/
-  adaptive-capacity proxy. See README.md "Poverty incidence
-  (vulnerability proxy)" for what shipped and how to refresh it, and
-  `scripts/00_fetch_vulnerability_data.py`'s docstring for the full
-  province-name reconciliation rules (notably: unlike the agriculture
-  layer's crop tonnage, poverty incidence is a rate, so Highly Urbanized
-  City rows are never summed/averaged into a province -- they're
-  reported as unmatched instead -- and Maguindanao uses PSA's own
-  already-combined figure rather than a home-grown average of its del
-  Norte/del Sur split). It is shown as a plain, informational
-  percentage, not blended into the alert level -- no geometric mean or
-  "vulnerability tier nudges the level" rule was implemented, since a
-  general poverty proxy (as opposed to an El Nino-specific vulnerability
-  ranking) diluting or nudging the hazard signal would be an even
-  weaker-founded editorial judgment call than combining two well-scoped
-  axes would have been. If an El Nino-specific vulnerability index ever
-  becomes accessible, revisit combining it with the hazard axis using a
+  **Tried, then removed (2026-09-22).** On investigation the UPLB
+  study's actual data table turned out to be inaccessible anywhere
+  legitimate (UKDR's own repository entry says "Digital Copy: none";
+  ResearchGate says "No full-text available, request from authors"),
+  so this shipped instead as PSA OpenSTAT poverty incidence -- a more
+  general (not El Nino-specific) vulnerability/adaptive-capacity proxy,
+  shown as a plain percentage alongside the drought card, never blended
+  into the alert level. It was pulled from the map shortly after to
+  simplify the province card and put design effort into the
+  agriculture exposure layer instead (see that section above) rather
+  than running two separate socioeconomic-context layers at once. The
+  fetch script and cached data (`scripts/00_fetch_vulnerability_data.py`,
+  `data/processed/vulnerability.json`) were deleted along with it rather
+  than left as dead code; the PSA table (`DB/1F/FY`, "Poverty Incidence
+  Among Population... by Region and Province") is still live if this
+  gets revisited, and the reconciliation notes are worth re-reading
+  first: poverty incidence is a rate, so Highly Urbanized City rows
+  can't be summed/averaged into a province the way the agriculture
+  layer's crop tonnage can, and Maguindanao has its own PSA-reported
+  combined figure rather than needing a home-grown average of its del
+  Norte/del Sur split. If an El Nino-specific vulnerability index ever
+  becomes accessible, that -- not a generic poverty proxy -- is the
+  better candidate for actually combining with the hazard axis, using a
   geometric mean (or a simple "vulnerability tier nudges the level by
   +/-1" rule) rather than an averaged score -- INFORM and the Marinduque
   barangay-level risk study

@@ -29,12 +29,6 @@ If that file is absent, __AG__ is written as an empty object ({}) and the
 map's "Agricultural exposure" card section falls back gracefully -- this
 script and build.sh both stay fully offline-buildable either way.
 
-Likewise, if data/processed/vulnerability.json exists (see
-scripts/00_fetch_vulnerability_data.py -- also optional, manually-run,
-network-dependent, NOT part of build.sh), it is injected as the __VULN__
-token. If absent, __VULN__ is written as an empty object ({}) and the
-map's "Poverty incidence" card section falls back gracefully.
-
 Usage:
     python3 scripts/02_assemble_map.py
     CARTO_API_KEY=xxxx python3 scripts/02_assemble_map.py
@@ -96,17 +90,6 @@ def main():
               "the map's Agricultural exposure card will show its fallback text for every "
               "province. Run scripts/00_fetch_agriculture_exposure.py to add this layer.")
 
-    vuln_path = ROOT / "data/processed/vulnerability.json"
-    if vuln_path.exists():
-        vuln = json.load(open(vuln_path))
-        print(f"vulnerability (poverty incidence): found data/processed/vulnerability.json "
-              f"({vuln.get('year', 'unknown year')}, {len(vuln.get('prov', {}))} provinces)")
-    else:
-        vuln = {}
-        print("vulnerability (poverty incidence): no data/processed/vulnerability.json found -- "
-              "the map's Poverty incidence card will show its fallback text for every "
-              "province. Run scripts/00_fetch_vulnerability_data.py to add this layer.")
-
     key, source = get_carto_key()
     tile = carto_tile(key) if key else OSM_TILE
     if key:
@@ -119,7 +102,6 @@ def main():
            .replace("__DATA__", json.dumps(data, separators=(",", ":")))
            .replace("__GEO__", json.dumps(geo, separators=(",", ":")))
            .replace("__AG__", json.dumps(ag, separators=(",", ":")))
-           .replace("__VULN__", json.dumps(vuln, separators=(",", ":")))
            .replace("__TILE_URL__", tile["url"])
            .replace("__TILE_ATTR__", tile["attr"])
            .replace("__TILE_MAXZOOM__", str(tile["maxzoom"]))

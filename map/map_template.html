@@ -90,6 +90,16 @@
   .foot-note a{color:var(--ink)}
   .report-btn{display:block;width:100%;margin:10px 0 14px;padding:10px;border:none;background:var(--accent);color:#fff;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
   .report-btn:hover{filter:brightness(1.08)}
+  .ag-block{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+  .ag-block-title{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:10px}
+  .ag-crop{margin-bottom:10px}
+  .ag-crop:last-of-type{margin-bottom:6px}
+  .ag-crop-label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+  .ag-crop-name{font-size:12.5px;font-weight:700;color:var(--ink);flex:none}
+  .ag-crop-stat{font-size:10.5px;color:var(--muted);text-align:right}
+  .ag-meter{height:7px;border-radius:4px;background:var(--tint);overflow:hidden}
+  .ag-meter-fill{height:100%;border-radius:4px}
+  .ag-crop-detail{font-size:10.5px;color:var(--muted);margin-top:3px}
   .prowlist{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
   .prow{display:flex;align-items:center;gap:9px;padding:9px 12px;cursor:pointer;background:#fff;border-bottom:1px solid var(--line)}
   .prow:last-child{border-bottom:none}
@@ -267,14 +277,6 @@ const GEO = __GEO__;
 // AG.prov may be {} (script never run yet) or missing individual province
 // keys -- agCardHtml() below handles both gracefully.
 const AG = __AG__;
-// Poverty incidence (vulnerability/adaptive-capacity proxy), from PSA
-// OpenSTAT -- see scripts/00_fetch_vulnerability_data.py. Purely
-// informational context, additive to the drought alert card below and
-// entirely separate from the agriculture-exposure block above; it is
-// never read by lvl()/style()/COL/ORDER and never changes an alert level.
-// VULN.prov may be {} (script never run yet) or missing individual
-// province keys -- vulnCardHtml() below handles both gracefully.
-const VULN = __VULN__;
 const COL={RESPOND:'#8E1B1B',ACT:'#E2711D',PREPARE:'#F2C14E',WATCH:'#7FB3D5',NORMAL:'#D8E3DC'};
 const TXT={RESPOND:'#fff',ACT:'#fff',PREPARE:'#3B2F00',WATCH:'#0F2A3F',NORMAL:'#3C4A45'};
 const ORDER=['RESPOND','ACT','PREPARE','WATCH','NORMAL'];
@@ -359,7 +361,7 @@ function renderLevels(){const el=document.getElementById('levels');
  const meaning=`<div class="card"><h3>What each level means</h3>`+ORDER.map(o=>`<div class="grp"><span class="chip static lbl" style="background:${COL[o]};color:${TXT[o]}">${o}</span><p style="margin:5px 0 0;color:var(--muted)">${LEVEL_LEGEND[o]}</p></div>`).join('')+`</div>`;
  const guide=`<div class="card guide-card"><h3>What to consider</h3><div class="guide-note">${GUIDANCE_SOURCE} These are general starting points, not tailored advice for your specific situation. Always confirm against PAGASA's own bulletins.</div>`+ORDER.map(o=>`<div class="grp"><span class="chip static lbl" style="background:${COL[o]};color:${TXT[o]}">${o}</span><ul>${GUIDANCE[o].map(a=>`<li>${a}</li>`).join('')}</ul></div>`).join('')+`</div>`;
  el.innerHTML=meaning+guide;}
-function renderLegend(){document.getElementById('legend').innerHTML=ORDER.map(o=>`<span class="item"><i style="background:${COL[o]}"></i>${o}. ${LEGEND_SHORT[o]}</span>`).join('')+'<span class="credit">Sources: <a href="https://bagong.pagasa.dost.gov.ph/climate" target="_blank" rel="noopener">DOST-PAGASA</a>, <a href="https://observatory.ph" target="_blank" rel="noopener">Manila Observatory</a>. Boundaries: <a href="https://psa.gov.ph" target="_blank" rel="noopener">PSA</a>, <a href="https://github.com/faeldon/philippines-json-maps" target="_blank" rel="noopener">faeldon</a> (2023). Agriculture &amp; poverty data: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>. Basemap: __TILE_CREDIT__.</span><span class="credit">This is an open-source passion project. If you find it useful, a star on <a href="https://github.com/quielq/quielq-enso-watch" target="_blank" rel="noopener">GitHub</a> would mean a lot, and contributions are always welcome.</span>';}
+function renderLegend(){document.getElementById('legend').innerHTML=ORDER.map(o=>`<span class="item"><i style="background:${COL[o]}"></i>${o}. ${LEGEND_SHORT[o]}</span>`).join('')+'<span class="credit">Sources: <a href="https://bagong.pagasa.dost.gov.ph/climate" target="_blank" rel="noopener">DOST-PAGASA</a>, <a href="https://observatory.ph" target="_blank" rel="noopener">Manila Observatory</a>. Boundaries: <a href="https://psa.gov.ph" target="_blank" rel="noopener">PSA</a>, <a href="https://github.com/faeldon/philippines-json-maps" target="_blank" rel="noopener">faeldon</a> (2023). Agricultural data: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>. Basemap: __TILE_CREDIT__.</span><span class="credit">This is an open-source passion project. If you find it useful, a star on <a href="https://github.com/quielq/quielq-enso-watch" target="_blank" rel="noopener">GitHub</a> would mean a lot, and contributions are always welcome.</span>';}
 function renderTcBanner(){
  const el=document.getElementById('tcBanner');
  if(!DATA.tc_forecast||!DATA.tc_forecast[cur]){el.style.display='none';return;}
@@ -380,12 +382,22 @@ const AG_RANK = (()=>{
   if(!AG||!AG.prov)return {};
   const entries=Object.entries(AG.prov).filter(([k,v])=>v[field]!=null).sort((a,b)=>b[1][field]-a[1][field]);
   const total=entries.reduce((s,[,v])=>s+v[field],0);
+  const max=entries.length?entries[0][1][field]:0;
   const out={};
-  entries.forEach(([k,v],i)=>{out[k]={rank:i+1,share:total>0?v[field]/total*100:0};});
+  entries.forEach(([k,v],i)=>{out[k]={rank:i+1,share:total>0?v[field]/total*100:0,relWidth:max>0?v[field]/max*100:0};});
   return out;
  }
  return {rice:rankField('rice_production_mt'),corn:rankField('corn_production_mt')};
 })();
+const CROP_COLOR={rice:'#2F7A5C',corn:'#B4772E'};
+function agMeterHtml(cropLabel,cropKey,value,ha,r){
+ if(!r)return `<div class="ag-crop"><div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">No PSA data</span></div></div>`;
+ return `<div class="ag-crop">
+ <div class="ag-crop-label"><span class="ag-crop-name">${cropLabel}</span><span class="ag-crop-stat">#${r.rank} in the Philippines &middot; ${fmtShare(r.share)} of national production</span></div>
+ <div class="ag-meter"><div class="ag-meter-fill" style="width:${Math.max(r.relWidth,2)}%;background:${CROP_COLOR[cropKey]}"></div></div>
+ <div class="ag-crop-detail">${fmtNum(value)} MT produced${ha!=null?`, ${fmtNum(ha)} ha harvested`:''}</div>
+ </div>`;
+}
 function agCardHtml(key){
  const ag=AG&&AG.prov?AG.prov[key]:null;
  const period=AG&&AG.period?AG.period:'';
@@ -393,26 +405,10 @@ function agCardHtml(key){
   const note=(ag&&ag.note)||'No PSA crop-production data for this area.';
   return `<div class="kv"><b>Agricultural exposure.</b> ${note}</div>`;
  }
- const rice=fmtNum(ag.rice_production_mt),riceHa=fmtNum(ag.rice_area_harvested_ha),riceR=AG_RANK.rice[key];
- const corn=fmtNum(ag.corn_production_mt),cornHa=fmtNum(ag.corn_area_harvested_ha),cornR=AG_RANK.corn[key];
- const riceLine=riceR
-  ?`Rice: #${riceR.rank} in the Philippines, ${fmtShare(riceR.share)} of national production (${rice} MT${riceHa!=null?`, ${riceHa} ha harvested`:''}).`
-  :'Rice: no PSA data.';
- const cornLine=cornR
-  ?`Corn: #${cornR.rank} in the Philippines, ${fmtShare(cornR.share)} of national production (${corn} MT${cornHa!=null?`, ${cornHa} ha harvested`:''}).`
-  :'Corn: no PSA data.';
- return `<div class="kv"><b>Agricultural exposure.</b> ${riceLine} ${cornLine}</div>
- <div class="foot-note">Agricultural exposure source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Rank and share are computed among Philippine provinces with PSA production data for that crop. Shown for context only; it does not affect the drought alert level above.</div>`;
-}
-function vulnCardHtml(key){
- const v=VULN&&VULN.prov?VULN.prov[key]:null;
- const year=VULN&&VULN.year?VULN.year:'';
- if(!v||v.poverty_incidence_pct==null){
-  const note=(v&&v.note)||'No PSA poverty data for this area.';
-  return `<div class="kv"><b>Poverty incidence.</b> ${note}</div>`;
- }
- return `<div class="kv"><b>Poverty incidence.</b> ${v.poverty_incidence_pct}% of population${year?` (${year}, PSA)`:' (PSA)'}.</div>
- <div class="foot-note">Poverty incidence source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${year?`, ${year}`:''}. A general vulnerability/adaptive-capacity proxy, not an El Nino-specific index. Shown for context only; it does not affect the drought alert level above.</div>`;
+ const riceHtml=agMeterHtml('Rice','rice',ag.rice_production_mt,ag.rice_area_harvested_ha,AG_RANK.rice[key]);
+ const cornHtml=agMeterHtml('Corn','corn',ag.corn_production_mt,ag.corn_area_harvested_ha,AG_RANK.corn[key]);
+ return `<div class="ag-block"><b class="ag-block-title">Agricultural exposure</b>${riceHtml}${cornHtml}
+ <div class="foot-note">Source: <a href="https://openstat.psa.gov.ph" target="_blank" rel="noopener">PSA OpenSTAT</a>${period?`, ${period}`:''}. Bars are scaled to the top-producing province for that crop, not to 100% of national output. Rank and share are computed among provinces with PSA data for that crop. Shown for context only; it does not affect the drought alert level above.</div></div>`;
 }
 function provinceCardHtml(key){
  const p=DATA.prov[key];const L=lvl(key,cur);const haz=hazardsOf(p,cur);
@@ -426,7 +422,6 @@ function provinceCardHtml(key){
  <ul>${GUIDANCE[L].map(a=>`<li>${a}</li>`).join('')}</ul>
  <div class="foot-note">Rain %N is forecast rainfall as a share of normal. Source: <a href="https://bagong.pagasa.dost.gov.ph/climate" target="_blank" rel="noopener">PAGASA</a>, 26 Aug 2026.</div>
  ${agCardHtml(key)}
- ${vulnCardHtml(key)}
  </div>`;
 }
 function provinceRowHtml(key){
@@ -444,7 +439,7 @@ function renderDetail(){
   return;
  }
  const keys=Object.keys(DATA.prov).sort((a,b)=>ORDER.indexOf(lvl(a,cur))-ORDER.indexOf(lvl(b,cur))||DATA.prov[a].name.localeCompare(DATA.prov[b].name));
- el.innerHTML=`<div class="foot-note" style="margin-bottom:8px">All ${keys.length} provinces, most severe first. Click a province on the map, in this list, or search above, for full details, agricultural exposure, poverty incidence, and to report what you're seeing there.</div><div class="prowlist">${keys.map(provinceRowHtml).join('')}</div>`;
+ el.innerHTML=`<div class="foot-note" style="margin-bottom:8px">All ${keys.length} provinces, most severe first. Click a province on the map, in this list, or search above, for full details, agricultural exposure, and to report what you're seeing there.</div><div class="prowlist">${keys.map(provinceRowHtml).join('')}</div>`;
 }
 function pickProvince(key){
  const f=GEO.features.find(x=>x.properties.key===key);

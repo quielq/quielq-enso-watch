@@ -30,13 +30,5 @@
     "title": "Palay and Corn: Volume of Production in Metric Tons, and Area Harvested in Hectares, by Ecosystem/Croptype, Quarter, Semester, Region and Province, 1987-2026",
     "public_source": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS (PSA OpenSTAT PXWeb API, crop statistics domain)",
     "ingested_into": "data/processed/agriculture_exposure.json (via scripts/00_fetch_agriculture_exposure.py, retrieved 2026-09-22)"
-  },
-  {
-    "used_for": "Poverty incidence (vulnerability/adaptive-capacity proxy) layer: province-level poverty incidence among population (%), most recent complete year (2023 at time of ingestion). A general vulnerability proxy, not an El Nino-specific index -- see README.md and ROADMAP.md for why this replaced the originally-planned UPLB El Nino vulnerability study (its data table was inaccessible).",
-    "issuer": "Philippine Statistics Authority (PSA) OpenSTAT",
-    "issued": "2026-08-03",
-    "title": "Table 2. Annual Per Capita Poverty Threshold and Poverty Incidence Among Population with Measures of Precision, by Region and Province: 2018, 2021, and 2023",
-    "public_source": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/1F/FY (PSA OpenSTAT PXWeb API, poverty statistics domain)",
-    "ingested_into": "data/processed/vulnerability.json (via scripts/00_fetch_vulnerability_data.py, retrieved 2026-09-22)"
   }
 ]
