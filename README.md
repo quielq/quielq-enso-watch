@@ -210,26 +210,40 @@ Each province's detail card has a "Report what you're seeing" button.
 It opens a short form (how dry it feels, water availability, crop
 condition, a checklist of other symptoms, an optional photo, and
 optional free text and contact info) and writes the submission to a
-private Firestore database (Google Firebase). This is **not** a public
-claims layer -- nothing submitted here is ever displayed back on the
-map automatically. It's a moderator inbox: reports are only visible
-to whoever has access to the Firebase Console for this project, who
-can review them and pass credible patterns on to PAGASA or a local
-DRRMO. See `ROADMAP.md` "Community ground-truth reports" for the full
-reasoning behind that framing.
+private Firestore database (Google Firebase). It's a moderator inbox
+first: every new report is invisible to everyone except whoever has
+access to the Firebase Console for this project, who reviews it and
+can pass credible patterns on to PAGASA or a local DRRMO. See
+`ROADMAP.md` "Community ground-truth reports" for the full reasoning
+behind that framing.
+
+A "Reports" tab shows a public, read-only feed of submitted reports --
+but only ones a moderator has individually reviewed and explicitly
+approved (added a `status: "approved"` field to that document via the
+Console; nothing else makes a report visible there, and the `contact`
+field is never rendered even for approved reports). This is
+deliberately *not* an unmoderated public claims feed -- a bad-faith or
+mistaken report would show up as fact to every visitor with no human
+in the loop, which is exactly the risk this project's framing was
+built to avoid. Every field rendered in that tab is HTML-escaped
+before being inserted into the page, since it's the one place this
+project displays arbitrary text someone else typed into their browser.
 
 The Firebase web config in `map/map_template.html` (`apiKey`,
 `projectId`, etc.) is intentionally public -- Firebase's own security
 model relies entirely on its Firestore/Storage rules, not on hiding
 this config, so it's safe to commit. The actual access control lives
 in those rules (set in the Firebase Console, not in this repo): anyone
-can *create* a report or *upload* a photo under 5MB, and nobody,
-including this site's own client code, can read, edit, or delete one
--- only the project owner via the Console. A report's `photoPath`
-field stores the photo's Storage path, never a public download URL
-(Storage read is blocked the same way Firestore read is), so viewing
-an attached photo means opening that path in the Console's Storage
-browser, not clicking a link on the map.
+can *create* a report or *upload* a photo under 5MB, but cannot set
+`status` themselves (so nobody can self-approve their own report);
+reads are allowed only for documents where `status == "approved"`; and
+nobody, including this site's own client code, can edit or delete a
+report at all -- only the project owner via the Console. A report's
+`photoPath` field stores the photo's Storage path, never a public
+download URL (Storage read is blocked the same way unapproved
+Firestore reads are), so viewing an attached photo means opening that
+path in the Console's Storage browser, not clicking a link on the map
+-- attached photos are never part of the public Reports tab.
 
 Photo upload requires Firebase's paid Blaze plan for Storage (a policy
 change Google made in late 2024, applying even to usage within the
@@ -244,9 +258,12 @@ one of the free-tier-eligible regions (currently us-central1, us-west1,
 us-east1) -- check before creating the bucket, since the location
 can't be changed afterward.
 
-**To review submitted reports:** open the Firestore Database in the
+**To review submitted reports and approve one for public display:**
+open the Firestore Database in the
 [Firebase Console](https://console.firebase.google.com) for this
-project's `reports` collection.
+project's `reports` collection, open the document, and add a field
+named `status` with the string value `approved`. It appears on the
+Reports tab immediately -- no redeploy needed, the tab queries live.
 
 ## Mobile layout
 

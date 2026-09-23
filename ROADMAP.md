@@ -215,6 +215,24 @@ one is rejected server-side, and an attempted read is rejected
 server-side too, so the "private moderator inbox" framing below is
 actually enforced, not just a client-side convention.
 
+**Public Reports tab, added (2026-09-23).** User explicitly asked for
+submitted reports to be publicly visible, not just moderator-only --
+a real change from the original framing above. Rather than build the
+unmoderated version (any report visible to every visitor the moment
+it's submitted, which is exactly the misinformation vector this
+project's design was originally built to avoid), added a moderation
+gate: Firestore rules now allow `get`/`list` only for documents where
+`status == "approved"`, a field the `create` rule explicitly forbids
+the client from setting itself (closes the obvious self-approval
+loophole), so a report only becomes public once a moderator has
+individually added that field via the Console. The tab HTML-escapes
+every field before rendering (the one place this project displays
+text someone else typed), and never renders `contact` or `photoPath`
+even for approved reports. Net effect: the "moderator reviews before
+anything reaches the public" principle survives; only the destination
+changed, from "escalate off-platform to PAGASA/LGU" to "optionally
+also show it here, one at a time, on purpose."
+
 **Photo upload.** Initially scoped out (2026-09-22 morning) because
 Firebase changed its policy in late 2024: Cloud Storage requires the
 paid Blaze plan even for usage entirely within the free quota, and

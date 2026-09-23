@@ -172,6 +172,7 @@
     <div class="tabs" id="tabs">
       <button id="tabOverview" class="on" onclick="setTab('overview')">Overview</button>
       <button id="tabInsights" onclick="setTab('insights')">Insights</button>
+      <button id="tabReports" onclick="setTab('reports')">Reports</button>
     </div>
     <div class="months" id="months"></div>
     <div class="stats" id="stats"></div>
@@ -191,6 +192,10 @@
       <div id="panel-insights" style="display:none">
         <div id="focus"></div>
         <div id="levels"></div>
+      </div>
+      <div id="panel-reports" style="display:none">
+        <div class="foot-note" style="margin-bottom:10px">Reports from residents, shown here only after a moderator has reviewed and approved them individually. These are not verified facts -- always confirm against PAGASA's own advisories before acting on anything here.</div>
+        <div id="publicReports"></div>
       </div>
       <div class="legend" id="legend"></div>
     </div>
@@ -564,7 +569,65 @@ function pickProvince(key){
  if(f)map.fitBounds(L.geoJSON(f).getBounds(),{padding:[20,20]});
  selected=key;setTab('overview');renderSearch();renderFocus();renderDetail();expandSheet();
 }
-function setTab(t){tab=t;document.getElementById('tabOverview').classList.toggle('on',t==='overview');document.getElementById('tabInsights').classList.toggle('on',t==='insights');document.getElementById('panel-overview').style.display=t==='overview'?'block':'none';document.getElementById('panel-insights').style.display=t==='insights'?'block':'none';}
+function setTab(t){
+ tab=t;
+ document.getElementById('tabOverview').classList.toggle('on',t==='overview');
+ document.getElementById('tabInsights').classList.toggle('on',t==='insights');
+ document.getElementById('tabReports').classList.toggle('on',t==='reports');
+ document.getElementById('panel-overview').style.display=t==='overview'?'block':'none';
+ document.getElementById('panel-insights').style.display=t==='insights'?'block':'none';
+ document.getElementById('panel-reports').style.display=t==='reports'?'block':'none';
+ if(t==='reports')loadPublicReports();
+}
+// Public reports tab: shows only reports a moderator has explicitly set
+// status:"approved" on via the Firebase Console -- Firestore rules block
+// reading anything else (see README.md "Community reports"). All fields
+// are HTML-escaped before rendering since this is the one place this
+// project displays arbitrary text submitted by someone else's browser.
+let reportsLoaded=false;
+function escapeHtml(s){
+ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function fmtReportDate(ts){
+ try{
+  const d=ts&&ts.toDate?ts.toDate():null;
+  return d?d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}):'';
+ }catch(e){return '';}
+}
+function reportCardHtml(data){
+ const provName=DATA.prov[data.province]?DATA.prov[data.province].name:escapeHtml(data.province||'Unknown province');
+ const symptoms=Array.isArray(data.symptoms)&&data.symptoms.length?data.symptoms.map(escapeHtml).join(', '):null;
+ return `<div class="card">
+ <div class="prov-title">${escapeHtml(provName)}</div>
+ <div class="prov-sub">${fmtReportDate(data.createdAt)}</div>
+ <div class="kv"><b>Feels like.</b> ${escapeHtml(data.dryness||'Not stated')}</div>
+ ${data.water?`<div class="kv"><b>Water availability.</b> ${escapeHtml(data.water)}</div>`:''}
+ ${data.agriculture?`<div class="kv"><b>Agriculture/crops.</b> ${escapeHtml(data.agriculture)}</div>`:''}
+ ${symptoms?`<div class="kv"><b>Also noticed.</b> ${symptoms}</div>`:''}
+ ${data.notes?`<div class="kv"><b>In their words.</b> ${escapeHtml(data.notes)}</div>`:''}
+ </div>`;
+}
+function loadPublicReports(force){
+ if(reportsLoaded&&!force)return;
+ const el=document.getElementById('publicReports');
+ el.innerHTML='<div class="foot-note">Loading…</div>';
+ db.collection('reports').where('status','==','approved').limit(50).get().then(snap=>{
+  reportsLoaded=true;
+  if(snap.empty){
+   el.innerHTML='<div class="foot-note">No approved reports yet. Reports are only shown here after a moderator reviews and approves them individually.</div>';
+   return;
+  }
+  const docs=snap.docs.map(d=>d.data());
+  docs.sort((a,b)=>{
+   const at=a.createdAt&&a.createdAt.toMillis?a.createdAt.toMillis():0;
+   const bt=b.createdAt&&b.createdAt.toMillis?b.createdAt.toMillis():0;
+   return bt-at;
+  });
+  el.innerHTML=docs.map(reportCardHtml).join('');
+ }).catch(err=>{
+  el.innerHTML='<div class="foot-note">Could not load reports right now'+(err&&err.code?` (${err.code})`:'')+'. Try again later.</div>';
+ });
+}
 function renderAll(){renderMonths();renderStats();renderFocus();renderDetail();renderLegend();renderLevels();renderSearch();renderTcBanner();recolor();}
 renderAll();
 
