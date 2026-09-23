@@ -22,13 +22,13 @@
   .hdr{padding:14px 24px 10px;border-bottom:1px solid var(--line)}
   .hdr h1{font-size:16px;margin:0 0 4px;letter-spacing:.1px;font-weight:700;line-height:1.25}
   .hdr .sub{font-size:11.5px;color:var(--muted);line-height:1.4}
-  .months{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:10px 0 6px}
+  .months{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:10px 24px 6px}
   .months button{border:1px solid var(--line);background:var(--tint);padding:7px 2px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;color:var(--ink);transition:background .12s}
   .months button:hover{background:#ECEFF3}
   .months button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
   .mtitle{padding:8px 0 2px;font-size:15px;font-weight:700}
   .mtitle-sub{padding:0 0 6px;font-size:11.5px;color:var(--muted)}
-  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:0 0 8px}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:0 24px 8px}
   .stat{border-radius:9px;padding:8px 5px 7px;text-align:center;color:#fff;cursor:pointer;border:none;font-family:inherit;transition:transform .1s,box-shadow .1s}
   .stat:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.18)}
   .stat:disabled{cursor:default;opacity:.45}
@@ -140,6 +140,7 @@
   .modal .report-status.ok{background:#EAF6EE;color:#1E6B36}
   .modal .report-status.err{background:#FBEAEA;color:#8E1B1B}
   .sheet-handle{display:none}
+  .sheet-close{display:none}
   @media (max-width:800px){
     #app{position:relative;overflow:hidden}
     #map{position:absolute;inset:0;height:auto}
@@ -148,8 +149,11 @@
       transition:max-height .28s cubic-bezier(.22,.8,.32,1);z-index:500}
     #side.collapsed{max-height:188px}
     #side.collapsed .hdr,#side.collapsed .tabs,#side.collapsed>.scroll{display:none}
-    .sheet-handle{display:flex;justify-content:center;padding:10px 0 2px;cursor:grab;flex:none;touch-action:none}
+    .sheet-handle{display:flex;justify-content:center;align-items:center;position:relative;padding:10px 0 2px;cursor:grab;flex:none;touch-action:none}
     .sheet-handle-bar{width:36px;height:4px;border-radius:2px;background:var(--line)}
+    #side:not(.collapsed) .sheet-close{display:flex}
+    .sheet-close{position:absolute;right:14px;top:6px;width:26px;height:26px;border-radius:50%;border:none;background:var(--tint);color:var(--muted);align-items:center;justify-content:center;font-size:15px;cursor:pointer;font-family:inherit;line-height:1}
+    .sheet-close:hover{background:#ECEFF3;color:var(--ink)}
     .months{padding-top:4px}
   }
 </style>
@@ -157,7 +161,10 @@
 <body>
 <div id="app">
   <div id="side" class="collapsed">
-    <div class="sheet-handle" id="sheetHandle"><div class="sheet-handle-bar"></div></div>
+    <div class="sheet-handle" id="sheetHandle">
+      <div class="sheet-handle-bar"></div>
+      <button type="button" class="sheet-close" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="event.stopPropagation();collapseSheet()" aria-label="Collapse panel">&times;</button>
+    </div>
     <div class="hdr">
       <h1>El Ni&ntilde;o Watch - Philippines</h1>
       <div class="sub">An open-source personal project that provides a guide to where El Ni&ntilde;o drought conditions are expected each month. This uses data from PAGASA and Manila Observatory's public outlooks. See sources below.</div>
@@ -568,6 +575,9 @@ renderAll();
    instead of leaving the user staring at a collapsed peek. ---- */
 function expandSheet(){
  if(window.innerWidth<=800)document.getElementById('side').classList.remove('collapsed');
+}
+function collapseSheet(){
+ document.getElementById('side').classList.add('collapsed');
 }
 (function(){
  const side=document.getElementById('side');
