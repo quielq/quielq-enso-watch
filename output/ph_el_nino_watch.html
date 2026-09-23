@@ -51,7 +51,7 @@
   .chip{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;color:#fff;margin:0 5px 5px 0;cursor:pointer;border:none;font-family:inherit;transition:filter .12s}
   .chip:hover{filter:brightness(1.08)}
   .chip.static{cursor:default}
-  .legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;padding:9px 24px;border-top:1px solid var(--line);background:var(--tint)}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;padding:14px 0 4px;margin-top:6px;border-top:1px solid var(--line)}
   .legend .item{display:flex;align-items:center;gap:6px}
   .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;flex:none}
   .legend .credit{width:100%;font-size:9.5px;color:var(--muted);margin-top:2px}
@@ -139,12 +139,25 @@
   .modal .report-status{font-size:12.5px;padding:10px;border-radius:8px;margin-top:12px}
   .modal .report-status.ok{background:#EAF6EE;color:#1E6B36}
   .modal .report-status.err{background:#FBEAEA;color:#8E1B1B}
-  @media (max-width:800px){#app{flex-direction:column}#side{width:100%;min-width:0;height:48%}#map{height:52%}}
+  .sheet-handle{display:none}
+  @media (max-width:800px){
+    #app{position:relative;overflow:hidden}
+    #map{position:absolute;inset:0;height:auto}
+    #side{position:absolute;left:0;right:0;bottom:0;top:auto;width:100%;min-width:0;
+      height:auto;max-height:82vh;border-radius:16px 16px 0 0;box-shadow:0 -6px 24px rgba(20,30,45,.18);
+      transition:max-height .28s cubic-bezier(.22,.8,.32,1);z-index:500}
+    #side.collapsed{max-height:188px}
+    #side.collapsed .hdr,#side.collapsed .tabs,#side.collapsed>.scroll{display:none}
+    .sheet-handle{display:flex;justify-content:center;padding:10px 0 2px;cursor:grab;flex:none;touch-action:none}
+    .sheet-handle-bar{width:36px;height:4px;border-radius:2px;background:var(--line)}
+    .months{padding-top:4px}
+  }
 </style>
 </head>
 <body>
 <div id="app">
-  <div id="side">
+  <div id="side" class="collapsed">
+    <div class="sheet-handle" id="sheetHandle"><div class="sheet-handle-bar"></div></div>
     <div class="hdr">
       <h1>El Ni&ntilde;o Watch - Philippines</h1>
       <div class="sub">An open-source personal project that provides a guide to where El Ni&ntilde;o drought conditions are expected each month. This uses data from PAGASA and Manila Observatory's public outlooks. See sources below.</div>
@@ -153,6 +166,8 @@
       <button id="tabOverview" class="on" onclick="setTab('overview')">Overview</button>
       <button id="tabInsights" onclick="setTab('insights')">Insights</button>
     </div>
+    <div class="months" id="months"></div>
+    <div class="stats" id="stats"></div>
     <div class="scroll">
       <div id="panel-overview">
         <div class="searchwrap">
@@ -161,19 +176,17 @@
           <button id="searchClear" class="clearbtn" onclick="resetSearch()" style="display:none" title="Clear filter">✕</button>
         </div>
         <div class="searchdrop" id="searchDrop"></div>
-        <div class="months" id="months"></div>
         <div id="tcBanner" style="display:none"></div>
         <div class="mtitle" id="mtitle"></div>
         <div class="mtitle-sub" id="mtitleSub"></div>
-        <div class="stats" id="stats"></div>
         <div id="detail"></div>
       </div>
       <div id="panel-insights" style="display:none">
         <div id="focus"></div>
         <div id="levels"></div>
       </div>
+      <div class="legend" id="legend"></div>
     </div>
-    <div class="legend" id="legend"></div>
   </div>
   <div id="map"></div>
 </div>
@@ -414,7 +427,7 @@ function style(f){const L=lvl(f.properties.key,cur);return{fillColor:COL[L],fill
 const geo=L.geoJSON(GEO,{style,onEachFeature:(f,l)=>{
   const p=DATA.prov[f.properties.key]; if(!p)return;
   l.bindTooltip(()=>`${p.name}. ${lvl(f.properties.key,cur)}`,{className:'prov',sticky:true});
-  l.on('click',()=>{selected=f.properties.key;setTab('overview');renderSearch();renderFocus();renderDetail();});
+  l.on('click',()=>{selected=f.properties.key;setTab('overview');renderSearch();renderFocus();renderDetail();expandSheet();});
   l.on('mouseover',()=>l.setStyle({weight:2,color:'#1B2433'})); l.on('mouseout',()=>geo.resetStyle(l));
 }}).addTo(map);
 
@@ -542,11 +555,76 @@ function renderDetail(){
 function pickProvince(key){
  const f=GEO.features.find(x=>x.properties.key===key);
  if(f)map.fitBounds(L.geoJSON(f).getBounds(),{padding:[20,20]});
- selected=key;setTab('overview');renderSearch();renderFocus();renderDetail();
+ selected=key;setTab('overview');renderSearch();renderFocus();renderDetail();expandSheet();
 }
 function setTab(t){tab=t;document.getElementById('tabOverview').classList.toggle('on',t==='overview');document.getElementById('tabInsights').classList.toggle('on',t==='insights');document.getElementById('panel-overview').style.display=t==='overview'?'block':'none';document.getElementById('panel-insights').style.display=t==='insights'?'block':'none';}
 function renderAll(){renderMonths();renderStats();renderFocus();renderDetail();renderLegend();renderLevels();renderSearch();renderTcBanner();recolor();}
 renderAll();
+
+/* ---- mobile bottom sheet: on narrow screens #side becomes a draggable
+   sheet over the map instead of a fixed sidebar (see the max-width:800px
+   CSS). expandSheet() is called whenever a province gets selected, so
+   picking one from the map or search always reveals its detail card
+   instead of leaving the user staring at a collapsed peek. ---- */
+function expandSheet(){
+ if(window.innerWidth<=800)document.getElementById('side').classList.remove('collapsed');
+}
+(function(){
+ const side=document.getElementById('side');
+ const handle=document.getElementById('sheetHandle');
+ let dragging=false,startY=0,startHeight=0,maxMoved=0,wasCollapsed=false;
+ function fullHeight(){return Math.round(window.innerHeight*0.82);}
+ const PEEK=188;
+ function pointY(e){return e.touches?e.touches[0].clientY:e.clientY;}
+ function onDown(e){
+  if(window.innerWidth>800)return;
+  dragging=true;maxMoved=0;
+  startY=pointY(e);
+  wasCollapsed=side.classList.contains('collapsed');
+  // Measure height while still in the original state, THEN reveal the
+  // hidden hdr/tabs/scroll content (if collapsed) so growing max-height
+  // during the drag actually has something to show -- otherwise #side's
+  // auto height stays pinned to the tiny peek content regardless of how
+  // far max-height is raised, and the sheet visually can't grow at all.
+  startHeight=side.getBoundingClientRect().height;
+  side.style.transition='none';
+  if(wasCollapsed){
+   side.classList.remove('collapsed');
+   side.style.maxHeight=startHeight+'px';
+  }
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+ }
+ function onMove(e){
+  if(!dragging)return;
+  if(e.cancelable)e.preventDefault();
+  const delta=startY-pointY(e);
+  maxMoved=Math.max(maxMoved,Math.abs(delta));
+  const h=Math.max(PEEK,Math.min(fullHeight(),startHeight+delta));
+  side.style.maxHeight=h+'px';
+ }
+ function onUp(){
+  if(!dragging)return;
+  dragging=false;
+  side.style.transition='';
+  window.removeEventListener('mousemove',onMove);
+  window.removeEventListener('mouseup',onUp);
+  window.removeEventListener('touchmove',onMove);
+  window.removeEventListener('touchend',onUp);
+  if(maxMoved<6){
+   side.style.maxHeight='';
+   if(wasCollapsed){side.classList.remove('collapsed');}else{side.classList.add('collapsed');}
+   return;
+  }
+  const h=side.getBoundingClientRect().height;
+  side.style.maxHeight='';
+  if(h>(PEEK+fullHeight())/2)side.classList.remove('collapsed');else side.classList.add('collapsed');
+ }
+ handle.addEventListener('mousedown',onDown);
+ handle.addEventListener('touchstart',onDown,{passive:true});
+})();
 
 /* ---- search / browse list ----
    Default (no query): every province, most severe first -- always

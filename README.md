@@ -248,6 +248,33 @@ can't be changed afterward.
 [Firebase Console](https://console.firebase.google.com) for this
 project's `reports` collection.
 
+## Mobile layout
+
+Below 800px wide, `#side` stops being a fixed sidebar and becomes a
+draggable bottom sheet over a full-screen map -- the same pattern as
+Google Maps or Airbnb's mobile map view, rather than the desktop
+sidebar just stacked on top of a small map (which is what this project
+used to do, and why it felt cramped on a phone: the header and footer
+credits alone ate most of the available space, leaving almost nothing
+for the actual months/stats/province list). Collapsed ("peek") state
+shows only a drag handle, the month selector, and the stat counts;
+dragging or tapping the handle expands it over most of the screen.
+Selecting a province (map, search, or the list) always auto-expands
+the sheet via `expandSheet()`, so picking one never leaves you staring
+at a collapsed panel with no visible detail card.
+
+The drag/tap logic lives in the IIFE right after `renderAll()` in
+`map/map_template.html`. One non-obvious bit worth knowing if you
+touch it: while collapsed, `.hdr`/`.tabs`/`.scroll` are `display:none`
+(see the `#side.collapsed` CSS), so a drag that starts from collapsed
+has to remove that class *before* the height change is visible --
+raising `max-height` alone does nothing if there's no visible content
+underneath it to grow into. `onDown()` handles this by capturing
+whether the sheet started collapsed, revealing the content immediately
+(pinned to the same visual height so nothing jumps), and only decides
+whether to restore the collapsed class in `onUp()`, once it knows
+whether the gesture was a tap or an actual drag.
+
 ## Adapting this for your own institution
 
 This project intentionally carries no organization-specific data. If
