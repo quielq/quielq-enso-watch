@@ -241,15 +241,63 @@ side tracking even though nothing currently reads it. Also added
 optional `barangay`/`municipality` fields to the report form
 specifically so a moderator knows who to forward a credible report to.
 
-What stayed constant across both steps and is still true: the tab
-HTML-escapes every field before rendering (verified against a
-synthetic report with `<script>`/`<img onerror>` payloads, both times),
-and never renders `contact` or `photoPath` publicly regardless of the
-read-access model -- an attached photo or a reporter's contact info
-stay Console-only either way. If a future maintainer wants to revisit
-gating the public tab again (e.g. if the anonymous/unmoderated version
-turns out to attract bad-faith submissions at scale), the `status`
-field and its `create`-time restriction are already there to build on.
+What stayed constant across both steps: the tab HTML-escapes every
+field before rendering (verified against a synthetic report with
+`<script>`/`<img onerror>` payloads at every step so far), and
+`contact` is never rendered publicly regardless of the read-access
+model. If a future maintainer wants to revisit gating the public tab
+again (e.g. if the anonymous/unmoderated version turns out to attract
+bad-faith submissions at scale), the `status` field and its
+`create`-time restriction are already there to build on.
+
+Step 3 (2026-09-23, same day): user asked to also display photos
+publicly, discussed the billing-spike risk this raises first (see
+below), decided to skip App Check for this POC pass and rely on
+budget alerts instead, and asked for a success acknowledgment +
+auto-close on the report form. `photoPath` is no longer excluded from
+the public tab; Storage rules now allow public `read` (previously
+`false`). Photos render via a client-constructed Storage download URL
+(`storagePublicUrl()`) rather than an SDK `getDownloadURL()` call per
+photo, so rendering N report cards doesn't cost N extra async
+round-trips. On successful submission, the form shows a clear
+acknowledgment and the modal auto-closes after ~1.8s (`setTimeout`),
+and `reportsLoaded` is reset so the Reports tab refetches instead of
+serving a stale cached list that wouldn't include the just-submitted
+report.
+
+**App Check was scoped, then explicitly skipped for this POC.**
+Firebase App Check (reCAPTCHA v3, free tier -- verified against
+Google's current pricing page, since they've since split the old
+"classic v3" into a 3-tier "Essentials / Premium / Enterprise"
+structure; Essentials is still free up to 10,000 assessments/month
+and is what App Check's "reCAPTCHA v3" provider uses) is the standard
+mitigation against exactly the risk this project now carries: public
+create/read on Firestore and Storage with no rate limiting and no
+verification that requests originate from the deployed site rather
+than a script. User chose to skip it for now given the POC framing,
+accepting that Google Cloud budget alerts are a strictly weaker,
+notification-only backstop (they don't prevent overspend, only flag
+it after it's started) rather than the access-control layer App Check
+would provide. Revisit this if usage or abuse patterns suggest it's
+warranted -- registering the app for App Check without yet flipping on
+enforcement is low-risk and could be done as a monitoring-only trial
+before committing either way.
+
+**Photo capacity under the free tier**, worked out from Firebase's
+verified pricing (see the agriculture/vulnerability-style research
+elsewhere in this file for the pattern of citing verified numbers
+rather than guessing): the 5MB-per-photo cap this project's Storage
+rules enforce means the 5GB-month storage allowance bounds roughly
+1,000 photos in the worst case (every photo at the cap) up to
+~2,000-5,000 if photos average a more realistic 1-2MB. Upload
+operations (5,000/month free) are unlikely to bind first at POC scale.
+The tighter real-world constraint is usually the 100GB/month
+**viewing** bandwidth, not storage or upload count -- every visitor who
+opens the Reports tab downloads every photo shown there, with no
+caching layer (this is a static site with no backend to add one
+cheaply), so total free "budget" scales with (average photo size) x
+(photos shown) x (how often people actually view the tab), not just
+how many photos exist.
 
 **Photo upload.** Initially scoped out (2026-09-22 morning) because
 Firebase changed its policy in late 2024: Cloud Storage requires the

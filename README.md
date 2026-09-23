@@ -223,48 +223,67 @@ for how this project's framing evolved (it started as a fully private
 moderator inbox, then a moderator-approval-gated public tab, before
 landing here) and the reasoning behind each step.
 
-Two fields are deliberately never rendered on the public Reports tab,
-even though they're stored: `contact` (kept private, for moderator
-follow-up only) and `photoPath` (an attached photo is only viewable by
-the moderator, via the Console's Storage browser -- see below). Every
-other field is HTML-escaped before being inserted into the page, since
-this is the one place the project displays arbitrary text someone else
-typed into their own browser.
+One field is deliberately never rendered on the public Reports tab even
+though it's stored: `contact` (kept private, for moderator follow-up
+only). Every other field, including the attached photo, is public.
+Text fields are HTML-escaped before being inserted into the page,
+since this is the one place the project displays arbitrary text
+someone else typed into their own browser; a photo is rendered via a
+constructed Storage download URL (`storagePublicUrl()`), not fetched
+through the SDK, so displaying N report cards doesn't cost N extra
+async round-trips first.
 
 The Firebase web config in `map/map_template.html` (`apiKey`,
 `projectId`, etc.) is intentionally public -- Firebase's own security
 model relies entirely on its Firestore/Storage rules, not on hiding
 this config, so it's safe to commit. The actual access control lives
 in those rules (set in the Firebase Console, not in this repo): anyone
-can *create* a report or *upload* a photo under 5MB, and *read* any
-report's fields (that's what powers the public tab) -- but nobody,
-including this site's own client code, can edit or delete a report at
-all, or set a `status` field on one at creation time (reserved for
-possible future moderator-side tracking, not currently used for
-gating). A report's `photoPath` field stores the photo's Storage path,
-never a public download URL (Storage read stays blocked regardless of
-the Firestore rules above), so viewing an attached photo means opening
-that path in the Console's Storage browser, not clicking a link on the
-map.
+can *create* a report, *upload* a photo under 5MB, and *read* any
+report's fields or photo (that's what powers the public tab) -- but
+nobody, including this site's own client code, can edit or delete a
+report at all, or set a `status` field on one at creation time
+(reserved for possible future moderator-side tracking, not currently
+used for gating).
+
+**No App Check.** This project's Firestore/Storage rules allow public
+create/read with no rate limiting and no verification that requests
+come from the actual deployed site rather than a script -- a real
+billing-spike risk once Blaze is enabled, since a scripted flood of
+writes or photo uploads has nothing stopping it. Firebase App Check
+(reCAPTCHA v3, free) is the standard mitigation and was scoped, but
+skipped for this POC pass in favor of Google Cloud budget alerts as a
+notification-only backstop (Billing -> Budgets & Alerts -- set a
+budget with alert thresholds, e.g. 50/90/100%, sent to your email).
+Budget alerts do not prevent overspend, they only notify after it
+starts, which is a materially weaker guarantee than App Check would
+give -- revisit this if the anonymous/unmoderated model attracts abuse
+at scale. See `ROADMAP.md` "Community ground-truth reports" for the
+full reasoning.
 
 Photo upload requires Firebase's paid Blaze plan for Storage (a policy
 change Google made in late 2024, applying even to usage within the
-free quota) -- this project's own Firebase project has Blaze enabled
-with a budget alert, using Storage's no-cost region tier (5GB stored,
-100GB/month downloaded, free) rather than the region nearest the
-Philippines, since that latency difference doesn't matter for an
-occasional report submission and losing the free tier isn't worth it.
-If you fork this and want photo upload too, you'll need to do the
-same: enable Blaze, and make sure your Storage bucket's location is
-one of the free-tier-eligible regions (currently us-central1, us-west1,
-us-east1) -- check before creating the bucket, since the location
-can't be changed afterward.
+free quota) -- this project's own Firebase project has Blaze enabled,
+using Storage's no-cost region tier (5GB-months stored, 100GB/month
+downloaded, 5K/month uploads, all free) rather than the region nearest
+the Philippines, since upload/view latency doesn't matter as much as
+staying in the free tier. Two different free-tier limits matter here in
+practice: the 5GB storage cap bounds roughly 1,000-5,000 photos
+depending on average size (most phone photos compress well under the
+5MB cap this project enforces), but the 100GB/month **viewing**
+bandwidth is usually the tighter constraint once the site has real
+traffic, since every visitor who opens the Reports tab downloads every
+photo shown there, every time (no server-side caching layer -- this is
+a pure static site). If you fork this and want photo upload too,
+you'll need to do the same: enable Blaze, and make sure your Storage
+bucket's location is one of the free-tier-eligible regions (currently
+us-central1, us-west1, us-east1) -- check before creating the bucket,
+since the location can't be changed afterward.
 
-**To review reports, see an attached photo, or forward one to an
-authority:** open the Firestore Database in the
+**To review reports or forward one to an authority:** open the
+Firestore Database in the
 [Firebase Console](https://console.firebase.google.com) for this
-project's `reports` collection -- every field, including `contact` and
-`photoPath`, is visible there even though the public tab hides them.
+project's `reports` collection -- `contact` is visible there even
+though the public tab hides it.
 
 ## Mobile layout
 

@@ -88,6 +88,7 @@
   .grp:last-child{margin-bottom:0}
   .grp .lbl{display:inline-block;margin-bottom:5px}
   .foot-note{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .report-photo{display:block;width:100%;max-height:280px;object-fit:cover;border-radius:8px;margin-top:8px}
   .foot-note a{color:var(--ink)}
   .report-btn{display:block;width:100%;margin:10px 0 14px;padding:10px;border:none;background:var(--accent);color:#fff;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
   .report-btn:hover{filter:brightness(1.08)}
@@ -363,7 +364,9 @@ function submitReport(e){
   };
   docRef.set(data).then(()=>{
    document.getElementById('reportForm').style.display = 'none';
-   status.innerHTML = '<div class="report-status ok">Thanks -- your report was submitted'+(photoNote||'')+'. A moderator will review it.</div>';
+   status.innerHTML = '<div class="report-status ok">&#10003; Report submitted successfully'+(photoNote||'')+'. Thank you -- a moderator reviews reports regularly and may forward yours to local contacts or authorities.</div>';
+   reportsLoaded = false;
+   setTimeout(closeReportModal, 1800);
   }).catch((err)=>{
    btn.disabled = false;
    status.innerHTML = '<div class="report-status err">Something went wrong submitting this ('+err.message+'). Please try again.</div>';
@@ -602,11 +605,21 @@ function fmtReportDate(ts){
   return d?d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}):'';
  }catch(e){return '';}
 }
+// Firebase Storage serves a public object at this URL shape once its
+// Storage rules allow read -- no signed download token needed, unlike a
+// private file. Constructed directly instead of calling
+// storage.ref(path).getDownloadURL() so rendering N report cards doesn't
+// need N extra async round-trips first.
+function storagePublicUrl(path){
+ if(!path)return null;
+ return `https://firebasestorage.googleapis.com/v0/b/${encodeURIComponent(firebaseConfig.storageBucket)}/o/${encodeURIComponent(path)}?alt=media`;
+}
 function reportCardHtml(data){
  const provName=DATA.prov[data.province]?DATA.prov[data.province].name:escapeHtml(data.province||'Unknown province');
  const symptoms=Array.isArray(data.symptoms)&&data.symptoms.length?data.symptoms.map(escapeHtml).join(', '):null;
  const locBits=[data.municipality,data.barangay?`Brgy. ${data.barangay}`:null].filter(Boolean).map(escapeHtml);
  const locLine=locBits.length?locBits.join(', ')+' &middot; ':'';
+ const photoUrl=storagePublicUrl(data.photoPath);
  return `<div class="card">
  <div class="prov-title">${escapeHtml(provName)}</div>
  <div class="prov-sub">${locLine}${fmtReportDate(data.createdAt)}</div>
@@ -615,6 +628,7 @@ function reportCardHtml(data){
  ${data.agriculture?`<div class="kv"><b>Agriculture/crops.</b> ${escapeHtml(data.agriculture)}</div>`:''}
  ${symptoms?`<div class="kv"><b>Also noticed.</b> ${symptoms}</div>`:''}
  ${data.notes?`<div class="kv"><b>In their words.</b> ${escapeHtml(data.notes)}</div>`:''}
+ ${photoUrl?`<img class="report-photo" src="${photoUrl}" alt="Photo submitted with this report" loading="lazy" onerror="this.remove()">`:''}
  </div>`;
 }
 function loadPublicReports(force){
