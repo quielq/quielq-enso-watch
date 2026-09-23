@@ -215,23 +215,41 @@ one is rejected server-side, and an attempted read is rejected
 server-side too, so the "private moderator inbox" framing below is
 actually enforced, not just a client-side convention.
 
-**Public Reports tab, added (2026-09-23).** User explicitly asked for
-submitted reports to be publicly visible, not just moderator-only --
-a real change from the original framing above. Rather than build the
-unmoderated version (any report visible to every visitor the moment
-it's submitted, which is exactly the misinformation vector this
-project's design was originally built to avoid), added a moderation
-gate: Firestore rules now allow `get`/`list` only for documents where
-`status == "approved"`, a field the `create` rule explicitly forbids
-the client from setting itself (closes the obvious self-approval
-loophole), so a report only becomes public once a moderator has
-individually added that field via the Console. The tab HTML-escapes
-every field before rendering (the one place this project displays
-text someone else typed), and never renders `contact` or `photoPath`
-even for approved reports. Net effect: the "moderator reviews before
-anything reaches the public" principle survives; only the destination
-changed, from "escalate off-platform to PAGASA/LGU" to "optionally
-also show it here, one at a time, on purpose."
+**Public Reports tab, added (2026-09-23), in two steps.** User first
+asked for submitted reports to be publicly visible, not just
+moderator-only -- a real change from the original framing above.
+
+Step 1: rather than build the unmoderated version (any report visible
+to every visitor the moment it's submitted, which is exactly the
+misinformation vector this project's design was originally built to
+avoid), added a moderation gate -- Firestore rules allowed `get`/`list`
+only for documents where `status == "approved"`, a field the `create`
+rule explicitly forbade the client from setting itself, so a report
+only became public once a moderator had individually approved it via
+the Console.
+
+Step 2, same day: user reconsidered, given this is explicitly a
+proof-of-concept ("since this is a POC") for "an anonymous
+community-based monitoring tool" -- reverted to auto-display for all
+reports, with moderation happening *after* publishing instead of
+before (a moderator "regularly reviewing the reports... to verify and
+forward... to contacts/authorities from the reported locations", not
+gatekeeping what the public sees). Firestore rules now allow `get`/
+`list` unconditionally; the `create` rule still forbids the client
+from setting `status`, kept in reserve for possible future moderator-
+side tracking even though nothing currently reads it. Also added
+optional `barangay`/`municipality` fields to the report form
+specifically so a moderator knows who to forward a credible report to.
+
+What stayed constant across both steps and is still true: the tab
+HTML-escapes every field before rendering (verified against a
+synthetic report with `<script>`/`<img onerror>` payloads, both times),
+and never renders `contact` or `photoPath` publicly regardless of the
+read-access model -- an attached photo or a reporter's contact info
+stay Console-only either way. If a future maintainer wants to revisit
+gating the public tab again (e.g. if the anonymous/unmoderated version
+turns out to attract bad-faith submissions at scale), the `status`
+field and its `create`-time restriction are already there to build on.
 
 **Photo upload.** Initially scoped out (2026-09-22 morning) because
 Firebase changed its policy in late 2024: Cloud Storage requires the

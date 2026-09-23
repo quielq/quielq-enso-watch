@@ -194,7 +194,7 @@
         <div id="levels"></div>
       </div>
       <div id="panel-reports" style="display:none">
-        <div class="foot-note" style="margin-bottom:10px">Reports from residents, shown here only after a moderator has reviewed and approved them individually. These are not verified facts -- always confirm against PAGASA's own advisories before acting on anything here.</div>
+        <div class="foot-note" style="margin-bottom:10px">This is an anonymous community monitoring tool. Every report submitted here is shown below automatically, as-is, without prior review. A moderator checks reports regularly to verify them and forward credible ones to local contacts or authorities in the reported area, but that happens after publishing, not before. These are not verified facts -- always confirm against PAGASA's own advisories before acting on anything here.</div>
         <div id="publicReports"></div>
       </div>
       <div class="legend" id="legend"></div>
@@ -205,9 +205,13 @@
 <div class="modal-overlay" id="reportOverlay" onclick="if(event.target===this)closeReportModal();">
   <div class="modal">
     <h2>Report what you're seeing</h2>
-    <div class="modal-sub">For <b id="reportProvinceName"></b>. This goes to a private inbox reviewed by a moderator, who may pass credible patterns on to PAGASA or your local DRRMO. It is never published to this map automatically.</div>
+    <div class="modal-sub">For <b id="reportProvinceName"></b>. This is an anonymous community monitoring tool -- your report is shown publicly on the Reports tab as submitted, without edits. A moderator reviews reports regularly to verify them and forward credible ones to local contacts or authorities in the reported area, but that review happens after publishing, not before. Please don't include anything you wouldn't want public; the optional contact field is the one exception, kept private for moderator follow-up only.</div>
     <form id="reportForm" onsubmit="submitReport(event);return false;">
-      <label class="first">How dry does it feel where you are?</label>
+      <label class="first">Barangay <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+      <input type="text" id="rBarangay" placeholder="Helps a moderator know who to forward this to">
+      <label>Municipality / City <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+      <input type="text" id="rMunicipality" placeholder="Helps a moderator know who to forward this to">
+      <label>How dry does it feel where you are?</label>
       <select id="rDryness" required>
         <option value="">Choose one</option>
         <option value="Normal">Normal</option>
@@ -338,12 +342,16 @@ function submitReport(e){
  btn.disabled = true;
  status.innerHTML = '';
  // A photo's Storage path is saved to the report (never a download URL --
- // Storage rules block public read, same private-inbox model as Firestore,
- // so only the moderator viewing the Firebase Console can see it).
+ // Storage rules still block public read even though Firestore reads are
+ // now open, so only the moderator viewing the Firebase Console can see
+ // an attached photo). contact is likewise never rendered on the public
+ // Reports tab -- see reportCardHtml().
  const docRef = db.collection('reports').doc();
  function writeDoc(photoPath,photoNote){
   const data = {
    province: reportProvinceKey,
+   barangay: document.getElementById('rBarangay').value || null,
+   municipality: document.getElementById('rMunicipality').value || null,
    dryness: dryness,
    water: document.getElementById('rWater').value || null,
    agriculture: document.getElementById('rAgriculture').value || null,
@@ -597,9 +605,11 @@ function fmtReportDate(ts){
 function reportCardHtml(data){
  const provName=DATA.prov[data.province]?DATA.prov[data.province].name:escapeHtml(data.province||'Unknown province');
  const symptoms=Array.isArray(data.symptoms)&&data.symptoms.length?data.symptoms.map(escapeHtml).join(', '):null;
+ const locBits=[data.municipality,data.barangay?`Brgy. ${data.barangay}`:null].filter(Boolean).map(escapeHtml);
+ const locLine=locBits.length?locBits.join(', ')+' &middot; ':'';
  return `<div class="card">
  <div class="prov-title">${escapeHtml(provName)}</div>
- <div class="prov-sub">${fmtReportDate(data.createdAt)}</div>
+ <div class="prov-sub">${locLine}${fmtReportDate(data.createdAt)}</div>
  <div class="kv"><b>Feels like.</b> ${escapeHtml(data.dryness||'Not stated')}</div>
  ${data.water?`<div class="kv"><b>Water availability.</b> ${escapeHtml(data.water)}</div>`:''}
  ${data.agriculture?`<div class="kv"><b>Agriculture/crops.</b> ${escapeHtml(data.agriculture)}</div>`:''}
@@ -611,10 +621,10 @@ function loadPublicReports(force){
  if(reportsLoaded&&!force)return;
  const el=document.getElementById('publicReports');
  el.innerHTML='<div class="foot-note">Loading…</div>';
- db.collection('reports').where('status','==','approved').limit(50).get().then(snap=>{
+ db.collection('reports').limit(50).get().then(snap=>{
   reportsLoaded=true;
   if(snap.empty){
-   el.innerHTML='<div class="foot-note">No approved reports yet. Reports are only shown here after a moderator reviews and approves them individually.</div>';
+   el.innerHTML='<div class="foot-note">No reports yet. Be the first to report what you\'re seeing from any province\'s detail card.</div>';
    return;
   }
   const docs=snap.docs.map(d=>d.data());
